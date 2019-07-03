@@ -35,6 +35,7 @@ std::string intToStr(int value)
 }
 
 // No real standard c++ to do this... See above !
+//TODO: Actually, this is more getCurrentFolder and we need to get the running app folder
 std::string runningFolder()
 {
 	char cCurrentPath[FILENAME_MAX];

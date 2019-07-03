@@ -60,7 +60,7 @@ void MainComponent::backupCurrentSession()
 void MainComponent::restoreLastSession()
 {
 	String filePath = File::getCurrentWorkingDirectory().getFullPathName();
-	ConfigurationFile cf(filePath.toStdString() + PATH_SEPARATOR + "GreenWitch.ini");
+	ConfigurationFile cf(filePath.toStdString() + PATH_SEPARATOR + "GreenWitch2.ini");
 	//TODO: ...
 }
 

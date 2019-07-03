@@ -9,7 +9,7 @@
 class ConfigurationFile
 {
 private:
-  std::map<std::string, std::map<std::string, std::string> > m_contents; // The "> > " means I'm old school :)
+  std::map<std::string, std::map<std::string, std::string> > m_contents; // The "> >" means I'm old school :)
 public:
 	ConfigurationFile(const std::string &filename);
 	~ConfigurationFile();

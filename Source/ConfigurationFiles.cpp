@@ -15,7 +15,7 @@ ConfigurationFile::ConfigurationFile(const std::string &filename)
 	//std::cout << "filename = " << filename << std::endl;
 
 	ifs.open(filename);
-	while(!ifs.eof())
+	while(ifs.good())
 	{
 		std::getline(ifs, line);
 		//std::cout << "line = " << line << std::endl;
