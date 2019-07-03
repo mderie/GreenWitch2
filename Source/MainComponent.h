@@ -49,8 +49,8 @@ private:
 	std::map<std::string, MidiInput*> mis;
 	std::map<std::string, MidiOutput*> mos;
 
-	void MainComponent::restoreLastSession();
-	void MainComponent::backupCurrentSession();
-	
+	void restoreLastSession();
+	void backupCurrentSession();
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };
