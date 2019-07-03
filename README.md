@@ -1,1 +1,1 @@
-GreenWitch 2.0 - Midi Might Magic
+GreenWitch 2.0 - Might Midi Magic
