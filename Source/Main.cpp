@@ -42,6 +42,14 @@ public:
     {
         // This is called when the app is being asked to quit: you can ignore this
         // request and let the app carry on running, or call quit() to allow the app to close.
+
+		//TODO: How link the MainWindow & MainComponent ?
+		/*
+		if (...)
+		{ 
+			showOkCancelBox or showYesNoCancelBox
+		}
+		*/
         quit();
     }
 
