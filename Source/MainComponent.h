@@ -45,21 +45,25 @@ private:
 	Label lblIn, lblOut;
 	TextEditor txtFormula, txtTarget;
 	TextButton btnOk, btnCancel; //TODO: Change this to ImageButton
-	TextEditor txtInA0, txtInB0, txtInAB0, txtOutA0, txtOutB0, txtOutAB0; // 4 lines ? 
-	ComboBox cboInO, cboOutO;
-	
-	ImageButton btnFirst, btnPrev, btnNext, btnLast;
+	TextEditor txtInA0, txtInB0, txtInAB0, txtOutA0, txtOutB0, txtOutAB0; // 4 lines ? Then CD & EF !
+	ComboBox cboDeviceIn0, cboOperationIn0, cboOperationOut0, cboDeviceOut0;
+
+	TextEditor txtInA1, txtInB1, txtInAB1, txtOutA1, txtOutB1, txtOutAB1;
+	ComboBox cboDeviceIn1, cboOperationIn1, cboOperationOut1, cboDeviceOut1;
+		
+	TextButton btnFirst, btnPrev, btnNext, btnLast; //TODO: Idem
 
 	// How many off them ? No limit... Use array !
 	//MidiInput* m_midiInput = nullptr;
 	//MidiOutput* m_midiOutput = nullptr;
 	//std::map<MidiInput*, std::string> mis;
 	//std::map<MidiOutput*, std::string> mos;
-	juce::StringArray m_midiInputDeviceNames; // Holds the name... And their index for opening them
+	juce::StringArray m_midiInputDeviceNames; // Holds the name... And their index for openning them
 	juce::StringArray m_midiOutputDeviceNames;
-	std::vector<MidiInput*> m_mids;
+	std::vector<MidiInput*> m_mids; // Must be in the same order as above
 	std::vector<MidiOutput*> m_mods;
 
+	// All the content value of ComboBoxes & TextEditors... A bit duplicate but more handy due to the pages
 	std::map<int, std::map<std::string, std::string> > pageControlValues;
 
 	int m_currentPage;
@@ -69,6 +73,7 @@ private:
 	byte midiNibbleB1;
 	byte midiNibbleA2;
 	byte midiNibbleB2;
+
 	bool m_sessionChanged;
 	void tryRestoreLastSession();
 	void backupCurrentSession();
