@@ -46,12 +46,14 @@ private:
 
 	// Header
 
-	Label lblIn, lblOut;
-	TextEditor txtFormula, txtTarget;
-	TextButton btnOk, btnCancel; //TODO: Change this to ImageButton (ImageButton btn...;) Then put the associated resource
+	Label lblDeviceIn, lblMuteIn, lblTarget, lblReverse, lblDropSysex, lblDeviceOut, lblMuteOut;
+
+	//Label lblIn, lblOut;
+	//TextEditor txtFormula, txtTarget;
+	//TextButton btnOk, btnCancel;
 
 	// Each line looks like the following (where xxx[ ] is a checkbox, yyy[] is a combobox & zzz is a textbox) :
-	// DeviceIn[] Mute[ ] A    B   C    D   E    F   Target[] Reverse[ ] DropSysex[ ] DeviceOut Mute[ ] A    B   C    D   E    F           
+	// DeviceIn[] Mute[ ] A    B   C    D   E    F   Target[] Reverse[ ] DropSysex[ ] DeviceOut Mute[ ] A    B   C    D   E    F
 	//                    AB[ ] AB CD[ ] CD EF[ ] EF                                                    AB[ ] AB CD[ ] CD EF[ ] EF
 
 	// Line 0
@@ -64,7 +66,7 @@ private:
 	ToggleButton chkInAB0, chkInCD0, chkInEF0;
 	ToggleButton chkOutAB0, chkOutCD0, chkOutEF0;
 	ToggleButton chkReverseIn0; // Negate the filter
-	ToggleButton chkDropSysexIn0; // Tell if we should ignore them or discard them
+	ToggleButton chkDropSysexIn0; // Tell if we should drop them or forward them
 	ToggleButton chkMuteIn0, chkMuteOut0;
 
 	// Line 1
@@ -80,9 +82,35 @@ private:
 	ToggleButton chkDropSysexIn1;
 	ToggleButton chkMuteIn1, chkMuteOut1;
 
+	// Line 2
+
+	TextEditor txtInA2, txtInB2, txtInAB2, txtInC2, txtInD2, txtInCD2, txtInE2, txtInF2, txtInEF2;
+	TextEditor txtOutA2, txtOutB2, txtOutAB2, txtOutC2, txtOutD2, txtOutCD2, txtOutE2, txtOutF2, txtOutEF2;
+	ComboBox cboDeviceIn2;
+	ComboBox cboTargetIn2;
+	ComboBox cboDeviceOut2;
+	ToggleButton chkInAB2, chkInCD2, chkInEF2;
+	ToggleButton chkOutAB2, chkOutCD2, chkOutEF2;
+	ToggleButton chkReverseIn2;
+	ToggleButton chkDropSysexIn2;
+	ToggleButton chkMuteIn2, chkMuteOut2;
+
+	// Line 3
+
+	TextEditor txtInA3, txtInB3, txtInAB3, txtInC3, txtInD3, txtInCD3, txtInE3, txtInF3, txtInEF3;
+	TextEditor txtOutA3, txtOutB3, txtOutAB3, txtOutC3, txtOutD3, txtOutCD3, txtOutE3, txtOutF3, txtOutEF3;
+	ComboBox cboDeviceIn3;
+	ComboBox cboTargetIn3;
+	ComboBox cboDeviceOut3;
+	ToggleButton chkInAB3, chkInCD3, chkInEF3;
+	ToggleButton chkOutAB3, chkOutCD3, chkOutEF3;
+	ToggleButton chkReverseIn3;
+	ToggleButton chkDropSysexIn3;
+	ToggleButton chkMuteIn3, chkMuteOut3;
+
 	// Footer
 
-	TextButton btnFirst, btnPrev, btnNext, btnLast; //TODO: Idem
+	TextButton btnFirst, btnPrev, btnNext, btnLast; //TODO: Change this to ImageButton (ImageButton btn...;) Then put the associated resource
 
 	// How many off them ? No limit... Use array !
 	//MidiInput* m_midiInput = nullptr;
@@ -137,7 +165,7 @@ private:
 	void ReserveOutDevice(const std::string &deviceName); // One out line is associated to this device
 	void RestoreOutDevice(const std::string &deviceName); // The device can now be used somewhere else
 
-	bool applyInputFilter(int page, int row); //TODO: Just rename it filter ?
+	bool filter(int page, int row);
 	// void mergeOrDup();
 	bool compare(const std::string &filterValue, byte currentValue);
 	void transform(int page, int row);

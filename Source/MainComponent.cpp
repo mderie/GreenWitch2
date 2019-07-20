@@ -21,7 +21,7 @@ MainComponent::MainComponent()
     setSize (600, 400);
 
 	// Header
-
+/*
 	txtFormula.addListener(this);
 	txtFormula.setBounds(200, 16, 100, 16);
 	txtFormula.setName("txtFormula");
@@ -46,187 +46,1089 @@ MainComponent::MainComponent()
 	lblOut.setColour(Label::textColourId, Colour(0, 255, 0));
 	lblOut.setText("Out", NotificationType::dontSendNotification);
 	addAndMakeVisible(lblOut);
+*/
+	int u = 4;
+	int x = 2*u;
+	int y = 2*u;
+	int w = 10*u;
 
-	// IN
+	lblDeviceIn.setBounds(x, y, 2*w, 4*u);
+	lblDeviceIn.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblDeviceIn.setText("In", NotificationType::dontSendNotification);
+	addAndMakeVisible(lblDeviceIn);
 
-	// Line 0
+	y += 4*u + 2*u; 
 
 	cboDeviceIn0.addListener(this);
-	cboDeviceIn0.setBounds(20, 40, 60, 16);
+	cboDeviceIn0.setBounds(x, y, 2*w, 4*u);
 	cboDeviceIn0.setName("cboDeviceIn0");
 	addAndMakeVisible(cboDeviceIn0);
 
+	y += 4*u + 6*u;
+
+	cboDeviceIn1.addListener(this);
+	cboDeviceIn1.setBounds(x, y, 2*w, 4*u);
+	cboDeviceIn1.setName("cboDeviceIn1");
+	addAndMakeVisible(cboDeviceIn1);
+
+	y += 4*u + 6*u;
+
+	cboDeviceIn2.addListener(this);
+	cboDeviceIn2.setBounds(x, y, 2*w, 4*u);
+	cboDeviceIn2.setName("cboDeviceIn2");
+	addAndMakeVisible(cboDeviceIn2);
+
+	y += 4*u + 6*u;
+
+	cboDeviceIn3.addListener(this);
+	cboDeviceIn3.setBounds(x, y, 2*w, 4*u);
+	cboDeviceIn3.setName("cboDeviceIn3");
+	addAndMakeVisible(cboDeviceIn3);
+
+	x += 2*w;
+	y = 2*u;
+
+	lblMuteIn.setBounds(x, y, w, 4 * u);
+	lblMuteIn.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblMuteIn.setText("Mute", NotificationType::dontSendNotification);
+	addAndMakeVisible(lblMuteIn);
+
+	y += 4*u + 2*u;
+
 	chkMuteIn0.addListener(this);
-	cboDeviceIn0.setBounds(100, 40, 20, 16);
-	cboDeviceIn0.setName("chkMuteIn0");
+	chkMuteIn0.setBounds(x, y, w, 4*u);
+	chkMuteIn0.setName("chkMuteIn0");
 	addAndMakeVisible(chkMuteIn0);
 
+	y += 4*u + 6*u;
+
+	chkMuteIn1.addListener(this);
+	chkMuteIn1.setBounds(x, y, w, 4*u);
+	chkMuteIn1.setName("chkMuteIn1");
+	addAndMakeVisible(chkMuteIn1);
+
+	y += 4*u + 6*u;
+
+	chkMuteIn2.addListener(this);
+	chkMuteIn2.setBounds(x, y, w, 4*u);
+	chkMuteIn2.setName("chkMuteIn2");
+	addAndMakeVisible(chkMuteIn2);
+
+	y += 4*u + 6*u;
+
+	chkMuteIn3.addListener(this);
+	chkMuteIn3.setBounds(x, y, w, 4*u);
+	chkMuteIn3.setName("chkMuteIn3");
+	addAndMakeVisible(chkMuteIn3);
+
+	x += w;
+	y = 2*u + 6*u;
+
 	txtInA0.addListener(this);
-	txtInA0.setBounds(20 + 120, 40, 40, 16);
+	txtInA0.setBounds(x, y, w, 4*u);
+	txtInA0.setName("txtInA0");
+	addAndMakeVisible(txtInA0);
+
+	y += 4*u + 6*u;
+
+	txtInA1.addListener(this);
+	txtInA1.setBounds(x, y, w, 4*u);
+	txtInA1.setName("txtInA1");
+	addAndMakeVisible(txtInA1);
+
+	y += 4*u + 6*u;
+
+	txtInA2.addListener(this);
+	txtInA2.setBounds(x, y, w, 4*u);
+	txtInA2.setName("txtInA2");
+	addAndMakeVisible(txtInA2);
+
+	y += 4*u + 6*u;
+
+	txtInA3.addListener(this);
+	txtInA3.setBounds(x, y, w, 4*u);
+	txtInA3.setName("txtInA3");
+	addAndMakeVisible(txtInA3);
+
+	x += w;
+	y = 2*u + 6*u;
+
+	txtInB0.addListener(this);
+	txtInB0.setBounds(x, y, w, 4*u);
+	txtInB0.setName("txtInB0");
+	addAndMakeVisible(txtInB0);
+
+	y += 4*u + 6*u;
+
+	txtInB1.addListener(this);
+	txtInB1.setBounds(x, y, w, 4*u);
+	txtInB1.setName("txtInB1");
+	addAndMakeVisible(txtInB1);
+
+	y += 4*u + 6*u;
+
+	txtInB2.addListener(this);
+	txtInB2.setBounds(x, y, w, 4*u);
+	txtInB2.setName("txtInB2");
+	addAndMakeVisible(txtInB2);
+
+	y += 4*u + 6*u;
+
+	txtInB3.addListener(this);
+	txtInB3.setBounds(x, y, w, 4*u);
+	txtInB3.setName("txtInB3");
+	addAndMakeVisible(txtInB3);
+
+	x -= w;
+	y = 12*u;
+
+	chkInAB0.addListener(this);
+	chkInAB0.setBounds(x, y, w, 4*u);
+	chkInAB0.setName("chkInAB0");
+	addAndMakeVisible(chkInAB0);
+
+	y += 4*u + 6*u;
+
+	chkInAB1.addListener(this);
+	chkInAB1.setBounds(x, y, w, 4*u);
+	chkInAB1.setName("chkInAB1");
+	addAndMakeVisible(chkInAB1);
+
+	y += 4*u + 6*u;
+
+	chkInAB2.addListener(this);
+	chkInAB2.setBounds(x, y, w, 4*u);
+	chkInAB2.setName("chkInAB2");
+	addAndMakeVisible(chkInAB2);
+
+	y += 4*u + 6*u;
+
+	chkInAB3.addListener(this);
+	chkInAB3.setBounds(x, y, w, 4*u);
+	chkInAB3.setName("chkInAB3");
+	addAndMakeVisible(chkInAB3);
+
+	x += 5*u;
+	y = 12*u;
+
+	txtInAB0.addListener(this);
+	txtInAB0.setBounds(x, y, 15*u, 4*u);
+	txtInAB0.setName("txtInAB0");
+	addAndMakeVisible(txtInAB0);
+
+	y += 4*u + 6*u;
+
+	txtInAB1.addListener(this);
+	txtInAB1.setBounds(x, y, 15*u, 4*u);
+	txtInAB1.setName("txtInAB1");
+	addAndMakeVisible(txtInAB1);
+
+	y += 4*u + 6*u;
+
+	txtInAB2.addListener(this);
+	txtInAB2.setBounds(x, y, 15*u, 4*u);
+	txtInAB2.setName("txtInAB2");
+	addAndMakeVisible(txtInAB2);
+
+	y += 4*u + 6*u;
+
+	txtInAB3.addListener(this);
+	txtInAB3.setBounds(x, y, 15*u, 4*u);
+	txtInAB3.setName("txtInAB3");
+	addAndMakeVisible(txtInAB3);
+
+	x += 15*u;
+	y = 2*u + 6*u;
+
+	txtInC0.addListener(this);
+	txtInC0.setBounds(x, y, w, 4*u);
+	txtInC0.setName("txtInC0");
+	addAndMakeVisible(txtInC0);
+
+	y += 4*u + 6*u;
+
+	txtInC1.addListener(this);
+	txtInC1.setBounds(x, y, w, 4*u);
+	txtInC1.setName("txtInC1");
+	addAndMakeVisible(txtInC1);
+
+	y += 4*u + 6*u;
+
+	txtInC2.addListener(this);
+	txtInC2.setBounds(x, y, w, 4*u);
+	txtInC2.setName("txtInC2");
+	addAndMakeVisible(txtInC2);
+
+	y += 4*u + 6*u;
+
+	txtInC3.addListener(this);
+	txtInC3.setBounds(x, y, w, 4*u);
+	txtInC3.setName("txtInC3");
+	addAndMakeVisible(txtInC3);
+
+	x += w;
+	y = 2*u + 6*u;
+
+	txtInD0.addListener(this);
+	txtInD0.setBounds(x, y, w, 4*u);
+	txtInD0.setName("txtInD0");
+	addAndMakeVisible(txtInD0);
+
+	y += 4*u + 6*u;
+
+	txtInD1.addListener(this);
+	txtInD1.setBounds(x, y, w, 4*u);
+	txtInD1.setName("txtInD1");
+	addAndMakeVisible(txtInD1);
+
+	y += 4*u + 6*u;
+
+	txtInD2.addListener(this);
+	txtInD2.setBounds(x, y, w, 4*u);
+	txtInD2.setName("txtInD2");
+	addAndMakeVisible(txtInD2);
+
+	y += 4*u + 6*u;
+
+	txtInD3.addListener(this);
+	txtInD3.setBounds(x, y, w, 4*u);
+	txtInD3.setName("txtInD3");
+	addAndMakeVisible(txtInD3);
+
+	x -= w;
+	y = 12*u;
+
+	chkInCD0.addListener(this);
+	chkInCD0.setBounds(x, y, w, 4*u);
+	chkInCD0.setName("chkInCD0");
+	addAndMakeVisible(chkInCD0);
+
+	y += 4*u + 6*u;
+
+	chkInCD1.addListener(this);
+	chkInCD1.setBounds(x, y, w, 4*u);
+	chkInCD1.setName("chkInCD1");
+	addAndMakeVisible(chkInCD1);
+
+	y += 4*u + 6*u;
+
+	chkInCD2.addListener(this);
+	chkInCD2.setBounds(x, y, w, 4*u);
+	chkInCD2.setName("chkInCD2");
+	addAndMakeVisible(chkInCD2);
+
+	y += 4*u + 6*u;
+
+	chkInCD3.addListener(this);
+	chkInCD3.setBounds(x, y, w, 4*u);
+	chkInCD3.setName("chkInCD3");
+	addAndMakeVisible(chkInCD3);
+
+	x += 5*u;
+	y = 12*u;
+
+	txtInCD0.addListener(this);
+	txtInCD0.setBounds(x, y, 15*u, 4*u);
+	txtInCD0.setName("txtInCD0");
+	addAndMakeVisible(txtInCD0);
+
+	y += 4*u + 6*u;
+
+	txtInCD1.addListener(this);
+	txtInCD1.setBounds(x, y, 15*u, 4*u);
+	txtInCD1.setName("txtInCD1");
+	addAndMakeVisible(txtInCD1);
+
+	y += 4*u + 6*u;
+
+	txtInCD2.addListener(this);
+	txtInCD2.setBounds(x, y, 15*u, 4*u);
+	txtInCD2.setName("txtInCD2");
+	addAndMakeVisible(txtInCD2);
+
+	y += 4*u + 6*u;
+
+	txtInCD3.addListener(this);
+	txtInCD3.setBounds(x, y, 15*u, 4*u);
+	txtInCD3.setName("txtInCD3");
+	addAndMakeVisible(txtInCD3);
+
+	x += 15*u;
+	y = 2*u + 6*u;
+
+	txtInE0.addListener(this);
+	txtInE0.setBounds(x, y, w, 4*u);
+	txtInE0.setName("txtInE0");
+	addAndMakeVisible(txtInE0);
+
+	y += 4*u + 6*u;
+
+	txtInE1.addListener(this);
+	txtInE1.setBounds(x, y, w, 4*u);
+	txtInE1.setName("txtInE1");
+	addAndMakeVisible(txtInE1);
+
+	y += 4*u + 6*u;
+
+	txtInE2.addListener(this);
+	txtInE2.setBounds(x, y, w, 4*u);
+	txtInE2.setName("txtInE2");
+	addAndMakeVisible(txtInE2);
+
+	y += 4*u + 6*u;
+
+	txtInE3.addListener(this);
+	txtInE3.setBounds(x, y, w, 4*u);
+	txtInE3.setName("txtInE3");
+	addAndMakeVisible(txtInE3);
+
+	x += w;
+	y = 2*u + 6*u;
+
+	txtInF0.addListener(this);
+	txtInF0.setBounds(x, y, w, 4*u);
+	txtInF0.setName("txtInF0");
+	addAndMakeVisible(txtInF0);
+
+	y += 4*u + 6*u;
+
+	txtInF1.addListener(this);
+	txtInF1.setBounds(x, y, w, 4*u);
+	txtInF1.setName("txtInF1");
+	addAndMakeVisible(txtInF1);
+
+	y += 4*u + 6*u;
+
+	txtInF2.addListener(this);
+	txtInF2.setBounds(x, y, w, 4*u);
+	txtInF2.setName("txtInF2");
+	addAndMakeVisible(txtInF2);
+
+	y += 4*u + 6*u;
+
+	txtInF3.addListener(this);
+	txtInF3.setBounds(x, y, w, 4*u);
+	txtInF3.setName("txtInF3");
+	addAndMakeVisible(txtInF3);
+
+	x -= w;
+	y = 12*u;
+
+	chkInEF0.addListener(this);
+	chkInEF0.setBounds(x, y, w, 4*u);
+	chkInEF0.setName("chkInEF0");
+	addAndMakeVisible(chkInEF0);
+
+	y += 4*u + 6*u;
+
+	chkInEF1.addListener(this);
+	chkInEF1.setBounds(x, y, w, 4*u);
+	chkInEF1.setName("chkInEF1");
+	addAndMakeVisible(chkInEF1);
+
+	y += 4*u + 6*u;
+
+	chkInEF2.addListener(this);
+	chkInEF2.setBounds(x, y, w, 4*u);
+	chkInEF2.setName("chkInEF2");
+	addAndMakeVisible(chkInEF2);
+
+	y += 4*u + 6*u;
+
+	chkInEF3.addListener(this);
+	chkInEF3.setBounds(x, y, w, 4*u);
+	chkInEF3.setName("chkInEF3");
+	addAndMakeVisible(chkInEF3);
+
+	x += 5*u;
+	y = 12*u;
+
+	txtInEF0.addListener(this);
+	txtInEF0.setBounds(x, y, 15*u, 4*u);
+	txtInEF0.setName("txtInEF0");
+	addAndMakeVisible(txtInEF0);
+
+	y += 4*u + 6*u;
+
+	txtInEF1.addListener(this);
+	txtInEF1.setBounds(x, y, 15*u, 4*u);
+	txtInEF1.setName("txtInEF1");
+	addAndMakeVisible(txtInEF1);
+
+	y += 4*u + 6*u;
+
+	txtInEF2.addListener(this);
+	txtInEF2.setBounds(x, y, 15*u, 4*u);
+	txtInEF2.setName("txtInEF2");
+	addAndMakeVisible(txtInEF2);
+
+	y += 4*u + 6*u;
+
+	txtInEF3.addListener(this);
+	txtInEF3.setBounds(x, y, 15*u, 4*u);
+	txtInEF3.setName("txtInEF3");
+	addAndMakeVisible(txtInEF3);
+
+	x += 2*w;
+	y = 2*u;
+
+	lblTarget.setBounds(x, y, 2*w, 4*u); 
+	lblTarget.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblTarget.setText("Target", NotificationType::dontSendNotification);
+	addAndMakeVisible(lblTarget);
+
+	y += 4*u + 2*u;
+
+	cboTargetIn0.addListener(this);
+	cboTargetIn0.setBounds(x, y, 2*w, 4*u);
+	cboTargetIn0.setName("cboTargetIn0");
+	addAndMakeVisible(cboTargetIn0);
+
+	y += 4*u + 6*u;
+
+	cboTargetIn1.addListener(this);
+	cboTargetIn1.setBounds(x, y, 2*w, 4*u);
+	cboTargetIn1.setName("cboTargetIn1");
+	addAndMakeVisible(cboTargetIn1);
+
+	y += 4*u + 6*u;
+
+	cboTargetIn2.addListener(this);
+	cboTargetIn2.setBounds(x, y, 2 * w, 4 * u);
+	cboTargetIn2.setName("cboTargetIn2");
+	addAndMakeVisible(cboTargetIn2);
+
+	y += 4*u + 6*u;
+
+	cboTargetIn3.addListener(this);
+	cboTargetIn3.setBounds(x, y, 2 * w, 4 * u);
+	cboTargetIn3.setName("cboTargetIn3");
+	addAndMakeVisible(cboTargetIn3);
+
+	x += 2*w;
+	y = 2*u;
+
+	lblReverse.setBounds(x, y, w + 2*u, 4*u);
+	lblReverse.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblReverse.setText("Reverse", NotificationType::dontSendNotification);
+	addAndMakeVisible(lblReverse);
+
+	y += 4*u + 2*u;
+
+	chkReverseIn0.addListener(this);
+	chkReverseIn0.setBounds(x, y, w + 2*u, 4*u);
+	chkReverseIn0.setName("chkReverseIn0");
+	addAndMakeVisible(chkReverseIn0);
+
+	y += 4*u + 6*u;
+
+	chkReverseIn1.addListener(this);
+	chkReverseIn1.setBounds(x, y, w + 2*u, 4*u);
+	chkReverseIn1.setName("chkReverseIn1");
+	addAndMakeVisible(chkReverseIn1);
+
+	y += 4*u + 6*u;
+
+	chkReverseIn2.addListener(this);
+	chkReverseIn2.setBounds(x, y, w + 2 * u, 4 * u);
+	chkReverseIn2.setName("chkReverseIn2");
+	addAndMakeVisible(chkReverseIn2);
+
+	y += 4*u + 6*u;
+
+	chkReverseIn3.addListener(this);
+	chkReverseIn3.setBounds(x, y, w + 2 * u, 4 * u);
+	chkReverseIn3.setName("chkReverseIn3");
+	addAndMakeVisible(chkReverseIn3);
+
+	x += w + 2*u;
+	y = 2*u;
+
+	lblDropSysex.setBounds(x, y, w, 4*u);
+	lblDropSysex.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblDropSysex.setText("Sysex", NotificationType::dontSendNotification);
+	addAndMakeVisible(lblDropSysex);
+
+	y += 4*u + 2*u;
+
+	chkDropSysexIn0.addListener(this);
+	chkDropSysexIn0.setBounds(x, y, w, 4*u);
+	chkDropSysexIn0.setName("chkDropSysexIn0");
+	addAndMakeVisible(chkDropSysexIn0);
+
+	y += 4*u + 6*u;
+
+	chkDropSysexIn1.addListener(this);
+	chkDropSysexIn1.setBounds(x, y, w, 4*u);
+	chkDropSysexIn1.setName("chkDropSysexIn1");
+	addAndMakeVisible(chkDropSysexIn1);
+
+	y += 4*u + 6*u;
+
+	chkDropSysexIn2.addListener(this);
+	chkDropSysexIn2.setBounds(x, y, w, 4 * u);
+	chkDropSysexIn2.setName("chkDropSysexIn2");
+	addAndMakeVisible(chkDropSysexIn2);
+
+	y += 4*u + 6*u;
+
+	chkDropSysexIn3.addListener(this);
+	chkDropSysexIn3.setBounds(x, y, w, 4 * u);
+	chkDropSysexIn3.setName("chkDropSysexIn3");
+	addAndMakeVisible(chkDropSysexIn3);
+	
+	x += w;
+	y = 2*u;
+
+	lblDeviceOut.setBounds(x, y, 2*w, 4*u);
+	lblDeviceOut.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblDeviceOut.setText("Out", NotificationType::dontSendNotification);
+	addAndMakeVisible(lblDeviceOut);
+
+	y += 4*u + 2*u;
+
+	cboDeviceOut0.addListener(this);
+	cboDeviceOut0.setBounds(x, y, 2*w, 4*u);
+	cboDeviceOut0.setName("cboDeviceOut0");
+	addAndMakeVisible(cboDeviceOut0);
+
+	y += 4*u + 6*u;
+
+	cboDeviceOut1.addListener(this);
+	cboDeviceOut1.setBounds(x, y, 2*w, 4*u);
+	cboDeviceOut1.setName("cboDeviceOut1");
+	addAndMakeVisible(cboDeviceOut1);
+
+	y += 4*u + 6*u;
+
+	cboDeviceOut2.addListener(this);
+	cboDeviceOut2.setBounds(x, y, 2 * w, 4 * u);
+	cboDeviceOut2.setName("cboDeviceOut2");
+	addAndMakeVisible(cboDeviceOut2);
+
+	y += 4*u + 6*u;
+
+	cboDeviceOut3.addListener(this);
+	cboDeviceOut3.setBounds(x, y, 2 * w, 4 * u);
+	cboDeviceOut3.setName("cboDeviceOut3");
+	addAndMakeVisible(cboDeviceOut3);
+
+	x += 2*w;
+	y = 2*u;
+
+	lblMuteOut.setBounds(x, y, w, 4*u);
+	lblMuteOut.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblMuteOut.setText("Mute", NotificationType::dontSendNotification);
+	addAndMakeVisible(lblMuteOut);
+
+	y += 4*u + 2*u;
+
+	chkMuteOut0.addListener(this);
+	chkMuteOut0.setBounds(x, y, w, 4*u);
+	chkMuteOut0.setName("chkMuteOut0");
+	addAndMakeVisible(chkMuteOut0);
+
+	y += 4*u + 6*u;
+
+	chkMuteOut1.addListener(this);
+	chkMuteOut1.setBounds(x, y, w, 4*u);
+	chkMuteOut1.setName("chkMuteOut1");
+	addAndMakeVisible(chkMuteOut1);
+
+	y += 4*u + 6*u;
+
+	chkMuteOut2.addListener(this);
+	chkMuteOut2.setBounds(x, y, w, 4 * u);
+	chkMuteOut2.setName("chkMuteOut2");
+	addAndMakeVisible(chkMuteOut2);
+
+	y += 4*u + 6*u;
+
+	chkMuteOut3.addListener(this);
+	chkMuteOut3.setBounds(x, y, w, 4 * u);
+	chkMuteOut3.setName("chkMuteOut3");
+	addAndMakeVisible(chkMuteOut3);
+
+	x += w;
+		y = 2*u + 6*u;
+
+	txtOutA0.addListener(this);
+	txtOutA0.setBounds(x, y, w, 4*u);
+	txtOutA0.setName("txtOutA0");
+	addAndMakeVisible(txtOutA0);
+
+	y += 4*u + 6*u;
+
+	txtOutA1.addListener(this);
+	txtOutA1.setBounds(x, y, w, 4*u);
+	txtOutA1.setName("txtOutA1");
+	addAndMakeVisible(txtOutA1);
+
+	y += 4*u + 6*u;
+
+	txtOutA2.addListener(this);
+	txtOutA2.setBounds(x, y, w, 4*u);
+	txtOutA2.setName("txtOutA2");
+	addAndMakeVisible(txtOutA2);
+
+	y += 4*u + 6*u;
+
+	txtOutA3.addListener(this);
+	txtOutA3.setBounds(x, y, w, 4*u);
+	txtOutA3.setName("txtOutA3");
+	addAndMakeVisible(txtOutA3);
+
+	x += w;
+	y = 2*u + 6*u;
+
+	txtOutB0.addListener(this);
+	txtOutB0.setBounds(x, y, w, 4*u);
+	txtOutB0.setName("txtOutB0");
+	addAndMakeVisible(txtOutB0);
+
+	y += 4*u + 6*u;
+
+	txtOutB1.addListener(this);
+	txtOutB1.setBounds(x, y, w, 4*u);
+	txtOutB1.setName("txtOutB1");
+	addAndMakeVisible(txtOutB1);
+
+	y += 4*u + 6*u;
+
+	txtOutB2.addListener(this);
+	txtOutB2.setBounds(x, y, w, 4*u);
+	txtOutB2.setName("txtOutB2");
+	addAndMakeVisible(txtOutB2);
+
+	y += 4*u + 6*u;
+
+	txtOutB3.addListener(this);
+	txtOutB3.setBounds(x, y, w, 4*u);
+	txtOutB3.setName("txtOutB3");
+	addAndMakeVisible(txtOutB3);
+
+	x -= w;
+	y = 12*u;
+
+	chkOutAB0.addListener(this);
+	chkOutAB0.setBounds(x, y, w, 4*u);
+	chkOutAB0.setName("chkOutAB0");
+	addAndMakeVisible(chkOutAB0);
+
+	y += 4*u + 6*u;
+
+	chkOutAB1.addListener(this);
+	chkOutAB1.setBounds(x, y, w, 4*u);
+	chkOutAB1.setName("chkOutAB1");
+	addAndMakeVisible(chkOutAB1);
+
+	y += 4*u + 6*u;
+
+	chkOutAB2.addListener(this);
+	chkOutAB2.setBounds(x, y, w, 4*u);
+	chkOutAB2.setName("chkOutAB2");
+	addAndMakeVisible(chkOutAB2);
+
+	y += 4*u + 6*u;
+
+	chkOutAB3.addListener(this);
+	chkOutAB3.setBounds(x, y, w, 4*u);
+	chkOutAB3.setName("chkOutAB3");
+	addAndMakeVisible(chkOutAB3);
+
+	x += 5*u;
+	y = 12*u;
+
+	txtOutAB0.addListener(this);
+	txtOutAB0.setBounds(x, y, 15*u, 4*u);
+	txtOutAB0.setName("txtOutAB0");
+	addAndMakeVisible(txtOutAB0);
+
+	y += 4*u + 6*u;
+
+	txtOutAB1.addListener(this);
+	txtOutAB1.setBounds(x, y, 15*u, 4*u);
+	txtOutAB1.setName("txtOutAB1");
+	addAndMakeVisible(txtOutAB1);
+
+	y += 4*u + 6*u;
+
+	txtOutAB2.addListener(this);
+	txtOutAB2.setBounds(x, y, 15*u, 4*u);
+	txtOutAB2.setName("txtOutAB2");
+	addAndMakeVisible(txtOutAB2);
+
+	y += 4*u + 6*u;
+
+	txtOutAB3.addListener(this);
+	txtOutAB3.setBounds(x, y, 15*u, 4*u);
+	txtOutAB3.setName("txtOutAB3");
+	addAndMakeVisible(txtOutAB3);
+
+	x += 15*u;
+	y = 2*u + 6*u;
+
+	txtOutC0.addListener(this);
+	txtOutC0.setBounds(x, y, w, 4*u);
+	txtOutC0.setName("txtOutC0");
+	addAndMakeVisible(txtOutC0);
+
+	y += 4*u + 6*u;
+
+	txtOutC1.addListener(this);
+	txtOutC1.setBounds(x, y, w, 4*u);
+	txtOutC1.setName("txtOutC1");
+	addAndMakeVisible(txtOutC1);
+
+	y += 4*u + 6*u;
+
+	txtOutC2.addListener(this);
+	txtOutC2.setBounds(x, y, w, 4*u);
+	txtOutC2.setName("txtOutC2");
+	addAndMakeVisible(txtOutC2);
+
+	y += 4*u + 6*u;
+
+	txtOutC3.addListener(this);
+	txtOutC3.setBounds(x, y, w, 4*u);
+	txtOutC3.setName("txtOutC3");
+	addAndMakeVisible(txtOutC3);
+
+	x += w;
+	y = 2*u + 6*u;
+
+	txtOutD0.addListener(this);
+	txtOutD0.setBounds(x, y, w, 4*u);
+	txtOutD0.setName("txtOutD0");
+	addAndMakeVisible(txtOutD0);
+
+	y += 4*u + 6*u;
+
+	txtOutD1.addListener(this);
+	txtOutD1.setBounds(x, y, w, 4*u);
+	txtOutD1.setName("txtOutD1");
+	addAndMakeVisible(txtOutD1);
+
+	y += 4*u + 6*u;
+
+	txtOutD2.addListener(this);
+	txtOutD2.setBounds(x, y, w, 4*u);
+	txtOutD2.setName("txtOutD2");
+	addAndMakeVisible(txtOutD2);
+
+	y += 4*u + 6*u;
+
+	txtOutD3.addListener(this);
+	txtOutD3.setBounds(x, y, w, 4*u);
+	txtOutD3.setName("txtOutD3");
+	addAndMakeVisible(txtOutD3);
+
+	x -= w;
+	y = 12*u;
+
+	chkOutCD0.addListener(this);
+	chkOutCD0.setBounds(x, y, w, 4*u);
+	chkOutCD0.setName("chkOutCD0");
+	addAndMakeVisible(chkOutCD0);
+
+	y += 4*u + 6*u;
+
+	chkOutCD1.addListener(this);
+	chkOutCD1.setBounds(x, y, w, 4*u);
+	chkOutCD1.setName("chkOutCD1");
+	addAndMakeVisible(chkOutCD1);
+
+	y += 4*u + 6*u;
+
+	chkOutCD2.addListener(this);
+	chkOutCD2.setBounds(x, y, w, 4*u);
+	chkOutCD2.setName("chkOutCD2");
+	addAndMakeVisible(chkOutCD2);
+
+	y += 4*u + 6*u;
+
+	chkOutCD3.addListener(this);
+	chkOutCD3.setBounds(x, y, w, 4*u);
+	chkOutCD3.setName("chkOutCD3");
+	addAndMakeVisible(chkOutCD3);
+
+	x += 5*u;
+	y = 12*u;
+
+	txtOutCD0.addListener(this);
+	txtOutCD0.setBounds(x, y, 15*u, 4*u);
+	txtOutCD0.setName("txtOutCD0");
+	addAndMakeVisible(txtOutCD0);
+
+	y += 4*u + 6*u;
+
+	txtOutCD1.addListener(this);
+	txtOutCD1.setBounds(x, y, 15*u, 4*u);
+	txtOutCD1.setName("txtOutCD1");
+	addAndMakeVisible(txtOutCD1);
+
+	y += 4*u + 6*u;
+
+	txtOutCD2.addListener(this);
+	txtOutCD2.setBounds(x, y, 15*u, 4*u);
+	txtOutCD2.setName("txtOutCD2");
+	addAndMakeVisible(txtOutCD2);
+
+	y += 4*u + 6*u;
+
+	txtOutCD3.addListener(this);
+	txtOutCD3.setBounds(x, y, 15*u, 4*u);
+	txtOutCD3.setName("txtOutCD3");
+	addAndMakeVisible(txtOutCD3);
+
+	x += 15*u;
+	y = 2*u + 6*u;
+
+	txtOutE0.addListener(this);
+	txtOutE0.setBounds(x, y, w, 4*u);
+	txtOutE0.setName("txtOutE0");
+	addAndMakeVisible(txtOutE0);
+
+	y += 4*u + 6*u;
+
+	txtOutE1.addListener(this);
+	txtOutE1.setBounds(x, y, w, 4*u);
+	txtOutE1.setName("txtOutE1");
+	addAndMakeVisible(txtOutE1);
+
+	y += 4*u + 6*u;
+
+	txtOutE2.addListener(this);
+	txtOutE2.setBounds(x, y, w, 4*u);
+	txtOutE2.setName("txtOutE2");
+	addAndMakeVisible(txtOutE2);
+
+	y += 4*u + 6*u;
+
+	txtOutE3.addListener(this);
+	txtOutE3.setBounds(x, y, w, 4*u);
+	txtOutE3.setName("txtOutE3");
+	addAndMakeVisible(txtOutE3);
+
+	x += w;
+	y = 2*u + 6*u;
+
+	txtOutF0.addListener(this);
+	txtOutF0.setBounds(x, y, w, 4*u);
+	txtOutF0.setName("txtOutF0");
+	addAndMakeVisible(txtOutF0);
+
+	y += 4*u + 6*u;
+
+	txtOutF1.addListener(this);
+	txtOutF1.setBounds(x, y, w, 4*u);
+	txtOutF1.setName("txtOutF1");
+	addAndMakeVisible(txtOutF1);
+
+	y += 4*u + 6*u;
+
+	txtOutF2.addListener(this);
+	txtOutF2.setBounds(x, y, w, 4*u);
+	txtOutF2.setName("txtOutF2");
+	addAndMakeVisible(txtOutF2);
+
+	y += 4*u + 6*u;
+
+	txtOutF3.addListener(this);
+	txtOutF3.setBounds(x, y, w, 4*u);
+	txtOutF3.setName("txtOutF3");
+	addAndMakeVisible(txtOutF3);
+
+	x -= w;
+	y = 12*u;
+
+	chkOutEF0.addListener(this);
+	chkOutEF0.setBounds(x, y, w, 4*u);
+	chkOutEF0.setName("chkOutEF0");
+	addAndMakeVisible(chkOutEF0);
+
+	y += 4*u + 6*u;
+
+	chkOutEF1.addListener(this);
+	chkOutEF1.setBounds(x, y, w, 4*u);
+	chkOutEF1.setName("chkOutEF1");
+	addAndMakeVisible(chkOutEF1);
+
+	y += 4*u + 6*u;
+
+	chkOutEF2.addListener(this);
+	chkOutEF2.setBounds(x, y, w, 4*u);
+	chkOutEF2.setName("chkOutEF2");
+	addAndMakeVisible(chkOutEF2);
+
+	y += 4*u + 6*u;
+
+	chkOutEF3.addListener(this);
+	chkOutEF3.setBounds(x, y, w, 4*u);
+	chkOutEF3.setName("chkOutEF3");
+	addAndMakeVisible(chkOutEF3);
+
+	x += 5*u;
+	y = 12*u;
+
+	txtOutEF0.addListener(this);
+	txtOutEF0.setBounds(x, y, 15*u, 4*u);
+	txtOutEF0.setName("txtOutEF0");
+	addAndMakeVisible(txtOutEF0);
+
+	y += 4*u + 6*u;
+
+	txtOutEF1.addListener(this);
+	txtOutEF1.setBounds(x, y, 15*u, 4*u);
+	txtOutEF1.setName("txtOutEF1");
+	addAndMakeVisible(txtOutEF1);
+
+	y += 4*u + 6*u;
+
+	txtOutEF2.addListener(this);
+	txtOutEF2.setBounds(x, y, 15*u, 4*u);
+	txtOutEF2.setName("txtOutEF2");
+	addAndMakeVisible(txtOutEF2);
+
+	y += 4*u + 6*u;
+
+	txtOutEF3.addListener(this);
+	txtOutEF3.setBounds(x, y, 15*u, 4*u);
+	txtOutEF3.setName("txtOutEF3");
+	addAndMakeVisible(txtOutEF3);
+
+/*
+	// Line 0
+	
+	txtInA0.addListener(this);
+	txtInA0.setBounds(20 + 120, 40, 40, 4*u);
 	txtInA0.setName("txtInA0");
 	addAndMakeVisible(txtInA0);
 
 	txtInB0.addListener(this);
-	txtInB0.setBounds(20 + 180, 40, 40, 16);
+	txtInB0.setBounds(20 + 180, 40, 40, 4*u);
 	txtInB0.setName("txtInB0");
 	addAndMakeVisible(txtInB0);
 
 	txtInAB0.addListener(this);
-	txtInAB0.setBounds(20 + 120, 60, 80, 16);
+	txtInAB0.setBounds(20 + 120, 60, 80, 4*u);
 	txtInAB0.setName("txtInAB0");
 	addAndMakeVisible(txtInAB0);
 
-	//TODO: CD & EF
+	chkInAB0.addListener(this);
+	chkInAB0.setBounds(4*u);
+	chkInAB0.setName("txtInAB0");
+	addAndMakeVisible(chkInAB0);
 
-	cboTargetIn0.addListener(this);
-	cboTargetIn0.setBounds(20 + 220, 40, 60, 16);
-	cboTargetIn0.setName("cboTargetIn0");
-	addAndMakeVisible(cboTargetIn0);
-
-	chkReverseIn0.addListener(this);
-	chkReverseIn0.setBounds(20 + 280, 40, 20, 16);
-	chkReverseIn0.setName("chkReverseIn0");
-	addAndMakeVisible(chkReverseIn0);
-
-	chkDropSysexIn0.addListener(this);
-	chkDropSysexIn0.setBounds(20 + 320, 40, 20, 16);
-	chkDropSysexIn0.setName("chkDropSysexIn0");
-	addAndMakeVisible(chkDropSysexIn0);
+	//TODO: CD & EF...
 
 	// Line 1
 
-	cboDeviceIn1.addListener(this);
-	cboDeviceIn1.setBounds(20, 70, 60, 16);
-	cboDeviceIn1.setName("cboDeviceIn1");
-	addAndMakeVisible(cboDeviceIn1);
-
-	chkMuteIn1.addListener(this);
-	cboDeviceIn1.setBounds(100, 70, 20, 16);
-	cboDeviceIn1.setName("chkMuteIn1");
-	addAndMakeVisible(chkMuteIn1);
-
 	txtInA1.addListener(this);
-	txtInA1.setBounds(20 + 120, 70, 40, 16);
+	txtInA1.setBounds(20 + 120, 70, 40, 4*u);
 	txtInA1.setName("txtInA1");
 	addAndMakeVisible(txtInA1);
 
 	txtInB1.addListener(this);
-	txtInB1.setBounds(20 + 180, 70, 40, 16);
+	txtInB1.setBounds(20 + 180, 70, 40, 4*u);
 	txtInB1.setName("txtInB1");
 	addAndMakeVisible(txtInB1);
 
 	txtInAB1.addListener(this);
-	txtInAB1.setBounds(20 + 120, 90, 80, 16);
+	txtInAB1.setBounds(20 + 120, 90, 80, 4*u);
 	txtInAB1.setName("txtInAB1");
 	addAndMakeVisible(txtInAB1);
 
-	//TODO: CD & EF
+	chkInAB1.addListener(this);
+	chkInAB1.setBounds(4*u);
+	chkInAB1.setName("txtInAB1");
+	addAndMakeVisible(chkInAB1);
 
-	cboTargetIn1.addListener(this);
-	cboTargetIn1.setBounds(20 + 220, 70, 80, 16);
-	cboTargetIn1.setName("cboTargetIn1");
-	addAndMakeVisible(cboTargetIn1);
-
-	chkReverseIn1.addListener(this);
-	chkReverseIn1.setBounds(20 + 280, 70, 20, 16);
-	chkReverseIn1.setName("chkReverseIn1");
-	addAndMakeVisible(chkReverseIn1);
-
-	chkDropSysexIn1.addListener(this);
-	chkDropSysexIn1.setBounds(20 + 320, 70, 20, 16);
-	chkDropSysexIn1.setName("chkDropSysexIn1");
-	addAndMakeVisible(chkDropSysexIn1);
-
-	// OUT
+	//TODO: CD & EF...
 
 	// Line 0
 
-	cboDeviceOut0.addListener(this);
-	cboDeviceOut0.setBounds(20 + 400, 40, 80, 16);
-	cboDeviceOut0.setName("cboDeviceOut0");
-	addAndMakeVisible(cboDeviceOut0);
-
-	chkMuteOut0.addListener(this);
-	chkMuteOut0.setBounds(500, 40, 20, 16);
-	chkMuteOut0.setName("chkMuteOut0");
-	addAndMakeVisible(chkMuteOut0);
-
 	txtOutA0.addListener(this);
-	txtOutA0.setBounds(20 + 500, 40, 40, 16);
+	txtOutA0.setBounds(20 + 500, 40, 40, 4*u);
 	txtOutA0.setName("txtOutA0");
 	addAndMakeVisible(txtOutA0);
 
 	txtOutB0.addListener(this);
-	txtOutB0.setBounds(20 + 560, 40, 40, 16);
+	txtOutB0.setBounds(20 + 560, 40, 40, 4*u);
 	txtOutB0.setName("txtOutB0");
 	addAndMakeVisible(txtOutB0);
 
 	txtOutAB0.addListener(this);
-	txtOutAB0.setBounds(20 + 560, 60, 40, 16);
+	txtOutAB0.setBounds(20 + 560, 60, 40, 4*u);
 	txtOutAB0.setName("txtOutAB0");
 	addAndMakeVisible(txtOutAB0);
 
-	//TODO: CD & EF
+	chkOutAB0.addListener(this);
+	chkOutAB0.setBounds(4*u);
+	chkOutAB0.setName("txtOutAB0");
+	addAndMakeVisible(chkOutAB0);
+
+	//TODO: CD & EF...
 
 	// Line 1
 
-	cboDeviceOut1.addListener(this);
-	cboDeviceOut1.setBounds(20 + 400, 70, 80, 16);
-	cboDeviceOut1.setName("cboDeviceOut1");
-	addAndMakeVisible(cboDeviceOut1);
-
-	chkMuteOut1.addListener(this);
-	chkMuteOut1.setBounds(500, 40, 70, 16);
-	chkMuteOut1.setName("chkMuteOut1");
-	addAndMakeVisible(chkMuteOut1);
-
 	txtOutA1.addListener(this);
-	txtOutA1.setBounds(20 + 500, 70, 40, 16);
+	txtOutA1.setBounds(20 + 500, 70, 40, 4*u);
 	txtOutA1.setName("txtOutA1");
 	addAndMakeVisible(txtOutA1);
 
 	txtOutB1.addListener(this);
-	txtOutB1.setBounds(20 + 560, 70, 40, 16);
+	txtOutB1.setBounds(20 + 560, 70, 40, 4*u);
 	txtOutB1.setName("txtOutB1");
 	addAndMakeVisible(txtOutB1);
 
 	txtOutAB1.addListener(this);
-	txtOutAB1.setBounds(20 + 560, 90, 40, 16);
+	txtOutAB1.setBounds(20 + 560, 90, 40, 4*u);
 	txtOutAB1.setName("txtOutAB1");
 	addAndMakeVisible(txtOutAB1);
 
-	//TODO: CD & EF
+	chkOutAB1.addListener(this);
+	chkOutAB1.setBounds(4*u);
+	chkOutAB1.setName("txtOutAB1");
+	addAndMakeVisible(chkOutAB1);
 
+	//TODO: CD & EF...
+*/
 	// Footer
 
 	btnFirst.addListener(this);
-	btnFirst.setBounds(20, 300, 16, 16);
+	btnFirst.setBounds(10, 350, 16, 4*u);
 	btnFirst.setButtonText("First");
 	addAndMakeVisible(btnFirst);
 
 	btnPrev.addListener(this);
-	btnPrev.setBounds(40, 300, 16, 16);
+	btnPrev.setBounds(30, 350, 16, 4*u);
 	btnPrev.setButtonText("Prev");
 	addAndMakeVisible(btnPrev);
 
 	btnNext.addListener(this);
-	btnNext.setBounds(20 + 400, 300, 16, 16);
+	btnNext.setBounds(810, 350, 16, 4*u);
 	btnNext.setButtonText("Next");
 	addAndMakeVisible(btnNext);
 
 	btnLast.addListener(this);
-	btnLast.setBounds(20 + 420, 300, 16, 16);
+	btnLast.setBounds(830, 350, 16, 4*u);
 	btnLast.setButtonText("Last");
 	addAndMakeVisible(btnLast);
+	
+	// Ouf enough of controls :)
 
 	openAllMidiDevices(); //TODO: Review this !
 	cboDeviceIn0.addItem(NO_DEVICE, 1); // Id's start always at 1
 	cboDeviceIn1.addItem(NO_DEVICE, 1);
+	cboDeviceIn2.addItem(NO_DEVICE, 1);
+	cboDeviceIn3.addItem(NO_DEVICE, 1);
 	for (int i = 0; i < m_midiInputDeviceNames.size(); i++)
 	{
 		cboDeviceIn0.addItem(m_midiInputDeviceNames[i], i + 2);
 		cboDeviceIn1.addItem(m_midiInputDeviceNames[i], i + 2);
-		//TODO: the other lines
+		cboDeviceIn2.addItem(m_midiInputDeviceNames[i], i + 2);
+		cboDeviceIn3.addItem(m_midiInputDeviceNames[i], i + 2);
 	}
 	// Doesn't work :(
 	//cboDeviceIn0.setSelectedId(1); 
@@ -236,11 +1138,14 @@ MainComponent::MainComponent()
 
 	cboTargetIn0.addItem(NO_DEVICE, 1);
 	cboTargetIn1.addItem(NO_DEVICE, 1);
+	cboTargetIn2.addItem(NO_DEVICE, 1);
+	cboTargetIn3.addItem(NO_DEVICE, 1);
 	for (int i = 0; i < m_midiOutputDeviceNames.size(); i++)
 	{
 		cboTargetIn0.addItem(m_midiOutputDeviceNames[i], i + 2);
 		cboTargetIn1.addItem(m_midiOutputDeviceNames[i], i + 2);
-		//TODO: the other lines
+		cboTargetIn2.addItem(m_midiOutputDeviceNames[i], i + 2);
+		cboTargetIn3.addItem(m_midiOutputDeviceNames[i], i + 2);
 	}
 	// Doesn't work :(
 	//cboTarget0.setSelectedId(1);
@@ -250,11 +1155,14 @@ MainComponent::MainComponent()
 
 	cboDeviceOut0.addItem(NO_DEVICE, 1);
 	cboDeviceOut1.addItem(NO_DEVICE, 1);
+	cboDeviceOut2.addItem(NO_DEVICE, 1);
+	cboDeviceOut3.addItem(NO_DEVICE, 1);
 	for (int i = 0; i < m_midiOutputDeviceNames.size(); i++)
 	{
 		cboDeviceOut0.addItem(m_midiOutputDeviceNames[i], i + 2);
 		cboDeviceOut1.addItem(m_midiOutputDeviceNames[i], i + 2);
-		//TODO: the other lines
+		cboDeviceOut2.addItem(m_midiOutputDeviceNames[i], i + 2);
+		cboDeviceOut3.addItem(m_midiOutputDeviceNames[i], i + 2);
 	}
 	// Doesn't work :(
 	//cboDeviceOut0.setSelectedId(1);
@@ -291,7 +1199,7 @@ void MainComponent::buttonClicked(Button *sender)
 	}
 
 	// Header
-
+/*
 	if (sender == &btnOk)
 	{
 		m_sessionChanged = true;
@@ -304,7 +1212,7 @@ void MainComponent::buttonClicked(Button *sender)
 		txtFormula.clear();
 		return;
 	}
-
+*/
 	// Line 0
 
 	// Line 1
@@ -349,7 +1257,7 @@ void MainComponent::comboBoxChanged(ComboBox *sender)
 	{
 		//Nothing to do ?
 	}
-	else if ((sender == &cboDeviceOut0) || (sender == &cboDeviceOut1)) //TODO: Add || (sender == &cboDeviceOut2) || (sender == &cboDeviceOut3))
+	else if ((sender == &cboDeviceOut0) || (sender == &cboDeviceOut1) || (sender == &cboDeviceOut2) || (sender == &cboDeviceOut3))
 	{
 		// We have to avoid duplicate in OUT ones...
 
@@ -410,13 +1318,23 @@ void MainComponent::showPage(int index)
 	txtInA0.setText(pageControlValues[index]["txtInA0"]);
 	txtInB0.setText(pageControlValues[index]["txtInB0"]);
 	txtInAB0.setText(pageControlValues[index]["txtInAB0"]);
+	txtInC0.setText(pageControlValues[index]["txtInC0"]);
+	txtInD0.setText(pageControlValues[index]["txtInD0"]);
+	txtInCD0.setText(pageControlValues[index]["txtInCD0"]);
+	txtInE0.setText(pageControlValues[index]["txtInE0"]);
+	txtInF0.setText(pageControlValues[index]["txtInF0"]);
+	txtInEF0.setText(pageControlValues[index]["txtInEF0"]);
 	cboTargetIn0.setText(pageControlValues[index]["cboTargetIn0"]);
 	cboDeviceOut0.setText(pageControlValues[index]["cboDeviceOut0"]);
 	txtOutA0.setText(pageControlValues[index]["txtOutA0"]);
 	txtOutB0.setText(pageControlValues[index]["txtOutB0"]);
 	txtOutAB0.setText(pageControlValues[index]["txtOutAB0"]);
-
-	//TODO: For the other lines... And CD & EF !
+	txtOutC0.setText(pageControlValues[index]["txtOutC0"]);
+	txtOutD0.setText(pageControlValues[index]["txtOutD0"]);
+	txtOutCD0.setText(pageControlValues[index]["txtOutCD0"]);
+	txtOutE0.setText(pageControlValues[index]["txtOutE0"]);
+	txtOutF0.setText(pageControlValues[index]["txtOutF0"]);
+	txtOutEF0.setText(pageControlValues[index]["txtOutEF0"]);
 
 	// Care of std::stoi when string to non int conversion occurs ! See :
 	// https://stackoverflow.com/questions/29250531/microsoft-c-exception-stdinvalid-argument-at-memory-location
@@ -437,13 +1355,23 @@ void MainComponent::showPage(int index)
 	txtInA1.setText(pageControlValues[index]["txtInA1"]);
 	txtInB1.setText(pageControlValues[index]["txtInB1"]);
 	txtInAB1.setText(pageControlValues[index]["txtInAB1"]);
+	txtInC1.setText(pageControlValues[index]["txtInC1"]);
+	txtInD1.setText(pageControlValues[index]["txtInD1"]);
+	txtInCD1.setText(pageControlValues[index]["txtInCD1"]);
+	txtInE1.setText(pageControlValues[index]["txtInE1"]);
+	txtInF1.setText(pageControlValues[index]["txtInF1"]);
+	txtInEF1.setText(pageControlValues[index]["txtInEF1"]);
 	cboTargetIn1.setText(pageControlValues[index]["cboTargetIn1"]);
 	cboDeviceOut1.setText(pageControlValues[index]["cboDeviceOut1"]);
 	txtOutA1.setText(pageControlValues[index]["txtOutA1"]);
 	txtOutB1.setText(pageControlValues[index]["txtOutB1"]);
 	txtOutAB1.setText(pageControlValues[index]["txtOutAB1"]);
-
-	//TODO: For the other lines... And CD & EF !
+	txtOutC1.setText(pageControlValues[index]["txtOutC1"]);
+	txtOutD1.setText(pageControlValues[index]["txtOutD1"]);
+	txtOutCD1.setText(pageControlValues[index]["txtOutCD1"]);
+	txtOutE1.setText(pageControlValues[index]["txtOutE1"]);
+	txtOutF1.setText(pageControlValues[index]["txtOutF1"]);
+	txtOutEF1.setText(pageControlValues[index]["txtOutEF1"]);
 
 	chkInAB1.setToggleState(CSTOI(pageControlValues[index]["chkInAB1"]) == 1, false);
 	chkInCD1.setToggleState(CSTOI(pageControlValues[index]["chkInCD1"]) == 1, false);
@@ -455,13 +1383,92 @@ void MainComponent::showPage(int index)
 	chkDropSysexIn1.setToggleState(CSTOI(pageControlValues[index]["chkDropSysexIn1"]) == 1, false);
 	chkMuteIn1.setToggleState(CSTOI(pageControlValues[index]["chkMuteIn1"]) == 1, false);
 	chkMuteOut1.setToggleState(CSTOI(pageControlValues[index]["chkMuteOut1"]) == 1, false);
+
+	//TODO: For lines 2 & 3
+
+	cboDeviceIn2.setText(pageControlValues[index]["cboDeviceIn2"]);
+	txtInA2.setText(pageControlValues[index]["txtInA2"]);
+	txtInB2.setText(pageControlValues[index]["txtInB2"]);
+	txtInAB2.setText(pageControlValues[index]["txtInAB2"]);
+	txtInC2.setText(pageControlValues[index]["txtInC2"]);
+	txtInD2.setText(pageControlValues[index]["txtInD2"]);
+	txtInCD2.setText(pageControlValues[index]["txtInCD2"]);
+	txtInE2.setText(pageControlValues[index]["txtInE2"]);
+	txtInF2.setText(pageControlValues[index]["txtInF2"]);
+	txtInEF2.setText(pageControlValues[index]["txtInEF2"]);
+	cboTargetIn2.setText(pageControlValues[index]["cboTargetIn2"]);
+	cboDeviceOut2.setText(pageControlValues[index]["cboDeviceOut2"]);
+	txtOutA2.setText(pageControlValues[index]["txtOutA2"]);
+	txtOutB2.setText(pageControlValues[index]["txtOutB2"]);
+	txtOutAB2.setText(pageControlValues[index]["txtOutAB2"]);
+	txtOutC2.setText(pageControlValues[index]["txtOutC2"]);
+	txtOutD2.setText(pageControlValues[index]["txtOutD2"]);
+	txtOutCD2.setText(pageControlValues[index]["txtOutCD2"]);
+	txtOutE2.setText(pageControlValues[index]["txtOutE2"]);
+	txtOutF2.setText(pageControlValues[index]["txtOutF2"]);
+	txtOutEF2.setText(pageControlValues[index]["txtOutEF2"]);
+
+	// Care of std::stoi when string to non int conversion occurs ! See :
+	// https://stackoverflow.com/questions/29250531/microsoft-c-exception-stdinvalid-argument-at-memory-location
+	chkInAB2.setToggleState(CSTOI(pageControlValues[index]["chkInAB2"]) == 1, false);
+	chkInCD2.setToggleState(CSTOI(pageControlValues[index]["chkInCD2"]) == 1, false);
+	chkInEF2.setToggleState(CSTOI(pageControlValues[index]["chkInEF2"]) == 1, false);
+	chkOutAB2.setToggleState(CSTOI(pageControlValues[index]["chkOutAB2"]) == 1, false);
+	chkOutCD2.setToggleState(CSTOI(pageControlValues[index]["chkOutCD2"]) == 1, false);
+	chkOutEF2.setToggleState(CSTOI(pageControlValues[index]["chkOutEF2"]) == 1, false);
+	chkReverseIn2.setToggleState(CSTOI(pageControlValues[index]["chkReverseIn2"]) == 1, false);
+	chkDropSysexIn2.setToggleState(CSTOI(pageControlValues[index]["chkDropSysexIn2"]) == 1, false);
+	chkMuteIn2.setToggleState(CSTOI(pageControlValues[index]["chkMuteIn2"]) == 1, false);
+	chkMuteOut2.setToggleState(CSTOI(pageControlValues[index]["chkMuteOut2"]) == 1, false);
+
+	cboDeviceIn3.setText(pageControlValues[index]["cboDeviceIn3"]);
+	txtInA3.setText(pageControlValues[index]["txtInA3"]);
+	txtInB3.setText(pageControlValues[index]["txtInB3"]);
+	txtInAB3.setText(pageControlValues[index]["txtInAB3"]);
+	txtInC3.setText(pageControlValues[index]["txtInC3"]);
+	txtInD3.setText(pageControlValues[index]["txtInD3"]);
+	txtInCD3.setText(pageControlValues[index]["txtInCD3"]);
+	txtInE3.setText(pageControlValues[index]["txtInE3"]);
+	txtInF3.setText(pageControlValues[index]["txtInF3"]);
+	txtInEF3.setText(pageControlValues[index]["txtInEF3"]);
+	cboTargetIn3.setText(pageControlValues[index]["cboTargetIn3"]);
+	cboDeviceOut3.setText(pageControlValues[index]["cboDeviceOut3"]);
+	txtOutA3.setText(pageControlValues[index]["txtOutA3"]);
+	txtOutB3.setText(pageControlValues[index]["txtOutB3"]);
+	txtOutAB3.setText(pageControlValues[index]["txtOutAB3"]);
+	txtOutC3.setText(pageControlValues[index]["txtOutC3"]);
+	txtOutD3.setText(pageControlValues[index]["txtOutD3"]);
+	txtOutCD3.setText(pageControlValues[index]["txtOutCD3"]);
+	txtOutE3.setText(pageControlValues[index]["txtOutE3"]);
+	txtOutF3.setText(pageControlValues[index]["txtOutF3"]);
+	txtOutEF3.setText(pageControlValues[index]["txtOutEF3"]);
+
+	// Care of std::stoi when string to non int conversion occurs ! See :
+	// https://stackoverflow.com/questions/29250531/microsoft-c-exception-stdinvalid-argument-at-memory-location
+	chkInAB3.setToggleState(CSTOI(pageControlValues[index]["chkInAB3"]) == 1, false);
+	chkInCD3.setToggleState(CSTOI(pageControlValues[index]["chkInCD3"]) == 1, false);
+	chkInEF3.setToggleState(CSTOI(pageControlValues[index]["chkInEF3"]) == 1, false);
+	chkOutAB3.setToggleState(CSTOI(pageControlValues[index]["chkOutAB3"]) == 1, false);
+	chkOutCD3.setToggleState(CSTOI(pageControlValues[index]["chkOutCD3"]) == 1, false);
+	chkOutEF3.setToggleState(CSTOI(pageControlValues[index]["chkOutEF3"]) == 1, false);
+	chkReverseIn3.setToggleState(CSTOI(pageControlValues[index]["chkReverseIn3"]) == 1, false);
+	chkDropSysexIn3.setToggleState(CSTOI(pageControlValues[index]["chkDropSysexIn3"]) == 1, false);
+	chkMuteIn3.setToggleState(CSTOI(pageControlValues[index]["chkMuteIn3"]) == 1, false);
+	chkMuteOut3.setToggleState(CSTOI(pageControlValues[index]["chkMuteOut3"]) == 1, false);
 }
 
 void MainComponent::handleIncomingMidiMessage(juce::MidiInput* source, const juce::MidiMessage& message)
 {
+	// Probably SYSEX... Just ignore it for now, later we could push it forward :)
 	if (message.getRawDataSize() > 3)
 	{
-		return; // Probably SYSEX... Just ignore it for now, later we could even discard them :)
+		/*
+		if (...)
+		{
+			->sendMessageNow(message);
+		}
+		*/
+		return;
 	}
 
 	//TODO: We'll see later for message of size 2 (Care ! See : http://midi.teragonaudio.com/tech/midispec/run.htm )
@@ -503,11 +1510,11 @@ void MainComponent::handleIncomingMidiMessage(juce::MidiInput* source, const juc
 		{
 			// Midi Input Device Name
 			std::string midn = pageControlValues[i][std::string("cboDeviceIn") + std::to_string(j)]; // Opposite of int x = std::stoi(s); !-)
-			bool muteIn = CSTOI(pageControlValues[i][std::string("chkMuteIn") + std::to_string(j)]);
+			bool muteIn = (CSTOI(pageControlValues[i][std::string("chkMuteIn") + std::to_string(j)]) != 0);
 			if (!muteIn and (midn == source->getName()))
 			{
 				std::string modn = pageControlValues[i][std::string("cboDeviceOut") + std::to_string(j)];
-				bool muteOut = CSTOI(pageControlValues[i][std::string("chkMuteOut") + std::to_string(j)]);
+				bool muteOut = (CSTOI(pageControlValues[i][std::string("chkMuteOut") + std::to_string(j)]) != 0);
 				if (modn == "")
 				{
 					modn = pageControlValues[i][std::string("cboTarget") + std::to_string(j)];
@@ -519,7 +1526,7 @@ void MainComponent::handleIncomingMidiMessage(juce::MidiInput* source, const juc
 				}
 				else
 				{
-					if (!muteOut and (applyInputFilter(i, j)))
+					if (!muteOut and (filter(i, j)))
 					{
 						transform(i, j);
 						//applyOutputFormula(i, j);
@@ -557,7 +1564,7 @@ bool MainComponent::compare(const std::string &filterValue, byte currentValue)
 	}
 }
 
-bool MainComponent::applyInputFilter(int page, int row)
+bool MainComponent::filter(int page, int row)
 {
 	std::string high, low, middle; // IE : (A and B) or AB
 		
@@ -581,9 +1588,53 @@ bool MainComponent::applyInputFilter(int page, int row)
 		if ((low.size() > 1) and (!compare(low, midiInLowNibble0)))
 		{
 			return false;
+		}		
+	}
+
+	if (CSTOI(pageControlValues[page][std::string("chkInCD") + std::to_string(row)]) != 0)
+	{
+		middle = trim(pageControlValues[page][std::string("txtInCD") + std::to_string(row)]);
+		if ((middle.size() > 1) and(!compare(middle, midiInByte0)))
+		{
+			return false;
+		}
+	}
+	else
+	{
+		high = trim(pageControlValues[page][std::string("txtInC") + std::to_string(row)]);
+		if ((high.size() > 1) and(!compare(high, midiInHighNibble0)))
+		{
+			return false;
 		}
 
-		//TODO: And CD & EF !
+		low = trim(pageControlValues[page][std::string("txtInD") + std::to_string(row)]);
+		if ((low.size() > 1) and(!compare(low, midiInLowNibble0)))
+		{
+			return false;
+		}
+	}
+
+	if (CSTOI(pageControlValues[page][std::string("chkInEF") + std::to_string(row)]) != 0)
+	{
+		middle = trim(pageControlValues[page][std::string("txtInEF") + std::to_string(row)]);
+		if ((middle.size() > 1) and(!compare(middle, midiInByte0)))
+		{
+			return false;
+		}
+	}
+	else
+	{
+		high = trim(pageControlValues[page][std::string("txtInE") + std::to_string(row)]);
+		if ((high.size() > 1) and(!compare(high, midiInHighNibble0)))
+		{
+			return false;
+		}
+
+		low = trim(pageControlValues[page][std::string("txtInF") + std::to_string(row)]);
+		if ((low.size() > 1) and(!compare(low, midiInLowNibble0)))
+		{
+			return false;
+		}
 	}
 
 	return true;	
@@ -659,7 +1710,55 @@ void MainComponent::transform(int page, int row)
 		}
 	}
 
-	//TODO: And CD & EF !
+	formula = pageControlValues[page][std::string("txtOutC") + s];
+	if (formula.size() > 0)
+	{
+		if (parser.compile(formula, expression))
+		{
+			midiOutHighNibble1 = static_cast<byte>(expression.value());
+		}
+	}
+	formula = pageControlValues[page][std::string("txtOutD") + s];
+	if (formula.size() > 0)
+	{
+		if (parser.compile(formula, expression))
+		{
+			midiOutLowNibble1 = static_cast<byte>(expression.value());
+		}
+	}
+	formula = pageControlValues[page][std::string("txtOutCD") + s];
+	if (formula.size() > 0)
+	{
+		if (parser.compile(formula, expression))
+		{
+			midiOutByte1 = static_cast<byte>(expression.value());
+		}
+	}
+
+	formula = pageControlValues[page][std::string("txtOutE") + s];
+	if (formula.size() > 0)
+	{
+		if (parser.compile(formula, expression))
+		{
+			midiOutHighNibble2 = static_cast<byte>(expression.value());
+		}
+	}
+	formula = pageControlValues[page][std::string("txtOutF") + s];
+	if (formula.size() > 0)
+	{
+		if (parser.compile(formula, expression))
+		{
+			midiOutLowNibble2 = static_cast<byte>(expression.value());
+		}
+	}
+	formula = pageControlValues[page][std::string("txtOutEF") + s];
+	if (formula.size() > 0)
+	{
+		if (parser.compile(formula, expression))
+		{
+			midiOutByte2 = static_cast<byte>(expression.value());
+		}
+	}
 }
 
 juce::MidiMessage MainComponent::generate(int page, int row)
