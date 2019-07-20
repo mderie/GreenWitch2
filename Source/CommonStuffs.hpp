@@ -20,8 +20,8 @@
 template <typename T, unsigned size>
 inline unsigned sizeOfArray(const T(&)[size]) { return size; }
 
-enum class Target { screen, midi, device, misc, last_item }; //TODO: Refine midi by channel ?
-const std::string targets[(int) Target::last_item] = { "screen", "midi", "device", "misc" }; // Don't forget the leading const :)
+enum class Target { screen, midiIn, midiOut, misc, last_item }; //TODO: Refine midi by channel ?
+const std::string targets[(int) Target::last_item] = { "screen", "midiIn", "midiOut", "misc" }; // Don't forget the leading const :)
 
 std::string intToStr(int value); // So Delpĥi...
 std::string runningFolder();

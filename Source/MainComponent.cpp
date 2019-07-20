@@ -18,7 +18,7 @@ MainComponent::MainComponent()
 {
 	logThis("Session start", Target::misc);
 
-    setSize (600, 400);
+    setSize (920, 520);
 
 	// Header
 /*
@@ -122,7 +122,14 @@ MainComponent::MainComponent()
 	addAndMakeVisible(chkMuteIn3);
 
 	x += w;
-	y = 2*u + 6*u;
+	y = 2*u;
+
+	lblAIn.setBounds(x, y, w, 4*u);
+	lblAIn.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblAIn.setText("A", NotificationType::dontSendNotification);
+	addAndMakeVisible(lblAIn);
+
+	y += 4*u + 2*u;
 
 	txtInA0.addListener(this);
 	txtInA0.setBounds(x, y, w, 4*u);
@@ -151,7 +158,14 @@ MainComponent::MainComponent()
 	addAndMakeVisible(txtInA3);
 
 	x += w;
-	y = 2*u + 6*u;
+	y = 2*u;
+
+	lblBIn.setBounds(x, y, w, 4*u);
+	lblBIn.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblBIn.setText("B", NotificationType::dontSendNotification);
+	addAndMakeVisible(lblBIn);
+
+	y += 4*u + 2*u;
 
 	txtInB0.addListener(this);
 	txtInB0.setBounds(x, y, w, 4*u);
@@ -238,7 +252,14 @@ MainComponent::MainComponent()
 	addAndMakeVisible(txtInAB3);
 
 	x += 15*u;
-	y = 2*u + 6*u;
+	y = 2*u;
+
+	lblCIn.setBounds(x, y, w, 4*u);
+	lblCIn.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblCIn.setText("C", NotificationType::dontSendNotification);
+	addAndMakeVisible(lblCIn);
+
+	y += 4*u + 2*u;
 
 	txtInC0.addListener(this);
 	txtInC0.setBounds(x, y, w, 4*u);
@@ -267,7 +288,14 @@ MainComponent::MainComponent()
 	addAndMakeVisible(txtInC3);
 
 	x += w;
-	y = 2*u + 6*u;
+	y = 2*u;
+
+	lblDIn.setBounds(x, y, w, 4*u);
+	lblDIn.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblDIn.setText("D", NotificationType::dontSendNotification);
+	addAndMakeVisible(lblDIn);
+
+	y += 4*u + 2*u;
 
 	txtInD0.addListener(this);
 	txtInD0.setBounds(x, y, w, 4*u);
@@ -354,7 +382,14 @@ MainComponent::MainComponent()
 	addAndMakeVisible(txtInCD3);
 
 	x += 15*u;
-	y = 2*u + 6*u;
+	y = 2*u;
+
+	lblEIn.setBounds(x, y, w, 4*u);
+	lblEIn.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblEIn.setText("E", NotificationType::dontSendNotification);
+	addAndMakeVisible(lblEIn);
+
+	y += 4*u + 2*u;
 
 	txtInE0.addListener(this);
 	txtInE0.setBounds(x, y, w, 4*u);
@@ -383,7 +418,14 @@ MainComponent::MainComponent()
 	addAndMakeVisible(txtInE3);
 
 	x += w;
-	y = 2*u + 6*u;
+	y = 2*u;
+
+	lblFIn.setBounds(x, y, w, 4*u);
+	lblFIn.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblFIn.setText("F", NotificationType::dontSendNotification);
+	addAndMakeVisible(lblFIn);
+
+	y += 4*u + 2*u;
 
 	txtInF0.addListener(this);
 	txtInF0.setBounds(x, y, w, 4*u);
@@ -650,7 +692,14 @@ MainComponent::MainComponent()
 	addAndMakeVisible(chkMuteOut3);
 
 	x += w;
-		y = 2*u + 6*u;
+	y = 2*u;
+
+	lblAOut.setBounds(x, y, w, 4*u);
+	lblAOut.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblAOut.setText("A", NotificationType::dontSendNotification);
+	addAndMakeVisible(lblAOut);
+
+	y += 4*u + 2*u;
 
 	txtOutA0.addListener(this);
 	txtOutA0.setBounds(x, y, w, 4*u);
@@ -679,7 +728,14 @@ MainComponent::MainComponent()
 	addAndMakeVisible(txtOutA3);
 
 	x += w;
-	y = 2*u + 6*u;
+	y = 2*u;
+
+	lblBOut.setBounds(x, y, w, 4*u);
+	lblBOut.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblBOut.setText("B", NotificationType::dontSendNotification);
+	addAndMakeVisible(lblBOut);
+
+	y += 4*u + 2*u;
 
 	txtOutB0.addListener(this);
 	txtOutB0.setBounds(x, y, w, 4*u);
@@ -766,7 +822,14 @@ MainComponent::MainComponent()
 	addAndMakeVisible(txtOutAB3);
 
 	x += 15*u;
-	y = 2*u + 6*u;
+	y = 2*u;
+
+	lblCOut.setBounds(x, y, w, 4*u);
+	lblCOut.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblCOut.setText("C", NotificationType::dontSendNotification);
+	addAndMakeVisible(lblCOut);
+
+	y += 4*u + 2*u;
 
 	txtOutC0.addListener(this);
 	txtOutC0.setBounds(x, y, w, 4*u);
@@ -795,7 +858,14 @@ MainComponent::MainComponent()
 	addAndMakeVisible(txtOutC3);
 
 	x += w;
-	y = 2*u + 6*u;
+	y = 2*u;
+
+	lblDOut.setBounds(x, y, w, 4*u);
+	lblDOut.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblDOut.setText("D", NotificationType::dontSendNotification);
+	addAndMakeVisible(lblDOut);
+
+	y += 4*u + 2*u;
 
 	txtOutD0.addListener(this);
 	txtOutD0.setBounds(x, y, w, 4*u);
@@ -882,7 +952,14 @@ MainComponent::MainComponent()
 	addAndMakeVisible(txtOutCD3);
 
 	x += 15*u;
-	y = 2*u + 6*u;
+	y = 2*u;
+
+	lblEOut.setBounds(x, y, w, 4*u);
+	lblEOut.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblEOut.setText("E", NotificationType::dontSendNotification);
+	addAndMakeVisible(lblEOut);
+
+	y += 4*u + 2*u;
 
 	txtOutE0.addListener(this);
 	txtOutE0.setBounds(x, y, w, 4*u);
@@ -911,7 +988,14 @@ MainComponent::MainComponent()
 	addAndMakeVisible(txtOutE3);
 
 	x += w;
-	y = 2*u + 6*u;
+	y = 2*u;
+
+	lblFOut.setBounds(x, y, w, 4*u);
+	lblFOut.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblFOut.setText("F", NotificationType::dontSendNotification);
+	addAndMakeVisible(lblFOut);
+
+	y += 4*u + 2*u;
 
 	txtOutF0.addListener(this);
 	txtOutF0.setBounds(x, y, w, 4*u);
@@ -997,103 +1081,6 @@ MainComponent::MainComponent()
 	txtOutEF3.setName("txtOutEF3");
 	addAndMakeVisible(txtOutEF3);
 
-/*
-	// Line 0
-	
-	txtInA0.addListener(this);
-	txtInA0.setBounds(20 + 120, 40, 40, 4*u);
-	txtInA0.setName("txtInA0");
-	addAndMakeVisible(txtInA0);
-
-	txtInB0.addListener(this);
-	txtInB0.setBounds(20 + 180, 40, 40, 4*u);
-	txtInB0.setName("txtInB0");
-	addAndMakeVisible(txtInB0);
-
-	txtInAB0.addListener(this);
-	txtInAB0.setBounds(20 + 120, 60, 80, 4*u);
-	txtInAB0.setName("txtInAB0");
-	addAndMakeVisible(txtInAB0);
-
-	chkInAB0.addListener(this);
-	chkInAB0.setBounds(4*u);
-	chkInAB0.setName("txtInAB0");
-	addAndMakeVisible(chkInAB0);
-
-	//TODO: CD & EF...
-
-	// Line 1
-
-	txtInA1.addListener(this);
-	txtInA1.setBounds(20 + 120, 70, 40, 4*u);
-	txtInA1.setName("txtInA1");
-	addAndMakeVisible(txtInA1);
-
-	txtInB1.addListener(this);
-	txtInB1.setBounds(20 + 180, 70, 40, 4*u);
-	txtInB1.setName("txtInB1");
-	addAndMakeVisible(txtInB1);
-
-	txtInAB1.addListener(this);
-	txtInAB1.setBounds(20 + 120, 90, 80, 4*u);
-	txtInAB1.setName("txtInAB1");
-	addAndMakeVisible(txtInAB1);
-
-	chkInAB1.addListener(this);
-	chkInAB1.setBounds(4*u);
-	chkInAB1.setName("txtInAB1");
-	addAndMakeVisible(chkInAB1);
-
-	//TODO: CD & EF...
-
-	// Line 0
-
-	txtOutA0.addListener(this);
-	txtOutA0.setBounds(20 + 500, 40, 40, 4*u);
-	txtOutA0.setName("txtOutA0");
-	addAndMakeVisible(txtOutA0);
-
-	txtOutB0.addListener(this);
-	txtOutB0.setBounds(20 + 560, 40, 40, 4*u);
-	txtOutB0.setName("txtOutB0");
-	addAndMakeVisible(txtOutB0);
-
-	txtOutAB0.addListener(this);
-	txtOutAB0.setBounds(20 + 560, 60, 40, 4*u);
-	txtOutAB0.setName("txtOutAB0");
-	addAndMakeVisible(txtOutAB0);
-
-	chkOutAB0.addListener(this);
-	chkOutAB0.setBounds(4*u);
-	chkOutAB0.setName("txtOutAB0");
-	addAndMakeVisible(chkOutAB0);
-
-	//TODO: CD & EF...
-
-	// Line 1
-
-	txtOutA1.addListener(this);
-	txtOutA1.setBounds(20 + 500, 70, 40, 4*u);
-	txtOutA1.setName("txtOutA1");
-	addAndMakeVisible(txtOutA1);
-
-	txtOutB1.addListener(this);
-	txtOutB1.setBounds(20 + 560, 70, 40, 4*u);
-	txtOutB1.setName("txtOutB1");
-	addAndMakeVisible(txtOutB1);
-
-	txtOutAB1.addListener(this);
-	txtOutAB1.setBounds(20 + 560, 90, 40, 4*u);
-	txtOutAB1.setName("txtOutAB1");
-	addAndMakeVisible(txtOutAB1);
-
-	chkOutAB1.addListener(this);
-	chkOutAB1.setBounds(4*u);
-	chkOutAB1.setName("txtOutAB1");
-	addAndMakeVisible(chkOutAB1);
-
-	//TODO: CD & EF...
-*/
 	// Footer
 
 	btnFirst.addListener(this);
@@ -1107,12 +1094,12 @@ MainComponent::MainComponent()
 	addAndMakeVisible(btnPrev);
 
 	btnNext.addListener(this);
-	btnNext.setBounds(810, 350, 16, 4*u);
+	btnNext.setBounds(880, 350, 16, 4*u);
 	btnNext.setButtonText("Next");
 	addAndMakeVisible(btnNext);
 
 	btnLast.addListener(this);
-	btnLast.setBounds(830, 350, 16, 4*u);
+	btnLast.setBounds(900, 350, 16, 4*u);
 	btnLast.setButtonText("Last");
 	addAndMakeVisible(btnLast);
 	
@@ -1245,7 +1232,7 @@ void MainComponent::comboBoxChanged(ComboBox *sender)
 {
 	std::string controlName = sender->getName().toStdString();
 	std::string controlValue = sender->getText().toStdString();
-	logThis2("controlName = %s & controlValue = %s", Target::screen, controlName, controlValue);
+	logThis2("controlName = %s & controlValue = %s", Target::screen, controlName.c_str(), controlValue.c_str());
 
 	//logThis("Step 0", Target::misc);
 	//return;
@@ -1384,8 +1371,6 @@ void MainComponent::showPage(int index)
 	chkMuteIn1.setToggleState(CSTOI(pageControlValues[index]["chkMuteIn1"]) == 1, false);
 	chkMuteOut1.setToggleState(CSTOI(pageControlValues[index]["chkMuteOut1"]) == 1, false);
 
-	//TODO: For lines 2 & 3
-
 	cboDeviceIn2.setText(pageControlValues[index]["cboDeviceIn2"]);
 	txtInA2.setText(pageControlValues[index]["txtInA2"]);
 	txtInB2.setText(pageControlValues[index]["txtInB2"]);
@@ -1457,6 +1442,19 @@ void MainComponent::showPage(int index)
 	chkMuteOut3.setToggleState(CSTOI(pageControlValues[index]["chkMuteOut3"]) == 1, false);
 }
 
+std::string MainComponent::dump(const juce::MidiMessage &mm)
+{
+	std::stringstream ss;
+	const juce::uint8* p = mm.getRawData();
+
+	for (int i = 0; i < mm.getRawDataSize(); i++)
+	{
+		ss << std::hex << static_cast<int>(*(p + i)) << " ";
+	}
+
+	return ss.str();
+}
+
 void MainComponent::handleIncomingMidiMessage(juce::MidiInput* source, const juce::MidiMessage& message)
 {
 	// Probably SYSEX... Just ignore it for now, later we could push it forward :)
@@ -1474,7 +1472,6 @@ void MainComponent::handleIncomingMidiMessage(juce::MidiInput* source, const juc
 	//TODO: We'll see later for message of size 2 (Care ! See : http://midi.teragonaudio.com/tech/midispec/run.htm )
 	// Introduce a container for each input device holding the first byte ?
 
-	std::stringstream ss;
 	const juce::uint8* p = message.getRawData();
 
 	for (int i = 0; i < message.getRawDataSize(); i++) // Although it should be 3 bytes all the time
@@ -1499,10 +1496,8 @@ void MainComponent::handleIncomingMidiMessage(juce::MidiInput* source, const juc
 			midiInHighNibble2 = (*(p + 2)) >> 4;
 			midiInLowNibble2 = (*(p + 2)) & 0x0F;
 		}
-
-		ss << std::hex << static_cast<int>(*(p + i)) << std::endl;
 	}
-	logThis2("Incomming message from device %s : %s", Target::midi, source->getName(), ss.str());
+	logThis2("Incomming message from device %s : %s", Target::midiIn, source->getName().toStdString().c_str(), dump(message).c_str());
 
 	for (int i = 0; i < PAGE_COUNT; i++)
 	{
@@ -1521,17 +1516,21 @@ void MainComponent::handleIncomingMidiMessage(juce::MidiInput* source, const juc
 					if (modn != "")
 					{
 						//TODO: Same case as below ? Then merge...
-						// We have to find the corresponding i & j
+						// We have to find first the corresponding i & j
 					}
 				}
 				else
 				{
+					logThis("About to filter", Target::misc);
 					if (!muteOut and (filter(i, j)))
 					{
+						logThis("About to transform", Target::misc);
 						transform(i, j);
-						//applyOutputFormula(i, j);
+						logThis("About to generate", Target::misc);
 						juce::MidiMessage msg = generate(i, j);						
-						m_mods[m_midiOutputDeviceNames.indexOf(modn)]->sendMessageNow(msg);
+						MidiOutput *mo = m_mods[m_midiOutputDeviceNames.indexOf(modn)];
+						logThis2("Outgoing message to device %s : %s", Target::midiOut, mo->getName().toStdString().c_str(), dump(msg).c_str());
+						mo->sendMessageNow(msg);
 					}
 				}
 			}
@@ -1693,6 +1692,11 @@ void MainComponent::transform(int page, int row)
 			midiOutHighNibble0 = static_cast<byte>(expression.value());
 		}
 	}
+	else
+	{
+		midiOutHighNibble0 = midiInHighNibble0;
+	}
+
 	formula = pageControlValues[page][std::string("txtOutB") + s];
 	if (formula.size() > 0)
 	{
@@ -1701,6 +1705,11 @@ void MainComponent::transform(int page, int row)
 			midiOutLowNibble0 = static_cast<byte>(expression.value());
 		}
 	}
+	else
+	{
+		midiOutLowNibble0 = midiInLowNibble0;
+	}
+
 	formula = pageControlValues[page][std::string("txtOutAB") + s];
 	if (formula.size() > 0)
 	{
@@ -1708,6 +1717,10 @@ void MainComponent::transform(int page, int row)
 		{
 			midiOutByte0 = static_cast<byte>(expression.value());
 		}
+	}
+	else
+	{
+		midiOutByte0 = midiInByte0;
 	}
 
 	formula = pageControlValues[page][std::string("txtOutC") + s];
@@ -1718,6 +1731,11 @@ void MainComponent::transform(int page, int row)
 			midiOutHighNibble1 = static_cast<byte>(expression.value());
 		}
 	}
+	else
+	{
+		midiOutHighNibble1 = midiInHighNibble1;
+	}
+
 	formula = pageControlValues[page][std::string("txtOutD") + s];
 	if (formula.size() > 0)
 	{
@@ -1726,6 +1744,11 @@ void MainComponent::transform(int page, int row)
 			midiOutLowNibble1 = static_cast<byte>(expression.value());
 		}
 	}
+	else
+	{
+		midiOutLowNibble1 = midiInLowNibble1;
+	}
+
 	formula = pageControlValues[page][std::string("txtOutCD") + s];
 	if (formula.size() > 0)
 	{
@@ -1733,6 +1756,10 @@ void MainComponent::transform(int page, int row)
 		{
 			midiOutByte1 = static_cast<byte>(expression.value());
 		}
+	}
+	else
+	{
+		midiOutByte1 = midiInByte1;
 	}
 
 	formula = pageControlValues[page][std::string("txtOutE") + s];
@@ -1743,6 +1770,11 @@ void MainComponent::transform(int page, int row)
 			midiOutHighNibble2 = static_cast<byte>(expression.value());
 		}
 	}
+	else
+	{
+		midiOutHighNibble2 = midiInHighNibble2;
+	}
+
 	formula = pageControlValues[page][std::string("txtOutF") + s];
 	if (formula.size() > 0)
 	{
@@ -1751,6 +1783,11 @@ void MainComponent::transform(int page, int row)
 			midiOutLowNibble2 = static_cast<byte>(expression.value());
 		}
 	}
+	else
+	{
+		midiOutLowNibble2 = midiInLowNibble2;
+	}
+
 	formula = pageControlValues[page][std::string("txtOutEF") + s];
 	if (formula.size() > 0)
 	{
@@ -1758,6 +1795,10 @@ void MainComponent::transform(int page, int row)
 		{
 			midiOutByte2 = static_cast<byte>(expression.value());
 		}
+	}
+	else
+	{
+		midiOutByte2 = midiInByte2;
 	}
 }
 
@@ -1771,7 +1812,7 @@ juce::MidiMessage MainComponent::generate(int page, int row)
 	}
 	else
 	{
-		b0 = (midiOutHighNibble0 << 4) & midiOutHighNibble0;
+		b0 = (midiOutHighNibble0 << 4) | (midiOutLowNibble0 & 0x0F);
 	}
 
 	if (CSTOI(pageControlValues[page][std::string("chkOutCD") + std::to_string(row)]) != 0)
@@ -1780,7 +1821,7 @@ juce::MidiMessage MainComponent::generate(int page, int row)
 	}
 	else
 	{
-		b1 = (midiOutHighNibble1 << 4) & midiOutHighNibble1;
+		b1 = (midiOutHighNibble1 << 4) | (midiOutLowNibble1 & 0x0F);
 	}
 
 	if (CSTOI(pageControlValues[page][std::string("chkOutEF") + std::to_string(row)]) != 0)
@@ -1789,10 +1830,10 @@ juce::MidiMessage MainComponent::generate(int page, int row)
 	}
 	else
 	{
-		b2 = (midiOutHighNibble2 << 4) & midiOutHighNibble2;
+		b2 = (midiOutHighNibble2 << 4) | (midiOutLowNibble2 & 0x0F);
 	}
 
-	return juce::MidiMessage (b0, b1, b2);
+	return juce::MidiMessage(b0, b1, b2);
 }
 
 void MainComponent::backupCurrentSession()

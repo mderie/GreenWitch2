@@ -47,6 +47,7 @@ private:
 	// Header
 
 	Label lblDeviceIn, lblMuteIn, lblTarget, lblReverse, lblDropSysex, lblDeviceOut, lblMuteOut;
+	Label lblAIn, lblBIn, lblCIn, lblDIn, lblEIn, lblFIn, lblAOut, lblBOut, lblCOut, lblDOut, lblEOut, lblFOut;
 
 	//Label lblIn, lblOut;
 	//TextEditor txtFormula, txtTarget;
@@ -167,6 +168,7 @@ private:
 
 	bool filter(int page, int row);
 	// void mergeOrDup();
+	std::string dump(const juce::MidiMessage &mm);
 	bool compare(const std::string &filterValue, byte currentValue);
 	void transform(int page, int row);
 	juce::MidiMessage generate(int page, int row);
