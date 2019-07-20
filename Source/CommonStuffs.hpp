@@ -31,5 +31,6 @@ std::vector<std::string> split(const std::string& str, const std::string& delimi
 void logThis(const char *s, Target t);
 void logThis2(const char *format, Target t, ...);
 std::string appendPath(const std::vector<std::string>& pieces);
+std::string trim(const std::string &value);
 
 #endif // COMMON_STUFFS

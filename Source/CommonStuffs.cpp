@@ -140,3 +140,14 @@ void logThis(const char *s, Target t)
   fprintf(fLog, "%s => %s\n", timestamp, s);
   fclose(fLog);
 }
+
+// Waiting for the C++17 standard... See
+// https://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring
+std::string trim(const std::string &value)
+{
+	std::string result;
+	std::stringstream ss;
+	ss << value;
+	ss >> result;
+	return result;
+}

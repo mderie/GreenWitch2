@@ -24,17 +24,18 @@ MainComponent::MainComponent()
 
 	txtFormula.addListener(this);
 	txtFormula.setBounds(200, 16, 100, 16);
+	txtFormula.setName("txtFormula");
 	addAndMakeVisible(txtFormula);
 
 	btnOk.addListener(this);
 	btnOk.setBounds(200 + 100, 16, 16, 16);
-	btnOk.setButtonText("Ok"); //TODO: Not meant to be text bug glyph		
+	btnOk.setButtonText("Ok"); //TODO: Not meant to be text bug glyph
 	addAndMakeVisible(btnOk);
 
 	btnCancel.addListener(this);	
 	btnCancel.setBounds(200 + 100 + 16, 16, 16, 16);
 	btnCancel.setButtonText("Cancel");
-	addAndMakeVisible(btnCancel);	
+	addAndMakeVisible(btnCancel);
 
 	lblIn.setBounds(40, 16, 40, 16);
 	lblIn.setColour(Label::textColourId, Colour(0, 255, 0));
@@ -62,14 +63,17 @@ MainComponent::MainComponent()
 
 	txtInA0.addListener(this);
 	txtInA0.setBounds(20 + 120, 40, 40, 16);
+	txtInA0.setName("txtInA0");
 	addAndMakeVisible(txtInA0);
 
 	txtInB0.addListener(this);
 	txtInB0.setBounds(20 + 180, 40, 40, 16);
+	txtInB0.setName("txtInB0");
 	addAndMakeVisible(txtInB0);
 
 	txtInAB0.addListener(this);
 	txtInAB0.setBounds(20 + 120, 60, 80, 16);
+	txtInAB0.setName("txtInAB0");
 	addAndMakeVisible(txtInAB0);
 
 	//TODO: CD & EF
@@ -103,14 +107,17 @@ MainComponent::MainComponent()
 
 	txtInA1.addListener(this);
 	txtInA1.setBounds(20 + 120, 70, 40, 16);
+	txtInA1.setName("txtInA1");
 	addAndMakeVisible(txtInA1);
 
 	txtInB1.addListener(this);
 	txtInB1.setBounds(20 + 180, 70, 40, 16);
+	txtInB1.setName("txtInB1");
 	addAndMakeVisible(txtInB1);
 
 	txtInAB1.addListener(this);
 	txtInAB1.setBounds(20 + 120, 90, 80, 16);
+	txtInAB1.setName("txtInAB1");
 	addAndMakeVisible(txtInAB1);
 
 	//TODO: CD & EF
@@ -146,14 +153,17 @@ MainComponent::MainComponent()
 
 	txtOutA0.addListener(this);
 	txtOutA0.setBounds(20 + 500, 40, 40, 16);
+	txtOutA0.setName("txtOutA0");
 	addAndMakeVisible(txtOutA0);
 
 	txtOutB0.addListener(this);
 	txtOutB0.setBounds(20 + 560, 40, 40, 16);
+	txtOutB0.setName("txtOutB0");
 	addAndMakeVisible(txtOutB0);
 
 	txtOutAB0.addListener(this);
 	txtOutAB0.setBounds(20 + 560, 60, 40, 16);
+	txtOutAB0.setName("txtOutAB0");
 	addAndMakeVisible(txtOutAB0);
 
 	//TODO: CD & EF
@@ -172,14 +182,17 @@ MainComponent::MainComponent()
 
 	txtOutA1.addListener(this);
 	txtOutA1.setBounds(20 + 500, 70, 40, 16);
+	txtOutA1.setName("txtOutA1");
 	addAndMakeVisible(txtOutA1);
 
 	txtOutB1.addListener(this);
 	txtOutB1.setBounds(20 + 560, 70, 40, 16);
+	txtOutB1.setName("txtOutB1");
 	addAndMakeVisible(txtOutB1);
 
 	txtOutAB1.addListener(this);
 	txtOutAB1.setBounds(20 + 560, 90, 40, 16);
+	txtOutAB1.setName("txtOutAB1");
 	addAndMakeVisible(txtOutAB1);
 
 	//TODO: CD & EF
@@ -405,16 +418,18 @@ void MainComponent::showPage(int index)
 
 	//TODO: For the other lines... And CD & EF !
 
-	chkInAB0.setToggleState(std::stoi(pageControlValues[index]["chkInAB0"]) == 1, false);
-	chkInCD0.setToggleState(std::stoi(pageControlValues[index]["chkInCD0"]) == 1, false);
-	chkInEF0.setToggleState(std::stoi(pageControlValues[index]["chkInEF0"]) == 1, false);
-	chkOutAB0.setToggleState(std::stoi(pageControlValues[index]["chkOutAB0"]) == 1, false);
-	chkOutCD0.setToggleState(std::stoi(pageControlValues[index]["chkOutCD0"]) == 1, false);
-	chkOutEF0.setToggleState(std::stoi(pageControlValues[index]["chkOutEF0"]) == 1, false);
-	chkReverseIn0.setToggleState(std::stoi(pageControlValues[index]["chkReverseIn0"]) == 1, false);
-	chkDropSysexIn0.setToggleState(std::stoi(pageControlValues[index]["chkDropSysexIn0"]) == 1, false);
-	chkMuteIn0.setToggleState(std::stoi(pageControlValues[index]["chkMuteIn0"]) == 1, false);
-	chkMuteOut0.setToggleState(std::stoi(pageControlValues[index]["chkMuteOut0"]) == 1, false);
+	// Care of std::stoi when string to non int conversion occurs ! See :
+	// https://stackoverflow.com/questions/29250531/microsoft-c-exception-stdinvalid-argument-at-memory-location
+	chkInAB0.setToggleState(CSTOI(pageControlValues[index]["chkInAB0"]) == 1, false); 
+	chkInCD0.setToggleState(CSTOI(pageControlValues[index]["chkInCD0"]) == 1, false);
+	chkInEF0.setToggleState(CSTOI(pageControlValues[index]["chkInEF0"]) == 1, false);
+	chkOutAB0.setToggleState(CSTOI(pageControlValues[index]["chkOutAB0"]) == 1, false);
+	chkOutCD0.setToggleState(CSTOI(pageControlValues[index]["chkOutCD0"]) == 1, false);
+	chkOutEF0.setToggleState(CSTOI(pageControlValues[index]["chkOutEF0"]) == 1, false);
+	chkReverseIn0.setToggleState(CSTOI(pageControlValues[index]["chkReverseIn0"]) == 1, false);
+	chkDropSysexIn0.setToggleState(CSTOI(pageControlValues[index]["chkDropSysexIn0"]) == 1, false);
+	chkMuteIn0.setToggleState(CSTOI(pageControlValues[index]["chkMuteIn0"]) == 1, false);
+	chkMuteOut0.setToggleState(CSTOI(pageControlValues[index]["chkMuteOut0"]) == 1, false);
 
 	// Line 1
 
@@ -430,16 +445,16 @@ void MainComponent::showPage(int index)
 
 	//TODO: For the other lines... And CD & EF !
 
-	chkInAB1.setToggleState(std::stoi(pageControlValues[index]["chkInAB1"]) == 1, false);
-	chkInCD1.setToggleState(std::stoi(pageControlValues[index]["chkInCD1"]) == 1, false);
-	chkInEF1.setToggleState(std::stoi(pageControlValues[index]["chkInEF1"]) == 1, false);
-	chkOutAB1.setToggleState(std::stoi(pageControlValues[index]["chkOutAB1"]) == 1, false);
-	chkOutCD1.setToggleState(std::stoi(pageControlValues[index]["chkOutCD1"]) == 1, false);
-	chkOutEF1.setToggleState(std::stoi(pageControlValues[index]["chkOutEF1"]) == 1, false);
-	chkReverseIn1.setToggleState(std::stoi(pageControlValues[index]["chkReverseIn1"]) == 1, false);
-	chkDropSysexIn1.setToggleState(std::stoi(pageControlValues[index]["chkDropSysexIn1"]) == 1, false);
-	chkMuteIn1.setToggleState(std::stoi(pageControlValues[index]["chkMuteIn1"]) == 1, false);
-	chkMuteOut1.setToggleState(std::stoi(pageControlValues[index]["chkMuteOut1"]) == 1, false);
+	chkInAB1.setToggleState(CSTOI(pageControlValues[index]["chkInAB1"]) == 1, false);
+	chkInCD1.setToggleState(CSTOI(pageControlValues[index]["chkInCD1"]) == 1, false);
+	chkInEF1.setToggleState(CSTOI(pageControlValues[index]["chkInEF1"]) == 1, false);
+	chkOutAB1.setToggleState(CSTOI(pageControlValues[index]["chkOutAB1"]) == 1, false);
+	chkOutCD1.setToggleState(CSTOI(pageControlValues[index]["chkOutCD1"]) == 1, false);
+	chkOutEF1.setToggleState(CSTOI(pageControlValues[index]["chkOutEF1"]) == 1, false);
+	chkReverseIn1.setToggleState(CSTOI(pageControlValues[index]["chkReverseIn1"]) == 1, false);
+	chkDropSysexIn1.setToggleState(CSTOI(pageControlValues[index]["chkDropSysexIn1"]) == 1, false);
+	chkMuteIn1.setToggleState(CSTOI(pageControlValues[index]["chkMuteIn1"]) == 1, false);
+	chkMuteOut1.setToggleState(CSTOI(pageControlValues[index]["chkMuteOut1"]) == 1, false);
 }
 
 void MainComponent::handleIncomingMidiMessage(juce::MidiInput* source, const juce::MidiMessage& message)
@@ -450,6 +465,7 @@ void MainComponent::handleIncomingMidiMessage(juce::MidiInput* source, const juc
 	}
 
 	//TODO: We'll see later for message of size 2 (Care ! See : http://midi.teragonaudio.com/tech/midispec/run.htm )
+	// Introduce a container for each input device holding the first byte ?
 
 	std::stringstream ss;
 	const juce::uint8* p = message.getRawData();
@@ -485,31 +501,100 @@ void MainComponent::handleIncomingMidiMessage(juce::MidiInput* source, const juc
 	{
 		for (int j = 0; j < ROW_COUNT; j++)
 		{
-			std::string midn = pageControlValues[i][std::string("cboDeviceIn") + std::to_string(j)]; // Or std::stoi ?-)
-			if (midn == source->getName())
+			// Midi Input Device Name
+			std::string midn = pageControlValues[i][std::string("cboDeviceIn") + std::to_string(j)]; // Opposite of int x = std::stoi(s); !-)
+			bool muteIn = CSTOI(pageControlValues[i][std::string("chkMuteIn") + std::to_string(j)]);
+			if (!muteIn and (midn == source->getName()))
 			{
 				std::string modn = pageControlValues[i][std::string("cboDeviceOut") + std::to_string(j)];
+				bool muteOut = CSTOI(pageControlValues[i][std::string("chkMuteOut") + std::to_string(j)]);
 				if (modn == "")
 				{
 					modn = pageControlValues[i][std::string("cboTarget") + std::to_string(j)];
 					if (modn != "")
 					{
-						//TODO: Same case as below ? Merge...
+						//TODO: Same case as below ? Then merge...
+						// We have to find the corresponding i & j
 					}
 				}
 				else
 				{
-					// ApplyFilter();
-					// ApplyFormula();
-					transform(i, j);
-					juce::MidiMessage msg();
-
-					m_mods[m_midiOutputDeviceNames.indexOf(modn)]->sendMessageNow(message);
+					if (!muteOut and (applyInputFilter(i, j)))
+					{
+						transform(i, j);
+						//applyOutputFormula(i, j);
+						juce::MidiMessage msg = generate(i, j);						
+						m_mods[m_midiOutputDeviceNames.indexOf(modn)]->sendMessageNow(msg);
+					}
 				}
 			}
 		}
 	}
 }
+
+bool MainComponent::compare(const std::string &filterValue, byte currentValue)
+{
+	byte value = (byte) CSTOI(filterValue.substr(1)); // We 'll see later for hex support
+	if (filterValue[0] == '!')
+	{
+		return currentValue != value;
+	}
+	else if (filterValue[0] == '<')
+	{
+		return currentValue < value;
+	}
+	else if (filterValue[0] == '>')
+	{
+		return (currentValue > value);
+	}
+	else if (filterValue[0] == '=')
+	{
+		return (currentValue == value);
+	}
+	else
+	{
+		return false; // Unknown first character
+	}
+}
+
+bool MainComponent::applyInputFilter(int page, int row)
+{
+	std::string high, low, middle; // IE : (A and B) or AB
+		
+	if (CSTOI(pageControlValues[page][std::string("chkInAB") + std::to_string(row)]) != 0)
+	{
+		middle = trim(pageControlValues[page][std::string("txtInAB") + std::to_string(row)]);
+		if ((middle.size() > 1) and (!compare(middle, midiInByte0)))
+		{
+			return false;
+		}
+	}
+	else
+	{
+		high = trim(pageControlValues[page][std::string("txtInA") + std::to_string(row)]);
+		if ((high.size() > 1) and (!compare(high, midiInHighNibble0)))
+		{
+			return false;
+		}
+
+		low = trim(pageControlValues[page][std::string("txtInB") + std::to_string(row)]);
+		if ((low.size() > 1) and (!compare(low, midiInLowNibble0)))
+		{
+			return false;
+		}
+
+		//TODO: And CD & EF !
+	}
+
+	return true;	
+}
+
+/*
+void MainComponent::applyOutputFormula(int page, int row)
+{
+//
+}
+*/
 
 void MainComponent::transform(int page, int row)
 {
@@ -575,6 +660,40 @@ void MainComponent::transform(int page, int row)
 	}
 
 	//TODO: And CD & EF !
+}
+
+juce::MidiMessage MainComponent::generate(int page, int row)
+{
+	byte b0, b1, b2;
+
+	if (CSTOI(pageControlValues[page][std::string("chkOutAB") + std::to_string(row)]) != 0)
+	{
+		b0 = midiOutByte0;
+	}
+	else
+	{
+		b0 = (midiOutHighNibble0 << 4) & midiOutHighNibble0;
+	}
+
+	if (CSTOI(pageControlValues[page][std::string("chkOutCD") + std::to_string(row)]) != 0)
+	{
+		b1 = midiOutByte1;
+	}
+	else
+	{
+		b1 = (midiOutHighNibble1 << 4) & midiOutHighNibble1;
+	}
+
+	if (CSTOI(pageControlValues[page][std::string("chkOutEF") + std::to_string(row)]) != 0)
+	{
+		b2 = midiOutByte2;
+	}
+	else
+	{
+		b2 = (midiOutHighNibble2 << 4) & midiOutHighNibble2;
+	}
+
+	return juce::MidiMessage (b0, b1, b2);
 }
 
 void MainComponent::backupCurrentSession()

@@ -17,6 +17,7 @@ typedef unsigned char byte; // Same as juce::uint8
 #define PAGE_COUNT 10
 #define ROW_COUNT 4
 #define NO_DEVICE "<nothing>"
+#define CSTOI(x) (x.size() == 0 ? 0 : std::stoi(x)) // Check stoi !-)
 
 //==============================================================================
 /*
@@ -49,7 +50,7 @@ private:
 	TextEditor txtFormula, txtTarget;
 	TextButton btnOk, btnCancel; //TODO: Change this to ImageButton (ImageButton btn...;) Then put the associated resource
 
-	// Each line looks like (where xxx[ ] is a checkbox, yyy[] is a combobox & zzz is a textbox)
+	// Each line looks like the following (where xxx[ ] is a checkbox, yyy[] is a combobox & zzz is a textbox) :
 	// DeviceIn[] Mute[ ] A    B   C    D   E    F   Target[] Reverse[ ] DropSysex[ ] DeviceOut Mute[ ] A    B   C    D   E    F           
 	//                    AB[ ] AB CD[ ] CD EF[ ] EF                                                    AB[ ] AB CD[ ] CD EF[ ] EF
 
@@ -100,13 +101,15 @@ private:
 	std::vector<MidiOutput*> m_mods;
 
 	// All the content value of the Buttons, ComboBoxes & TextEditors... A bit duplicate but more handy due to the pages
+	// Moreover, we don't have to store the associated pointer to control to find it back
 	std::map<int, std::map<std::string, std::string> > pageControlValues; // Page -> Control name -> Control value
 
 	int m_currentPage;
 	bool m_sessionChanged;
-
+	
+	// well, we asssume here that we can process each message one at time without threading issue...
 	byte midiInByte0;
-	byte midiInHighNibble0; // We asssume here that we can process each message one at time without threading issue...
+	byte midiInHighNibble0; 
 	byte midiInLowNibble0;
 	byte midiInByte1;
 	byte midiInHighNibble1;
@@ -134,10 +137,12 @@ private:
 	void ReserveOutDevice(const std::string &deviceName); // One out line is associated to this device
 	void RestoreOutDevice(const std::string &deviceName); // The device can now be used somewhere else
 
-	// void filterInput();
+	bool applyInputFilter(int page, int row); //TODO: Just rename it filter ?
 	// void mergeOrDup();
-	// void filterOutput();
+	bool compare(const std::string &filterValue, byte currentValue);
 	void transform(int page, int row);
+	juce::MidiMessage generate(int page, int row);
+	//void applyOutputFormula(int page, int row);
 	// void sendMessage();
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
