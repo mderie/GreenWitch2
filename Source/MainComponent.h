@@ -30,6 +30,7 @@ public:
 	// Event handler for all the "listeners"
 	virtual void buttonClicked(Button *sender) override;
 	virtual void comboBoxChanged(ComboBox *sender) override;
+	virtual void textEditorTextChanged(TextEditor &sender) override; // Oddly enough it is not *sender...
 	virtual void handleIncomingMidiMessage(juce::MidiInput* source, const juce::MidiMessage& message) override;
 
     //==============================================================================
@@ -113,12 +114,6 @@ private:
 
 	TextButton btnFirst, btnPrev, btnNext, btnLast; //TODO: Change this to ImageButton (ImageButton btn...;) Then put the associated resource
 
-	// How many off them ? No limit... Use array !
-	//MidiInput* m_midiInput = nullptr;
-	//MidiOutput* m_midiOutput = nullptr;
-	//std::map<MidiInput*, std::string> mis;
-	//std::map<MidiOutput*, std::string> mos;
-
 	juce::StringArray m_midiInputDeviceNames;
 	juce::StringArray m_midiInputDeviceNamesAvail;
 	juce::StringArray m_midiInputDeviceNamesInUse;
@@ -167,13 +162,11 @@ private:
 	void RestoreOutDevice(const std::string &deviceName); // The device can now be used somewhere else
 
 	bool filter(int page, int row);
-	// void mergeOrDup();
+	void process(int pageIn, int rowIn, int pageOut, int rowOut);
 	std::string dump(const juce::MidiMessage &mm);
 	bool compare(const std::string &filterValue, byte currentValue);
 	void transform(int page, int row);
 	juce::MidiMessage generate(int page, int row);
-	//void applyOutputFormula(int page, int row);
-	// void sendMessage();
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };

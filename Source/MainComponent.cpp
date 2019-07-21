@@ -48,7 +48,7 @@ MainComponent::MainComponent()
 	addAndMakeVisible(lblOut);
 */
 	int u = 4;
-	int x = 2*u;
+	int x = u;
 	int y = 2*u;
 	int w = 10*u;
 
@@ -1266,7 +1266,16 @@ void MainComponent::comboBoxChanged(ComboBox *sender)
 
 	pageControlValues[m_currentPage][controlName] = controlValue; // Always save the change
 }
-//==============================================================================
+
+void MainComponent::textEditorTextChanged(TextEditor &sender)
+{
+	std::string controlName = sender.getName().toStdString();
+	std::string controlValue = sender.getText().toStdString();
+	logThis2("controlName = %s & controlValue = %s", Target::screen, controlName.c_str(), controlValue.c_str());
+
+	pageControlValues[m_currentPage][controlName] = controlValue; // Always save the change
+}
+
 void MainComponent::paint (Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
@@ -1280,8 +1289,9 @@ void MainComponent::paint (Graphics& g)
     g.drawText ("Hello World!", getLocalBounds(), Justification::centred, true);
 	*/
 
-	Image background = juce::ImageCache::getFromMemory(BinaryData::background_jpg, BinaryData::background_jpgSize);
-	g.drawImageAt(background, 0, 0);
+	// Ok but the image doesn't fit well the window size / orientation
+	//Image background = juce::ImageCache::getFromMemory(BinaryData::background_jpg, BinaryData::background_jpgSize);
+	//g.drawImageAt(background, 0, 0);
 }
 
 void MainComponent::resized()
@@ -1473,7 +1483,6 @@ void MainComponent::handleIncomingMidiMessage(juce::MidiInput* source, const juc
 	// Introduce a container for each input device holding the first byte ?
 
 	const juce::uint8* p = message.getRawData();
-
 	for (int i = 0; i < message.getRawDataSize(); i++) // Although it should be 3 bytes all the time
 	{
 		if (i == 0)
@@ -1499,43 +1508,72 @@ void MainComponent::handleIncomingMidiMessage(juce::MidiInput* source, const juc
 	}
 	logThis2("Incomming message from device %s : %s", Target::midiIn, source->getName().toStdString().c_str(), dump(message).c_str());
 
+	std::string midn; // Midi Input Device Name
+	std::string modn;
+	std::string mtdn;
+
 	for (int i = 0; i < PAGE_COUNT; i++)
 	{
 		for (int j = 0; j < ROW_COUNT; j++)
-		{
-			// Midi Input Device Name
-			std::string midn = pageControlValues[i][std::string("cboDeviceIn") + std::to_string(j)]; // Opposite of int x = std::stoi(s); !-)
+		{			
+			midn = pageControlValues[i][std::string("cboDeviceIn") + std::to_string(j)]; // Opposite of int x = std::stoi(s); !-)
 			bool muteIn = (CSTOI(pageControlValues[i][std::string("chkMuteIn") + std::to_string(j)]) != 0);
-			if (!muteIn and (midn == source->getName()))
+			if (!muteIn and (midn.size() > 0) and (midn == source->getName()))
 			{
-				std::string modn = pageControlValues[i][std::string("cboDeviceOut") + std::to_string(j)];
-				bool muteOut = (CSTOI(pageControlValues[i][std::string("chkMuteOut") + std::to_string(j)]) != 0);
+				modn = pageControlValues[i][std::string("cboDeviceOut") + std::to_string(j)];
 				if (modn == "")
 				{
-					modn = pageControlValues[i][std::string("cboTarget") + std::to_string(j)];
-					if (modn != "")
+					mtdn = pageControlValues[i][std::string("cboTargetIn") + std::to_string(j)];
+					if (mtdn != "")
 					{
-						//TODO: Same case as below ? Then merge...
-						// We have to find first the corresponding i & j
+						for (int k = 0; k < PAGE_COUNT; k++)
+						{
+							for (int l = 0; l < ROW_COUNT; l++)
+							{
+								modn = pageControlValues[k][std::string("cboDeviceOut") + std::to_string(l)];
+								if (modn == mtdn)
+								{
+									logThis("Using the target OUT", Target::misc);
+									process(i, j, k, l);
+								}
+							}
+						}
 					}
 				}
 				else
 				{
-					logThis("About to filter", Target::misc);
-					if (!muteOut and (filter(i, j)))
-					{
-						logThis("About to transform", Target::misc);
-						transform(i, j);
-						logThis("About to generate", Target::misc);
-						juce::MidiMessage msg = generate(i, j);						
-						MidiOutput *mo = m_mods[m_midiOutputDeviceNames.indexOf(modn)];
-						logThis2("Outgoing message to device %s : %s", Target::midiOut, mo->getName().toStdString().c_str(), dump(msg).c_str());
-						mo->sendMessageNow(msg);
-					}
+					logThis("Using the classical OUT", Target::misc);
+					process(i, j, i, j);
 				}
 			}
 		}
 	}
+}
+
+void MainComponent::process(int pageIn, int rowIn, int pageOut, int rowOut)
+{
+	logThis("Check out mute", Target::misc);
+	bool muteOut = (CSTOI(pageControlValues[pageOut][std::string("chkMuteOut") + std::to_string(rowOut)]) != 0);
+	if (muteOut)
+	{
+		return;
+	}
+
+	logThis("About to filter", Target::misc);
+	if (!filter(pageIn, rowIn))
+	{
+		logThis2("Midi message didn't pass the filter : page = %d ; row = %d", Target::misc, pageIn, rowIn);
+		return;
+	}
+
+	logThis("About to transform", Target::misc);
+	transform(pageIn, rowIn);
+	logThis("About to generate", Target::misc);
+	juce::MidiMessage msg = generate(pageOut, rowOut);
+	std::string modn = pageControlValues[pageOut][std::string("cboDeviceOut") + std::to_string(rowOut)];
+	MidiOutput *mo = m_mods[m_midiOutputDeviceNames.indexOf(modn)];
+	logThis2("Outgoing message to device %s : %s", Target::midiOut, mo->getName().toStdString().c_str(), dump(msg).c_str());
+	mo->sendMessageNow(msg);
 }
 
 bool MainComponent::compare(const std::string &filterValue, byte currentValue)
@@ -1559,7 +1597,8 @@ bool MainComponent::compare(const std::string &filterValue, byte currentValue)
 	}
 	else
 	{
-		return false; // Unknown first character
+		logThis2("Unknown first character = %c", Target::misc, filterValue[0]);
+		return false;
 	}
 }
 

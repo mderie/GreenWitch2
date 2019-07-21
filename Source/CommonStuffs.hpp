@@ -23,7 +23,7 @@ inline unsigned sizeOfArray(const T(&)[size]) { return size; }
 enum class Target { screen, midiIn, midiOut, misc, last_item }; //TODO: Refine midi by channel ?
 const std::string targets[(int) Target::last_item] = { "screen", "midiIn", "midiOut", "misc" }; // Don't forget the leading const :)
 
-std::string intToStr(int value); // So Delpĥi...
+std::string intToStr(int value); // So Delphi...
 std::string runningFolder();
 std::string stringUpper(const std::string& s);
 void join(std::string& dest, const std::string& item, const std::string& delimiter); // Little string accumulator helper

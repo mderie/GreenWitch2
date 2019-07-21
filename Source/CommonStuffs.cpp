@@ -5,6 +5,11 @@
 #include <algorithm>
 #include <iostream>
 #include <ctime>
+// Include milli second... Nice but it doesn't comple :( ? See
+// https://stackoverflow.com/questions/3673226/how-to-print-time-in-format-2009-08-10-181754-811
+//#include <sys/time.h>
+//==> use instead #include <chrono>
+// See https://stackoverflow.com/questions/19555121/how-to-get-current-timestamp-in-milliseconds-since-1970-just-the-way-java-gets
 #include <sstream>
 #include <cstdarg>
 
@@ -128,9 +133,12 @@ void logThis(const char *s, Target t)
 {
   time_t rawtime;
   struct tm* timeinfo;
+  //struct timeval tmnow;
   char timestamp[32]; // Sure there is more C++ way to do this...
 
-  time (&rawtime);
+  // Not C++ ?
+  //gettimeofday(&tmnow, NULL);
+  time(&rawtime);
   timeinfo = localtime(&rawtime);
   strftime(timestamp, sizeof(timestamp), "%d/%m/%Y %H:%M:%S", timeinfo);
 

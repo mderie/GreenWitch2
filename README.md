@@ -1,21 +1,21 @@
 GreenWitch 2.0 - Might Midi Magic
 
-TODO
-----
+TODO (first ones are though ones)
+---------------------------------
 
-- Review completely the UI building and so remove all those ugly copy/paste lines !
+- Review completely the UI building (use a custom panel and repeat it on a scroll area) and so remove all those ugly copy/paste lines !
 - Associated a thread to each IN device ?
+- Optimize all the transform rulez should not be computed every time
+- Save and restore session
 - Handle Reverse
-- Handle Sysex
+- Handle Sysex (AKA message > 3 bytes)
 - Message < 3 bytes
-- Handle Target (aka optional merge to OUT)
 - Don't open all devices
 - Put glyph on buttons
 - Transparency & resize
-- Save and restore session
-- Review the default path for config file
+- Review the default path for config file & lgo files
 - Implement OUT Combobox filtering on used devices
 - Reload midi devices on each device combobox openning ?
-- Enhance the log content ?
+- Enhance the log content : introduce log level and put it in config
+- Enhance the log content : put the milli seconds
 - Support hex in formula/filter ?
-- Add A-B-C-D-E-F * 2 as labels
