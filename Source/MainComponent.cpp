@@ -16,6 +16,11 @@
 //==============================================================================
 MainComponent::MainComponent()
 {
+	setLogFilter(true, Target::screen);
+	setLogFilter(true, Target::midiIn);
+	setLogFilter(true, Target::midiOut);
+	setLogFilter(true, Target::misc);
+
 	logThis("Session start", Target::misc);
 
     setSize (920, 520);
@@ -521,31 +526,31 @@ MainComponent::MainComponent()
 
 	y += 4*u + 2*u;
 
-	cboTargetIn0.addListener(this);
-	cboTargetIn0.setBounds(x, y, 2*w, 4*u);
-	cboTargetIn0.setName("cboTargetIn0");
-	addAndMakeVisible(cboTargetIn0);
+	//cboTargetIn0.addListener(this);
+	//cboTargetIn0.setBounds(x, y, 2*w, 4*u);
+	//cboTargetIn0.setName("cboTargetIn0");
+	//addAndMakeVisible(cboTargetIn0);
 
 	y += 4*u + 6*u;
 
-	cboTargetIn1.addListener(this);
-	cboTargetIn1.setBounds(x, y, 2*w, 4*u);
-	cboTargetIn1.setName("cboTargetIn1");
-	addAndMakeVisible(cboTargetIn1);
+	//cboTargetIn1.addListener(this);
+	//cboTargetIn1.setBounds(x, y, 2*w, 4*u);
+	//cboTargetIn1.setName("cboTargetIn1");
+	//addAndMakeVisible(cboTargetIn1);
 
 	y += 4*u + 6*u;
 
-	cboTargetIn2.addListener(this);
-	cboTargetIn2.setBounds(x, y, 2 * w, 4 * u);
-	cboTargetIn2.setName("cboTargetIn2");
-	addAndMakeVisible(cboTargetIn2);
+	//cboTargetIn2.addListener(this);
+	//cboTargetIn2.setBounds(x, y, 2 * w, 4 * u);
+	//cboTargetIn2.setName("cboTargetIn2");
+	//addAndMakeVisible(cboTargetIn2);
 
 	y += 4*u + 6*u;
 
-	cboTargetIn3.addListener(this);
-	cboTargetIn3.setBounds(x, y, 2 * w, 4 * u);
-	cboTargetIn3.setName("cboTargetIn3");
-	addAndMakeVisible(cboTargetIn3);
+	//cboTargetIn3.addListener(this);
+	//cboTargetIn3.setBounds(x, y, 2 * w, 4 * u);
+	//cboTargetIn3.setName("cboTargetIn3");
+	//addAndMakeVisible(cboTargetIn3);
 
 	x += 2*w;
 	y = 2*u;
@@ -593,31 +598,31 @@ MainComponent::MainComponent()
 
 	y += 4*u + 2*u;
 
-	chkDropSysexIn0.addListener(this);
-	chkDropSysexIn0.setBounds(x, y, w, 4*u);
-	chkDropSysexIn0.setName("chkDropSysexIn0");
-	addAndMakeVisible(chkDropSysexIn0);
+	//chkDropSysexIn0.addListener(this);
+	//chkDropSysexIn0.setBounds(x, y, w, 4*u);
+	//chkDropSysexIn0.setName("chkDropSysexIn0");
+	//addAndMakeVisible(chkDropSysexIn0);
 
 	y += 4*u + 6*u;
 
-	chkDropSysexIn1.addListener(this);
-	chkDropSysexIn1.setBounds(x, y, w, 4*u);
-	chkDropSysexIn1.setName("chkDropSysexIn1");
-	addAndMakeVisible(chkDropSysexIn1);
+	//chkDropSysexIn1.addListener(this);
+	//chkDropSysexIn1.setBounds(x, y, w, 4*u);
+	//chkDropSysexIn1.setName("chkDropSysexIn1");
+	//addAndMakeVisible(chkDropSysexIn1);
 
 	y += 4*u + 6*u;
 
-	chkDropSysexIn2.addListener(this);
-	chkDropSysexIn2.setBounds(x, y, w, 4 * u);
-	chkDropSysexIn2.setName("chkDropSysexIn2");
-	addAndMakeVisible(chkDropSysexIn2);
+	//chkDropSysexIn2.addListener(this);
+	//chkDropSysexIn2.setBounds(x, y, w, 4 * u);
+	//chkDropSysexIn2.setName("chkDropSysexIn2");
+	//addAndMakeVisible(chkDropSysexIn2);
 
 	y += 4*u + 6*u;
 
-	chkDropSysexIn3.addListener(this);
-	chkDropSysexIn3.setBounds(x, y, w, 4 * u);
-	chkDropSysexIn3.setName("chkDropSysexIn3");
-	addAndMakeVisible(chkDropSysexIn3);
+	//chkDropSysexIn3.addListener(this);
+	//chkDropSysexIn3.setBounds(x, y, w, 4 * u);
+	//chkDropSysexIn3.setName("chkDropSysexIn3");
+	//addAndMakeVisible(chkDropSysexIn3);
 	
 	x += w;
 	y = 2*u;
@@ -665,31 +670,31 @@ MainComponent::MainComponent()
 
 	y += 4*u + 2*u;
 
-	chkMuteOut0.addListener(this);
-	chkMuteOut0.setBounds(x, y, w, 4*u);
-	chkMuteOut0.setName("chkMuteOut0");
-	addAndMakeVisible(chkMuteOut0);
+	//chkMuteOut0.addListener(this);
+	//chkMuteOut0.setBounds(x, y, w, 4*u);
+	//chkMuteOut0.setName("chkMuteOut0");
+	//addAndMakeVisible(chkMuteOut0);
 
 	y += 4*u + 6*u;
 
-	chkMuteOut1.addListener(this);
-	chkMuteOut1.setBounds(x, y, w, 4*u);
-	chkMuteOut1.setName("chkMuteOut1");
-	addAndMakeVisible(chkMuteOut1);
+	//chkMuteOut1.addListener(this);
+	//chkMuteOut1.setBounds(x, y, w, 4*u);
+	//chkMuteOut1.setName("chkMuteOut1");
+	//addAndMakeVisible(chkMuteOut1);
 
 	y += 4*u + 6*u;
 
-	chkMuteOut2.addListener(this);
-	chkMuteOut2.setBounds(x, y, w, 4 * u);
-	chkMuteOut2.setName("chkMuteOut2");
-	addAndMakeVisible(chkMuteOut2);
+	//chkMuteOut2.addListener(this);
+	//chkMuteOut2.setBounds(x, y, w, 4 * u);
+	//chkMuteOut2.setName("chkMuteOut2");
+	//addAndMakeVisible(chkMuteOut2);
 
 	y += 4*u + 6*u;
 
-	chkMuteOut3.addListener(this);
-	chkMuteOut3.setBounds(x, y, w, 4 * u);
-	chkMuteOut3.setName("chkMuteOut3");
-	addAndMakeVisible(chkMuteOut3);
+	//chkMuteOut3.addListener(this);
+	//chkMuteOut3.setBounds(x, y, w, 4 * u);
+	//chkMuteOut3.setName("chkMuteOut3");
+	//addAndMakeVisible(chkMuteOut3);
 
 	x += w;
 	y = 2*u;
@@ -1082,6 +1087,16 @@ MainComponent::MainComponent()
 	addAndMakeVisible(txtOutEF3);
 
 	// Footer
+	
+	lblFilter.setBounds(250, 350, 15*u, 4*u);
+	lblFilter.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblFilter.setText("Filter", NotificationType::dontSendNotification);
+	addAndMakeVisible(lblFilter);
+	
+	lblFormula.setBounds(750, 350, 15*u, 4*u);
+	lblFormula.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblFormula.setText("Formula", NotificationType::dontSendNotification);
+	addAndMakeVisible(lblFormula);
 
 	btnFirst.addListener(this);
 	btnFirst.setBounds(10, 350, 16, 4*u);
@@ -1103,7 +1118,7 @@ MainComponent::MainComponent()
 	btnLast.setButtonText("Last");
 	addAndMakeVisible(btnLast);
 	
-	// Ouf enough of controls :)
+	// Ouf ! Enough of controls :)
 
 	openAllMidiDevices(); //TODO: Review this !
 	cboDeviceIn0.addItem(NO_DEVICE, 1); // Id's start always at 1
@@ -1123,6 +1138,7 @@ MainComponent::MainComponent()
 	cboDeviceIn0.setText(NO_DEVICE);
 	cboDeviceIn1.setSelectedId(1);
 
+	/*
 	cboTargetIn0.addItem(NO_DEVICE, 1);
 	cboTargetIn1.addItem(NO_DEVICE, 1);
 	cboTargetIn2.addItem(NO_DEVICE, 1);
@@ -1139,6 +1155,7 @@ MainComponent::MainComponent()
 	// Not better... Too early ?
 	cboTargetIn0.setSelectedItemIndex(0);
 	cboTargetIn1.setSelectedId(1);
+	*/
 
 	cboDeviceOut0.addItem(NO_DEVICE, 1);
 	cboDeviceOut1.addItem(NO_DEVICE, 1);
@@ -1240,13 +1257,13 @@ void MainComponent::comboBoxChanged(ComboBox *sender)
 	{
 		//Nothing to do ? Hard code the name here ?
 	}
-	else if (sender == &cboTargetIn0)
-	{
+    //else if (sender == &cboTargetIn0)
+	//{
 		//Nothing to do ?
-	}
+	//}
 	else if ((sender == &cboDeviceOut0) || (sender == &cboDeviceOut1) || (sender == &cboDeviceOut2) || (sender == &cboDeviceOut3))
 	{
-		// We have to avoid duplicate in OUT ones...
+		// We have to avoid duplicate in OUT ones... What ?
 
 		if (sender->getSelectedId() == 1)
 		{
@@ -1321,30 +1338,30 @@ void MainComponent::showPage(int index)
 	txtInE0.setText(pageControlValues[index]["txtInE0"]);
 	txtInF0.setText(pageControlValues[index]["txtInF0"]);
 	txtInEF0.setText(pageControlValues[index]["txtInEF0"]);
-	cboTargetIn0.setText(pageControlValues[index]["cboTargetIn0"]);
+	//cboTargetIn0.setText(pageControlValues[index]["cboTargetIn0"]);
 	cboDeviceOut0.setText(pageControlValues[index]["cboDeviceOut0"]);
-	txtOutA0.setText(pageControlValues[index]["txtOutA0"]);
-	txtOutB0.setText(pageControlValues[index]["txtOutB0"]);
-	txtOutAB0.setText(pageControlValues[index]["txtOutAB0"]);
-	txtOutC0.setText(pageControlValues[index]["txtOutC0"]);
-	txtOutD0.setText(pageControlValues[index]["txtOutD0"]);
-	txtOutCD0.setText(pageControlValues[index]["txtOutCD0"]);
-	txtOutE0.setText(pageControlValues[index]["txtOutE0"]);
-	txtOutF0.setText(pageControlValues[index]["txtOutF0"]);
-	txtOutEF0.setText(pageControlValues[index]["txtOutEF0"]);
+	//txtOutA0.setText(pageControlValues[index]["txtOutA0"]);
+	//txtOutB0.setText(pageControlValues[index]["txtOutB0"]);
+	//txtOutAB0.setText(pageControlValues[index]["txtOutAB0"]);
+	//txtOutC0.setText(pageControlValues[index]["txtOutC0"]);
+	//txtOutD0.setText(pageControlValues[index]["txtOutD0"]);
+	//txtOutCD0.setText(pageControlValues[index]["txtOutCD0"]);
+	//txtOutE0.setText(pageControlValues[index]["txtOutE0"]);
+	//txtOutF0.setText(pageControlValues[index]["txtOutF0"]);
+	//txtOutEF0.setText(pageControlValues[index]["txtOutEF0"]);
 
 	// Care of std::stoi when string to non int conversion occurs ! See :
 	// https://stackoverflow.com/questions/29250531/microsoft-c-exception-stdinvalid-argument-at-memory-location
 	chkInAB0.setToggleState(CSTOI(pageControlValues[index]["chkInAB0"]) == 1, false); 
 	chkInCD0.setToggleState(CSTOI(pageControlValues[index]["chkInCD0"]) == 1, false);
 	chkInEF0.setToggleState(CSTOI(pageControlValues[index]["chkInEF0"]) == 1, false);
-	chkOutAB0.setToggleState(CSTOI(pageControlValues[index]["chkOutAB0"]) == 1, false);
-	chkOutCD0.setToggleState(CSTOI(pageControlValues[index]["chkOutCD0"]) == 1, false);
-	chkOutEF0.setToggleState(CSTOI(pageControlValues[index]["chkOutEF0"]) == 1, false);
+	//chkOutAB0.setToggleState(CSTOI(pageControlValues[index]["chkOutAB0"]) == 1, false);
+	//chkOutCD0.setToggleState(CSTOI(pageControlValues[index]["chkOutCD0"]) == 1, false);
+	//chkOutEF0.setToggleState(CSTOI(pageControlValues[index]["chkOutEF0"]) == 1, false);
 	chkReverseIn0.setToggleState(CSTOI(pageControlValues[index]["chkReverseIn0"]) == 1, false);
-	chkDropSysexIn0.setToggleState(CSTOI(pageControlValues[index]["chkDropSysexIn0"]) == 1, false);
+	//chkDropSysexIn0.setToggleState(CSTOI(pageControlValues[index]["chkDropSysexIn0"]) == 1, false);
 	chkMuteIn0.setToggleState(CSTOI(pageControlValues[index]["chkMuteIn0"]) == 1, false);
-	chkMuteOut0.setToggleState(CSTOI(pageControlValues[index]["chkMuteOut0"]) == 1, false);
+	//chkMuteOut0.setToggleState(CSTOI(pageControlValues[index]["chkMuteOut0"]) == 1, false);
 
 	// Line 1
 
@@ -1358,28 +1375,28 @@ void MainComponent::showPage(int index)
 	txtInE1.setText(pageControlValues[index]["txtInE1"]);
 	txtInF1.setText(pageControlValues[index]["txtInF1"]);
 	txtInEF1.setText(pageControlValues[index]["txtInEF1"]);
-	cboTargetIn1.setText(pageControlValues[index]["cboTargetIn1"]);
+	//cboTargetIn1.setText(pageControlValues[index]["cboTargetIn1"]);
 	cboDeviceOut1.setText(pageControlValues[index]["cboDeviceOut1"]);
-	txtOutA1.setText(pageControlValues[index]["txtOutA1"]);
-	txtOutB1.setText(pageControlValues[index]["txtOutB1"]);
-	txtOutAB1.setText(pageControlValues[index]["txtOutAB1"]);
-	txtOutC1.setText(pageControlValues[index]["txtOutC1"]);
-	txtOutD1.setText(pageControlValues[index]["txtOutD1"]);
-	txtOutCD1.setText(pageControlValues[index]["txtOutCD1"]);
-	txtOutE1.setText(pageControlValues[index]["txtOutE1"]);
-	txtOutF1.setText(pageControlValues[index]["txtOutF1"]);
-	txtOutEF1.setText(pageControlValues[index]["txtOutEF1"]);
+	//txtOutA1.setText(pageControlValues[index]["txtOutA1"]);
+	//txtOutB1.setText(pageControlValues[index]["txtOutB1"]);
+	//txtOutAB1.setText(pageControlValues[index]["txtOutAB1"]);
+	//txtOutC1.setText(pageControlValues[index]["txtOutC1"]);
+	//txtOutD1.setText(pageControlValues[index]["txtOutD1"]);
+	//txtOutCD1.setText(pageControlValues[index]["txtOutCD1"]);
+	//txtOutE1.setText(pageControlValues[index]["txtOutE1"]);
+	//txtOutF1.setText(pageControlValues[index]["txtOutF1"]);
+	//txtOutEF1.setText(pageControlValues[index]["txtOutEF1"]);
 
 	chkInAB1.setToggleState(CSTOI(pageControlValues[index]["chkInAB1"]) == 1, false);
 	chkInCD1.setToggleState(CSTOI(pageControlValues[index]["chkInCD1"]) == 1, false);
 	chkInEF1.setToggleState(CSTOI(pageControlValues[index]["chkInEF1"]) == 1, false);
-	chkOutAB1.setToggleState(CSTOI(pageControlValues[index]["chkOutAB1"]) == 1, false);
-	chkOutCD1.setToggleState(CSTOI(pageControlValues[index]["chkOutCD1"]) == 1, false);
-	chkOutEF1.setToggleState(CSTOI(pageControlValues[index]["chkOutEF1"]) == 1, false);
+	//chkOutAB1.setToggleState(CSTOI(pageControlValues[index]["chkOutAB1"]) == 1, false);
+	//chkOutCD1.setToggleState(CSTOI(pageControlValues[index]["chkOutCD1"]) == 1, false);
+	//chkOutEF1.setToggleState(CSTOI(pageControlValues[index]["chkOutEF1"]) == 1, false);
 	chkReverseIn1.setToggleState(CSTOI(pageControlValues[index]["chkReverseIn1"]) == 1, false);
-	chkDropSysexIn1.setToggleState(CSTOI(pageControlValues[index]["chkDropSysexIn1"]) == 1, false);
+	//chkDropSysexIn1.setToggleState(CSTOI(pageControlValues[index]["chkDropSysexIn1"]) == 1, false);
 	chkMuteIn1.setToggleState(CSTOI(pageControlValues[index]["chkMuteIn1"]) == 1, false);
-	chkMuteOut1.setToggleState(CSTOI(pageControlValues[index]["chkMuteOut1"]) == 1, false);
+	//chkMuteOut1.setToggleState(CSTOI(pageControlValues[index]["chkMuteOut1"]) == 1, false);
 
 	cboDeviceIn2.setText(pageControlValues[index]["cboDeviceIn2"]);
 	txtInA2.setText(pageControlValues[index]["txtInA2"]);
@@ -1391,30 +1408,30 @@ void MainComponent::showPage(int index)
 	txtInE2.setText(pageControlValues[index]["txtInE2"]);
 	txtInF2.setText(pageControlValues[index]["txtInF2"]);
 	txtInEF2.setText(pageControlValues[index]["txtInEF2"]);
-	cboTargetIn2.setText(pageControlValues[index]["cboTargetIn2"]);
+	//cboTargetIn2.setText(pageControlValues[index]["cboTargetIn2"]);
 	cboDeviceOut2.setText(pageControlValues[index]["cboDeviceOut2"]);
-	txtOutA2.setText(pageControlValues[index]["txtOutA2"]);
-	txtOutB2.setText(pageControlValues[index]["txtOutB2"]);
-	txtOutAB2.setText(pageControlValues[index]["txtOutAB2"]);
-	txtOutC2.setText(pageControlValues[index]["txtOutC2"]);
-	txtOutD2.setText(pageControlValues[index]["txtOutD2"]);
-	txtOutCD2.setText(pageControlValues[index]["txtOutCD2"]);
-	txtOutE2.setText(pageControlValues[index]["txtOutE2"]);
-	txtOutF2.setText(pageControlValues[index]["txtOutF2"]);
-	txtOutEF2.setText(pageControlValues[index]["txtOutEF2"]);
+	//txtOutA2.setText(pageControlValues[index]["txtOutA2"]);
+	//txtOutB2.setText(pageControlValues[index]["txtOutB2"]);
+	//txtOutAB2.setText(pageControlValues[index]["txtOutAB2"]);
+	//txtOutC2.setText(pageControlValues[index]["txtOutC2"]);
+	//txtOutD2.setText(pageControlValues[index]["txtOutD2"]);
+	//txtOutCD2.setText(pageControlValues[index]["txtOutCD2"]);
+	//txtOutE2.setText(pageControlValues[index]["txtOutE2"]);
+	//txtOutF2.setText(pageControlValues[index]["txtOutF2"]);
+	//txtOutEF2.setText(pageControlValues[index]["txtOutEF2"]);
 
 	// Care of std::stoi when string to non int conversion occurs ! See :
 	// https://stackoverflow.com/questions/29250531/microsoft-c-exception-stdinvalid-argument-at-memory-location
 	chkInAB2.setToggleState(CSTOI(pageControlValues[index]["chkInAB2"]) == 1, false);
 	chkInCD2.setToggleState(CSTOI(pageControlValues[index]["chkInCD2"]) == 1, false);
 	chkInEF2.setToggleState(CSTOI(pageControlValues[index]["chkInEF2"]) == 1, false);
-	chkOutAB2.setToggleState(CSTOI(pageControlValues[index]["chkOutAB2"]) == 1, false);
-	chkOutCD2.setToggleState(CSTOI(pageControlValues[index]["chkOutCD2"]) == 1, false);
-	chkOutEF2.setToggleState(CSTOI(pageControlValues[index]["chkOutEF2"]) == 1, false);
+	//chkOutAB2.setToggleState(CSTOI(pageControlValues[index]["chkOutAB2"]) == 1, false);
+	//chkOutCD2.setToggleState(CSTOI(pageControlValues[index]["chkOutCD2"]) == 1, false);
+	//chkOutEF2.setToggleState(CSTOI(pageControlValues[index]["chkOutEF2"]) == 1, false);
 	chkReverseIn2.setToggleState(CSTOI(pageControlValues[index]["chkReverseIn2"]) == 1, false);
-	chkDropSysexIn2.setToggleState(CSTOI(pageControlValues[index]["chkDropSysexIn2"]) == 1, false);
+	//chkDropSysexIn2.setToggleState(CSTOI(pageControlValues[index]["chkDropSysexIn2"]) == 1, false);
 	chkMuteIn2.setToggleState(CSTOI(pageControlValues[index]["chkMuteIn2"]) == 1, false);
-	chkMuteOut2.setToggleState(CSTOI(pageControlValues[index]["chkMuteOut2"]) == 1, false);
+	//chkMuteOut2.setToggleState(CSTOI(pageControlValues[index]["chkMuteOut2"]) == 1, false);
 
 	cboDeviceIn3.setText(pageControlValues[index]["cboDeviceIn3"]);
 	txtInA3.setText(pageControlValues[index]["txtInA3"]);
@@ -1426,30 +1443,30 @@ void MainComponent::showPage(int index)
 	txtInE3.setText(pageControlValues[index]["txtInE3"]);
 	txtInF3.setText(pageControlValues[index]["txtInF3"]);
 	txtInEF3.setText(pageControlValues[index]["txtInEF3"]);
-	cboTargetIn3.setText(pageControlValues[index]["cboTargetIn3"]);
+	//cboTargetIn3.setText(pageControlValues[index]["cboTargetIn3"]);
 	cboDeviceOut3.setText(pageControlValues[index]["cboDeviceOut3"]);
-	txtOutA3.setText(pageControlValues[index]["txtOutA3"]);
-	txtOutB3.setText(pageControlValues[index]["txtOutB3"]);
-	txtOutAB3.setText(pageControlValues[index]["txtOutAB3"]);
-	txtOutC3.setText(pageControlValues[index]["txtOutC3"]);
-	txtOutD3.setText(pageControlValues[index]["txtOutD3"]);
-	txtOutCD3.setText(pageControlValues[index]["txtOutCD3"]);
-	txtOutE3.setText(pageControlValues[index]["txtOutE3"]);
-	txtOutF3.setText(pageControlValues[index]["txtOutF3"]);
-	txtOutEF3.setText(pageControlValues[index]["txtOutEF3"]);
+	//txtOutA3.setText(pageControlValues[index]["txtOutA3"]);
+	//txtOutB3.setText(pageControlValues[index]["txtOutB3"]);
+	//txtOutAB3.setText(pageControlValues[index]["txtOutAB3"]);
+	//txtOutC3.setText(pageControlValues[index]["txtOutC3"]);
+	//txtOutD3.setText(pageControlValues[index]["txtOutD3"]);
+	//txtOutCD3.setText(pageControlValues[index]["txtOutCD3"]);
+	//txtOutE3.setText(pageControlValues[index]["txtOutE3"]);
+	//txtOutF3.setText(pageControlValues[index]["txtOutF3"]);
+	//txtOutEF3.setText(pageControlValues[index]["txtOutEF3"]);
 
 	// Care of std::stoi when string to non int conversion occurs ! See :
 	// https://stackoverflow.com/questions/29250531/microsoft-c-exception-stdinvalid-argument-at-memory-location
 	chkInAB3.setToggleState(CSTOI(pageControlValues[index]["chkInAB3"]) == 1, false);
 	chkInCD3.setToggleState(CSTOI(pageControlValues[index]["chkInCD3"]) == 1, false);
 	chkInEF3.setToggleState(CSTOI(pageControlValues[index]["chkInEF3"]) == 1, false);
-	chkOutAB3.setToggleState(CSTOI(pageControlValues[index]["chkOutAB3"]) == 1, false);
-	chkOutCD3.setToggleState(CSTOI(pageControlValues[index]["chkOutCD3"]) == 1, false);
-	chkOutEF3.setToggleState(CSTOI(pageControlValues[index]["chkOutEF3"]) == 1, false);
+	//chkOutAB3.setToggleState(CSTOI(pageControlValues[index]["chkOutAB3"]) == 1, false);
+	//chkOutCD3.setToggleState(CSTOI(pageControlValues[index]["chkOutCD3"]) == 1, false);
+	//chkOutEF3.setToggleState(CSTOI(pageControlValues[index]["chkOutEF3"]) == 1, false);
 	chkReverseIn3.setToggleState(CSTOI(pageControlValues[index]["chkReverseIn3"]) == 1, false);
-	chkDropSysexIn3.setToggleState(CSTOI(pageControlValues[index]["chkDropSysexIn3"]) == 1, false);
+	//chkDropSysexIn3.setToggleState(CSTOI(pageControlValues[index]["chkDropSysexIn3"]) == 1, false);
 	chkMuteIn3.setToggleState(CSTOI(pageControlValues[index]["chkMuteIn3"]) == 1, false);
-	chkMuteOut3.setToggleState(CSTOI(pageControlValues[index]["chkMuteOut3"]) == 1, false);
+	//chkMuteOut3.setToggleState(CSTOI(pageControlValues[index]["chkMuteOut3"]) == 1, false);
 }
 
 std::string MainComponent::dump(const juce::MidiMessage &mm)
@@ -1468,7 +1485,7 @@ std::string MainComponent::dump(const juce::MidiMessage &mm)
 void MainComponent::handleIncomingMidiMessage(juce::MidiInput* source, const juce::MidiMessage& message)
 {
 	// Probably SYSEX... Just ignore it for now, later we could push it forward :)
-	if (message.getRawDataSize() > 3)
+	if (message.getRawDataSize() != 3)
 	{
 		/*
 		if (...)
@@ -1483,27 +1500,27 @@ void MainComponent::handleIncomingMidiMessage(juce::MidiInput* source, const juc
 	// Introduce a container for each input device holding the first byte ?
 
 	const juce::uint8* p = message.getRawData();
-	for (int i = 0; i < message.getRawDataSize(); i++) // Although it should be 3 bytes all the time
+	for (int i = 0; i < message.getRawDataSize(); i++) // Although it should be 3 bytes all the time :)
 	{
 		if (i == 0)
 		{
-			midiInByte0 = (*(p + 0));
-			midiInHighNibble0 = (*(p + 0)) >> 4;
-			midiInLowNibble0 = (*(p + 0)) & 0x0F;
+			m_midiInByte0 = (*(p + 0));
+			m_midiInHighNibble0 = (*(p + 0)) >> 4;
+			m_midiInLowNibble0 = (*(p + 0)) & 0x0F;
 		}
 
 		if (i == 1)
 		{
-			midiInByte1 = (*(p + 1));
-			midiInHighNibble1 = (*(p + 1)) >> 4;
-			midiInLowNibble1 = (*(p + 1)) & 0x0F;
+			m_midiInByte1 = (*(p + 1));
+			m_midiInHighNibble1 = (*(p + 1)) >> 4;
+			m_midiInLowNibble1 = (*(p + 1)) & 0x0F;
 		}
 
 		if (i == 2)
 		{
-			midiInByte2 = (*(p + 2));
-			midiInHighNibble2 = (*(p + 2)) >> 4;
-			midiInLowNibble2 = (*(p + 2)) & 0x0F;
+			m_midiInByte2 = (*(p + 2));
+			m_midiInHighNibble2 = (*(p + 2)) >> 4;
+			m_midiInLowNibble2 = (*(p + 2)) & 0x0F;
 		}
 	}
 	logThis2("Incomming message from device %s : %s", Target::midiIn, source->getName().toStdString().c_str(), dump(message).c_str());
@@ -1517,28 +1534,30 @@ void MainComponent::handleIncomingMidiMessage(juce::MidiInput* source, const juc
 		for (int j = 0; j < ROW_COUNT; j++)
 		{			
 			midn = pageControlValues[i][std::string("cboDeviceIn") + std::to_string(j)]; // Opposite of int x = std::stoi(s); !-)
-			bool muteIn = (CSTOI(pageControlValues[i][std::string("chkMuteIn") + std::to_string(j)]) != 0);
+			bool muteIn = (CSTOI(pageControlValues[i][std::string("chkMuteIn") + std::to_string(j)]) != 0); // Mute means actually ignore ligne 
 			if (!muteIn and (midn.size() > 0) and (midn == source->getName()))
 			{
 				modn = pageControlValues[i][std::string("cboDeviceOut") + std::to_string(j)];
-				if (modn == "")
+				if ((modn == "") || (modn == NO_DEVICE))
 				{
-					mtdn = pageControlValues[i][std::string("cboTargetIn") + std::to_string(j)];
-					if (mtdn != "")
-					{
-						for (int k = 0; k < PAGE_COUNT; k++)
-						{
-							for (int l = 0; l < ROW_COUNT; l++)
-							{
-								modn = pageControlValues[k][std::string("cboDeviceOut") + std::to_string(l)];
-								if (modn == mtdn)
-								{
-									logThis("Using the target OUT", Target::misc);
-									process(i, j, k, l);
-								}
-							}
-						}
-					}
+					return;
+
+				//	mtdn = pageControlValues[i][std::string("cboTargetIn") + std::to_string(j)];
+				//	if (mtdn != "")
+				//	{
+				//		for (int k = 0; k < PAGE_COUNT; k++)
+				//		{
+				//			for (int l = 0; l < ROW_COUNT; l++)
+				//			{
+				//				modn = pageControlValues[k][std::string("cboDeviceOut") + std::to_string(l)];
+				//				if (modn == mtdn)
+				//				{
+				//					logThis("Using the target OUT", Target::misc); // For merge
+				//					process(i, j, k, l);
+				//				}
+				//			}
+				//		}
+				//	}
 				}
 				else
 				{
@@ -1552,18 +1571,21 @@ void MainComponent::handleIncomingMidiMessage(juce::MidiInput* source, const juc
 
 void MainComponent::process(int pageIn, int rowIn, int pageOut, int rowOut)
 {
-	logThis("Check out mute", Target::misc);
-	bool muteOut = (CSTOI(pageControlValues[pageOut][std::string("chkMuteOut") + std::to_string(rowOut)]) != 0);
-	if (muteOut)
-	{
-		return;
-	}
+	//logThis("Check out mute", Target::misc);
+	//bool muteOut = (CSTOI(pageControlValues[pageOut][std::string("chkMuteOut") + std::to_string(rowOut)]) != 0);
+	//if (muteOut)
+	//{
+	//	return;
+	//}
 
 	logThis("About to filter", Target::misc);
 	if (!filter(pageIn, rowIn))
 	{
-		logThis2("Midi message didn't pass the filter : page = %d ; row = %d", Target::misc, pageIn, rowIn);
-		return;
+		if (pageControlValues[pageIn][std::string("chkReverseIn") + std::to_string(rowIn)] != "1")
+		{ 
+			logThis2("Midi message didn't pass the filter : page = %d ; row = %d", Target::misc, pageIn, rowIn);
+			return;
+		}		
 	}
 
 	logThis("About to transform", Target::misc);
@@ -1609,7 +1631,7 @@ bool MainComponent::filter(int page, int row)
 	if (CSTOI(pageControlValues[page][std::string("chkInAB") + std::to_string(row)]) != 0)
 	{
 		middle = trim(pageControlValues[page][std::string("txtInAB") + std::to_string(row)]);
-		if ((middle.size() > 1) and (!compare(middle, midiInByte0)))
+		if ((middle.size() > 1) and(!compare(middle, m_midiInByte0)))
 		{
 			return false;
 		}
@@ -1617,13 +1639,13 @@ bool MainComponent::filter(int page, int row)
 	else
 	{
 		high = trim(pageControlValues[page][std::string("txtInA") + std::to_string(row)]);
-		if ((high.size() > 1) and (!compare(high, midiInHighNibble0)))
+		if ((high.size() > 1) and(!compare(high, m_midiInHighNibble0)))
 		{
 			return false;
 		}
 
 		low = trim(pageControlValues[page][std::string("txtInB") + std::to_string(row)]);
-		if ((low.size() > 1) and (!compare(low, midiInLowNibble0)))
+		if ((low.size() > 1) and(!compare(low, m_midiInLowNibble0)))
 		{
 			return false;
 		}		
@@ -1632,7 +1654,7 @@ bool MainComponent::filter(int page, int row)
 	if (CSTOI(pageControlValues[page][std::string("chkInCD") + std::to_string(row)]) != 0)
 	{
 		middle = trim(pageControlValues[page][std::string("txtInCD") + std::to_string(row)]);
-		if ((middle.size() > 1) and(!compare(middle, midiInByte0)))
+		if ((middle.size() > 1) and(!compare(middle, m_midiInByte0)))
 		{
 			return false;
 		}
@@ -1640,13 +1662,13 @@ bool MainComponent::filter(int page, int row)
 	else
 	{
 		high = trim(pageControlValues[page][std::string("txtInC") + std::to_string(row)]);
-		if ((high.size() > 1) and(!compare(high, midiInHighNibble0)))
+		if ((high.size() > 1) and(!compare(high, m_midiInHighNibble0)))
 		{
 			return false;
 		}
 
 		low = trim(pageControlValues[page][std::string("txtInD") + std::to_string(row)]);
-		if ((low.size() > 1) and(!compare(low, midiInLowNibble0)))
+		if ((low.size() > 1) and(!compare(low, m_midiInLowNibble0)))
 		{
 			return false;
 		}
@@ -1655,7 +1677,7 @@ bool MainComponent::filter(int page, int row)
 	if (CSTOI(pageControlValues[page][std::string("chkInEF") + std::to_string(row)]) != 0)
 	{
 		middle = trim(pageControlValues[page][std::string("txtInEF") + std::to_string(row)]);
-		if ((middle.size() > 1) and(!compare(middle, midiInByte0)))
+		if ((middle.size() > 1) and(!compare(middle, m_midiInByte0)))
 		{
 			return false;
 		}
@@ -1663,13 +1685,13 @@ bool MainComponent::filter(int page, int row)
 	else
 	{
 		high = trim(pageControlValues[page][std::string("txtInE") + std::to_string(row)]);
-		if ((high.size() > 1) and(!compare(high, midiInHighNibble0)))
+		if ((high.size() > 1) and(!compare(high, m_midiInHighNibble0)))
 		{
 			return false;
 		}
 
 		low = trim(pageControlValues[page][std::string("txtInF") + std::to_string(row)]);
-		if ((low.size() > 1) and(!compare(low, midiInLowNibble0)))
+		if ((low.size() > 1) and(!compare(low, m_midiInLowNibble0)))
 		{
 			return false;
 		}
@@ -1690,6 +1712,8 @@ void MainComponent::transform(int page, int row)
 	std::string s = std::to_string(row);
 	std::string formula;
 
+	//TODO: Move invariant part outside !!! Which is only the symbol table ?
+
 	typedef exprtk::symbol_table<double> symbol_table_t;
 	typedef exprtk::expression<double> expression_t;
 	typedef exprtk::parser<double> parser_t;
@@ -1700,17 +1724,18 @@ void MainComponent::transform(int page, int row)
 
 	// The lib does not work well with byte only algebra... 
 	// Care: had to add /bigobj to the project C/C++ compile option at the command line !
+	// All the time Projucer regenerate the project / solution files (care of the new _App stuff)
 	double a, b, ab, c, d, cd, e, f, ef;
 	// OK but potentially misleading : int *p, q;
-	a = midiInHighNibble0;
-	b = midiInLowNibble0;
-	ab = midiInByte0;
-	c = midiInHighNibble1;
-	d = midiInLowNibble1;
-	cd = midiInByte1;
-	e = midiInHighNibble2;
-	f = midiInLowNibble2;
-	ef = midiInByte2;
+	a = m_midiInHighNibble0;
+	b = m_midiInLowNibble0;
+	ab = m_midiInByte0;
+	c = m_midiInHighNibble1;
+	d = m_midiInLowNibble1;
+	cd = m_midiInByte1;
+	e = m_midiInHighNibble2;
+	f = m_midiInLowNibble2;
+	ef = m_midiInByte2;
 
 	symbol_table.add_variable("A", a);
 	symbol_table.add_variable("B", b);
@@ -1728,12 +1753,12 @@ void MainComponent::transform(int page, int row)
 	{
 		if (parser.compile(formula, expression))
 		{
-			midiOutHighNibble0 = static_cast<byte>(expression.value());
+			m_midiOutHighNibble0 = static_cast<byte>(expression.value());
 		}
 	}
 	else
 	{
-		midiOutHighNibble0 = midiInHighNibble0;
+		m_midiOutHighNibble0 = m_midiInHighNibble0;
 	}
 
 	formula = pageControlValues[page][std::string("txtOutB") + s];
@@ -1741,12 +1766,12 @@ void MainComponent::transform(int page, int row)
 	{
 		if (parser.compile(formula, expression))
 		{
-			midiOutLowNibble0 = static_cast<byte>(expression.value());
+			m_midiOutLowNibble0 = static_cast<byte>(expression.value());
 		}
 	}
 	else
 	{
-		midiOutLowNibble0 = midiInLowNibble0;
+		m_midiOutLowNibble0 = m_midiInLowNibble0;
 	}
 
 	formula = pageControlValues[page][std::string("txtOutAB") + s];
@@ -1754,12 +1779,12 @@ void MainComponent::transform(int page, int row)
 	{
 		if (parser.compile(formula, expression))
 		{
-			midiOutByte0 = static_cast<byte>(expression.value());
+			m_midiOutByte0 = static_cast<byte>(expression.value());
 		}
 	}
 	else
 	{
-		midiOutByte0 = midiInByte0;
+		m_midiOutByte0 = m_midiInByte0;
 	}
 
 	formula = pageControlValues[page][std::string("txtOutC") + s];
@@ -1767,12 +1792,12 @@ void MainComponent::transform(int page, int row)
 	{
 		if (parser.compile(formula, expression))
 		{
-			midiOutHighNibble1 = static_cast<byte>(expression.value());
+			m_midiOutHighNibble1 = static_cast<byte>(expression.value());
 		}
 	}
 	else
 	{
-		midiOutHighNibble1 = midiInHighNibble1;
+		m_midiOutHighNibble1 = m_midiInHighNibble1;
 	}
 
 	formula = pageControlValues[page][std::string("txtOutD") + s];
@@ -1780,12 +1805,12 @@ void MainComponent::transform(int page, int row)
 	{
 		if (parser.compile(formula, expression))
 		{
-			midiOutLowNibble1 = static_cast<byte>(expression.value());
+			m_midiOutLowNibble1 = static_cast<byte>(expression.value());
 		}
 	}
 	else
 	{
-		midiOutLowNibble1 = midiInLowNibble1;
+		m_midiOutLowNibble1 = m_midiInLowNibble1;
 	}
 
 	formula = pageControlValues[page][std::string("txtOutCD") + s];
@@ -1793,12 +1818,12 @@ void MainComponent::transform(int page, int row)
 	{
 		if (parser.compile(formula, expression))
 		{
-			midiOutByte1 = static_cast<byte>(expression.value());
+			m_midiOutByte1 = static_cast<byte>(expression.value());
 		}
 	}
 	else
 	{
-		midiOutByte1 = midiInByte1;
+		m_midiOutByte1 = m_midiInByte1;
 	}
 
 	formula = pageControlValues[page][std::string("txtOutE") + s];
@@ -1806,12 +1831,12 @@ void MainComponent::transform(int page, int row)
 	{
 		if (parser.compile(formula, expression))
 		{
-			midiOutHighNibble2 = static_cast<byte>(expression.value());
+			m_midiOutHighNibble2 = static_cast<byte>(expression.value());
 		}
 	}
 	else
 	{
-		midiOutHighNibble2 = midiInHighNibble2;
+		m_midiOutHighNibble2 = m_midiInHighNibble2;
 	}
 
 	formula = pageControlValues[page][std::string("txtOutF") + s];
@@ -1819,12 +1844,12 @@ void MainComponent::transform(int page, int row)
 	{
 		if (parser.compile(formula, expression))
 		{
-			midiOutLowNibble2 = static_cast<byte>(expression.value());
+			m_midiOutLowNibble2 = static_cast<byte>(expression.value());
 		}
 	}
 	else
 	{
-		midiOutLowNibble2 = midiInLowNibble2;
+		m_midiOutLowNibble2 = m_midiInLowNibble2;
 	}
 
 	formula = pageControlValues[page][std::string("txtOutEF") + s];
@@ -1832,12 +1857,12 @@ void MainComponent::transform(int page, int row)
 	{
 		if (parser.compile(formula, expression))
 		{
-			midiOutByte2 = static_cast<byte>(expression.value());
+			m_midiOutByte2 = static_cast<byte>(expression.value());
 		}
 	}
 	else
 	{
-		midiOutByte2 = midiInByte2;
+		m_midiOutByte2 = m_midiInByte2;
 	}
 }
 
@@ -1847,29 +1872,29 @@ juce::MidiMessage MainComponent::generate(int page, int row)
 
 	if (CSTOI(pageControlValues[page][std::string("chkOutAB") + std::to_string(row)]) != 0)
 	{
-		b0 = midiOutByte0;
+		b0 = m_midiOutByte0;
 	}
 	else
 	{
-		b0 = (midiOutHighNibble0 << 4) | (midiOutLowNibble0 & 0x0F);
+		b0 = (m_midiOutHighNibble0 << 4) | (m_midiOutLowNibble0 & 0x0F);
 	}
 
 	if (CSTOI(pageControlValues[page][std::string("chkOutCD") + std::to_string(row)]) != 0)
 	{
-		b1 = midiOutByte1;
+		b1 = m_midiOutByte1;
 	}
 	else
 	{
-		b1 = (midiOutHighNibble1 << 4) | (midiOutLowNibble1 & 0x0F);
+		b1 = (m_midiOutHighNibble1 << 4) | (m_midiOutLowNibble1 & 0x0F);
 	}
 
 	if (CSTOI(pageControlValues[page][std::string("chkOutEF") + std::to_string(row)]) != 0)
 	{
-		b2 = midiOutByte2;
+		b2 = m_midiOutByte2;
 	}
 	else
 	{
-		b2 = (midiOutHighNibble2 << 4) | (midiOutLowNibble2 & 0x0F);
+		b2 = (m_midiOutHighNibble2 << 4) | (m_midiOutLowNibble2 & 0x0F);
 	}
 
 	return juce::MidiMessage(b0, b1, b2);
@@ -1884,7 +1909,10 @@ void MainComponent::tryRestoreLastSession()
 {
 	String filePath = File::getCurrentWorkingDirectory().getFullPathName(); //TODO: Review this...
 	ConfigurationFile cf(filePath.toStdString() + PATH_SEPARATOR + "GreenWitch2.ini");
-	//TODO: ...
+	setLogFilter((cf.keyValue("Log", "screen") == "1"), Target::screen);
+	setLogFilter((cf.keyValue("Log", "midiIn") == "1"), Target::midiIn);
+	setLogFilter((cf.keyValue("Log", "midiOut") == "1"), Target::midiOut);
+	setLogFilter((cf.keyValue("Log", "misc") == "1"), Target::misc);
 
 	m_sessionChanged = false;
 }

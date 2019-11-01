@@ -129,8 +129,19 @@ void logThis2(const char *format, Target t, ...)
 // C like simple logger
 // void logf(const char *s);
 
+bool logFilters[(int) Target::last_item];
+void setLogFilter(bool value, Target t)
+{
+	logFilters[(int) t] = value;
+}
+
 void logThis(const char *s, Target t)
 {
+	if (!logFilters[(int) t])
+	{
+		return;
+	}
+
   time_t rawtime;
   struct tm* timeinfo;
   //struct timeval tmnow;

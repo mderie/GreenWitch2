@@ -7,7 +7,7 @@ TODO (first ones are though ones)
 - Associated a thread to each IN device ?
 - Optimize all the transform rulez should not be computed every time
 - Save and restore session
-- Handle Reverse
+- Handle Reverse [OK]
 - Handle Sysex (AKA message > 3 bytes)
 - Message < 3 bytes
 - Don't open all devices
@@ -16,6 +16,6 @@ TODO (first ones are though ones)
 - Review the default path for config file & lgo files
 - Implement OUT Combobox filtering on used devices
 - Reload midi devices on each device combobox openning ?
-- Enhance the log content : introduce log level and put it in config
+- Enhance the log content : introduce log level and put it in config [OK]
 - Enhance the log content : put the milli seconds
 - Support hex in formula/filter ?
