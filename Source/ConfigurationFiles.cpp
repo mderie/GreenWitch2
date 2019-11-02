@@ -5,7 +5,8 @@
 #include "ConfigurationFiles.hpp"
 #include "CommonStuffs.hpp"
 
-ConfigurationFile::ConfigurationFile(const std::string &filename)
+// RAII like ctor
+ConfigurationFile::ConfigurationFile(const std::string &fullFileName)
 {
 	std::ifstream ifs;
 	std::string line;
@@ -14,7 +15,7 @@ ConfigurationFile::ConfigurationFile(const std::string &filename)
 
 	//std::cout << "filename = " << filename << std::endl;
 
-	ifs.open(filename);
+	ifs.open(fullFileName);
 	while(ifs.good())
 	{
 		std::getline(ifs, line);
@@ -43,7 +44,7 @@ ConfigurationFile::ConfigurationFile(const std::string &filename)
 		}
 		else
 		{
-			std::cout << "Found bad line in filename = " << filename << " value = " << line << std::endl;
+			std::cout << "Found bad line in filename = " << fullFileName << " value = " << line << std::endl;
 			/*
 			We can't log yet ! Can we ?-)
 			logThis("Found error in the configuration file !", Target::misc);
@@ -55,16 +56,45 @@ ConfigurationFile::ConfigurationFile(const std::string &filename)
 		}
 	}
 	ifs.close();
+	m_saveChanges = false;
+	m_fullFileName = fullFileName;
 }
 
 ConfigurationFile::~ConfigurationFile()
 {
+	if (m_saveChanges)
+	{
+		std::ofstream ofs;
+		ofs.open(m_fullFileName);
+		for (auto const &kvp1 : m_contents)
+		{
+			ofs << '[' << kvp1.first << "]" << std::endl;
+			for (auto const &kvp2 : kvp1.second)
+			{
+				ofs << kvp2.first << '=' << kvp2.second << std::endl;
+			}
+		}
+		ofs.close();
+	}
+
 	m_contents.clear();
 }
 
-std::vector<std::string> ConfigurationFile::keyNames(const std::string &section)
+std::vector<std::string> ConfigurationFile::readSections()
 {
 	std::vector<std::string> result;
+	result.reserve(m_contents.size());
+	for (auto const &kvp : m_contents)
+	{
+		result.push_back(kvp.first);
+	}
+	return result;
+}
+
+std::vector<std::string> ConfigurationFile::readKeys(const std::string &section)
+{
+	std::vector<std::string> result;
+	result.reserve(m_contents[section].size());
 	for(auto const &kvp : m_contents[section])
 	{
 		result.push_back(kvp.first);
@@ -73,7 +103,7 @@ std::vector<std::string> ConfigurationFile::keyNames(const std::string &section)
 	return result;
 }
 
-std::string ConfigurationFile::keyValue(const std::string &section, const std::string &key)
+std::string ConfigurationFile::read(const std::string &section, const std::string &key)
 {
 	if (m_contents.find(section) == m_contents.end())
 	{
@@ -87,4 +117,10 @@ std::string ConfigurationFile::keyValue(const std::string &section, const std::s
 	{
 		return m_contents[section][key];
 	}
+}
+
+void ConfigurationFile::write(const std::string &section, const std::string &key, const std::string &value)
+{
+	m_contents[section][key] = value;
+	m_saveChanges = true;
 }

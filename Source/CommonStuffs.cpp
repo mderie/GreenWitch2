@@ -31,13 +31,34 @@
 #endif
 
 // Can't understand why there is no shorter way to perform this conversion...
-// In C++ 2011 there is finally to_string() !!!
-std::string intToStr(int value)
+// In C++ 2011 there is finally std::to_string() !!! The opposite is std::stoi()
+std::string intToStr(int value) //TODO: Leave the camel case style ?
 {
 	std::stringstream ss;
 	ss << value;
 	return ss.str();
 }
+
+// Source for both : https://stackoverflow.com/questions/12774207/fastest-way-to-check-if-a-file-exist-using-standard-c-c11-c/19841704
+
+#ifdef _WIN32 // What is the difference with WIN32 ?
+#include <io.h>
+#define access _access_s
+#else
+#include <unistd.h>
+#endif
+
+bool FileExists(const std::string &fullFileName)
+{
+	return access(fullFileName.c_str(), 0) == 0;
+}
+
+// Doesn't compile... Why ?
+//bool fileExists(const char *fullFileName)
+//{
+//	std::ifstream inputFile(fullFileName);
+//	return inputFile.good();
+//}
 
 // No real standard c++ to do this... See above !
 //TODO: Actually, this is more getCurrentFolder and we need to get the running app folder

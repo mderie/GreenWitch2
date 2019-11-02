@@ -26,6 +26,8 @@ void setLogFilter(bool value, Target t);
 
 std::string intToStr(int value); // So Delphi...
 std::string runningFolder();
+//bool fileExist(const char *fullFileName);
+bool FileExists(const std::string &fullFileName);
 std::string stringUpper(const std::string& s);
 void join(std::string& dest, const std::string& item, const std::string& delimiter); // Little string accumulator helper
 std::vector<std::string> split(const std::string& str, const std::string& delimiter); // Almost the opposite :)

@@ -1098,6 +1098,21 @@ MainComponent::MainComponent()
 	lblFormula.setText("Formula", NotificationType::dontSendNotification);
 	addAndMakeVisible(lblFormula);
 
+	lblPage.setBounds(450, 350, 15 * u, 4 * u);
+	lblPage.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblPage.setText("Page ", NotificationType::dontSendNotification);
+	addAndMakeVisible(lblPage);
+	
+	txtPageNumber.setBounds(500, 350, 10 * u, 4 * u);
+	txtPageNumber.setName("txtPageNumber");
+	txtPageNumber.setReadOnly(true);
+	addAndMakeVisible(txtPageNumber);
+
+	lblPageCount.setBounds(550, 350, 15 * u, 4 * u);
+	lblPageCount.setColour(Label::textColourId, Colour(0, 255, 0));
+	lblPageCount.setText(std::string(" of ") + std::to_string(PAGE_COUNT - 1), NotificationType::dontSendNotification);
+	addAndMakeVisible(lblPageCount);
+
 	btnFirst.addListener(this);
 	btnFirst.setBounds(10, 350, 16, 4*u);
 	btnFirst.setButtonText("First");
@@ -1185,7 +1200,7 @@ MainComponent::MainComponent()
 MainComponent::~MainComponent()
 {
 	logThis("Session stop", Target::misc);
-
+	backupCurrentSession();
 	closeAllMidiDevices();
 }
 
@@ -1196,10 +1211,10 @@ void MainComponent::buttonClicked(Button *sender)
 
 	// C++20 gives us std::map::contains but in the meantime...
 	// Could be != 0 or > 0 See https://stackoverflow.com/questions/1939953/how-to-find-if-a-given-key-exists-in-a-c-stdmap
-	if (pageControlValues[m_currentPage].count(controlName) != 0)
+	if (m_pageControlValues[m_currentPage].count(controlName) != 0)
 	{
 		m_sessionChanged = true; // Find another way of working... ?
-		pageControlValues[m_currentPage][controlName] = controlValue; // Always save the change
+		m_pageControlValues[m_currentPage][controlName] = controlValue; // Always save the change
 	}
 
 	// Header
@@ -1208,7 +1223,7 @@ void MainComponent::buttonClicked(Button *sender)
 	{
 		m_sessionChanged = true;
 		txtTarget.setText(txtFormula.getText());
-		pageControlValues[m_currentPage][txtTarget.getName().toStdString()] = txtFormula.getText().toStdString();
+		m_pageControlValues[m_currentPage][txtTarget.getName().toStdString()] = txtFormula.getText().toStdString();
 		return;
 	}
 	else if (sender == &btnCancel)
@@ -1281,7 +1296,8 @@ void MainComponent::comboBoxChanged(ComboBox *sender)
 		
 	//TODO: the other lines if needed...
 
-	pageControlValues[m_currentPage][controlName] = controlValue; // Always save the change
+	m_pageControlValues[m_currentPage][controlName] = controlValue; // Always save the change
+	m_sessionChanged = true;
 }
 
 void MainComponent::textEditorTextChanged(TextEditor &sender)
@@ -1290,7 +1306,7 @@ void MainComponent::textEditorTextChanged(TextEditor &sender)
 	std::string controlValue = sender.getText().toStdString();
 	logThis2("controlName = %s & controlValue = %s", Target::screen, controlName.c_str(), controlValue.c_str());
 
-	pageControlValues[m_currentPage][controlName] = controlValue; // Always save the change
+	m_pageControlValues[m_currentPage][controlName] = controlValue; // Always save the change
 }
 
 void MainComponent::paint (Graphics& g)
@@ -1324,149 +1340,150 @@ void MainComponent::resized()
 
 void MainComponent::showPage(int index)
 {
+	txtPageNumber.setText(std::to_string(index));
 	m_currentPage = index;
 
 	// Line 0
 
-	cboDeviceIn0.setText(pageControlValues[index]["cboDeviceIn0"]);
-	txtInA0.setText(pageControlValues[index]["txtInA0"]);
-	txtInB0.setText(pageControlValues[index]["txtInB0"]);
-	txtInAB0.setText(pageControlValues[index]["txtInAB0"]);
-	txtInC0.setText(pageControlValues[index]["txtInC0"]);
-	txtInD0.setText(pageControlValues[index]["txtInD0"]);
-	txtInCD0.setText(pageControlValues[index]["txtInCD0"]);
-	txtInE0.setText(pageControlValues[index]["txtInE0"]);
-	txtInF0.setText(pageControlValues[index]["txtInF0"]);
-	txtInEF0.setText(pageControlValues[index]["txtInEF0"]);
-	//cboTargetIn0.setText(pageControlValues[index]["cboTargetIn0"]);
-	cboDeviceOut0.setText(pageControlValues[index]["cboDeviceOut0"]);
-	//txtOutA0.setText(pageControlValues[index]["txtOutA0"]);
-	//txtOutB0.setText(pageControlValues[index]["txtOutB0"]);
-	//txtOutAB0.setText(pageControlValues[index]["txtOutAB0"]);
-	//txtOutC0.setText(pageControlValues[index]["txtOutC0"]);
-	//txtOutD0.setText(pageControlValues[index]["txtOutD0"]);
-	//txtOutCD0.setText(pageControlValues[index]["txtOutCD0"]);
-	//txtOutE0.setText(pageControlValues[index]["txtOutE0"]);
-	//txtOutF0.setText(pageControlValues[index]["txtOutF0"]);
-	//txtOutEF0.setText(pageControlValues[index]["txtOutEF0"]);
+	cboDeviceIn0.setText(m_pageControlValues[index]["cboDeviceIn0"]);
+	txtInA0.setText(m_pageControlValues[index]["txtInA0"]);
+	txtInB0.setText(m_pageControlValues[index]["txtInB0"]);
+	txtInAB0.setText(m_pageControlValues[index]["txtInAB0"]);
+	txtInC0.setText(m_pageControlValues[index]["txtInC0"]);
+	txtInD0.setText(m_pageControlValues[index]["txtInD0"]);
+	txtInCD0.setText(m_pageControlValues[index]["txtInCD0"]);
+	txtInE0.setText(m_pageControlValues[index]["txtInE0"]);
+	txtInF0.setText(m_pageControlValues[index]["txtInF0"]);
+	txtInEF0.setText(m_pageControlValues[index]["txtInEF0"]);
+	//cboTargetIn0.setText(m_pageControlValues[index]["cboTargetIn0"]);
+	cboDeviceOut0.setText(m_pageControlValues[index]["cboDeviceOut0"]);
+	//txtOutA0.setText(m_pageControlValues[index]["txtOutA0"]);
+	//txtOutB0.setText(m_pageControlValues[index]["txtOutB0"]);
+	//txtOutAB0.setText(m_pageControlValues[index]["txtOutAB0"]);
+	//txtOutC0.setText(m_pageControlValues[index]["txtOutC0"]);
+	//txtOutD0.setText(m_pageControlValues[index]["txtOutD0"]);
+	//txtOutCD0.setText(m_pageControlValues[index]["txtOutCD0"]);
+	//txtOutE0.setText(m_pageControlValues[index]["txtOutE0"]);
+	//txtOutF0.setText(m_pageControlValues[index]["txtOutF0"]);
+	//txtOutEF0.setText(m_pageControlValues[index]["txtOutEF0"]);
 
 	// Care of std::stoi when string to non int conversion occurs ! See :
 	// https://stackoverflow.com/questions/29250531/microsoft-c-exception-stdinvalid-argument-at-memory-location
-	chkInAB0.setToggleState(CSTOI(pageControlValues[index]["chkInAB0"]) == 1, false); 
-	chkInCD0.setToggleState(CSTOI(pageControlValues[index]["chkInCD0"]) == 1, false);
-	chkInEF0.setToggleState(CSTOI(pageControlValues[index]["chkInEF0"]) == 1, false);
-	//chkOutAB0.setToggleState(CSTOI(pageControlValues[index]["chkOutAB0"]) == 1, false);
-	//chkOutCD0.setToggleState(CSTOI(pageControlValues[index]["chkOutCD0"]) == 1, false);
-	//chkOutEF0.setToggleState(CSTOI(pageControlValues[index]["chkOutEF0"]) == 1, false);
-	chkReverseIn0.setToggleState(CSTOI(pageControlValues[index]["chkReverseIn0"]) == 1, false);
-	//chkDropSysexIn0.setToggleState(CSTOI(pageControlValues[index]["chkDropSysexIn0"]) == 1, false);
-	chkMuteIn0.setToggleState(CSTOI(pageControlValues[index]["chkMuteIn0"]) == 1, false);
-	//chkMuteOut0.setToggleState(CSTOI(pageControlValues[index]["chkMuteOut0"]) == 1, false);
+	chkInAB0.setToggleState(CSTOI(m_pageControlValues[index]["chkInAB0"]) == 1, false);
+	chkInCD0.setToggleState(CSTOI(m_pageControlValues[index]["chkInCD0"]) == 1, false);
+	chkInEF0.setToggleState(CSTOI(m_pageControlValues[index]["chkInEF0"]) == 1, false);
+	//chkOutAB0.setToggleState(CSTOI(m_pageControlValues[index]["chkOutAB0"]) == 1, false);
+	//chkOutCD0.setToggleState(CSTOI(m_pageControlValues[index]["chkOutCD0"]) == 1, false);
+	//chkOutEF0.setToggleState(CSTOI(m_pageControlValues[index]["chkOutEF0"]) == 1, false);
+	chkReverseIn0.setToggleState(CSTOI(m_pageControlValues[index]["chkReverseIn0"]) == 1, false);
+	//chkDropSysexIn0.setToggleState(CSTOI(m_pageControlValues[index]["chkDropSysexIn0"]) == 1, false);
+	chkMuteIn0.setToggleState(CSTOI(m_pageControlValues[index]["chkMuteIn0"]) == 1, false);
+	//chkMuteOut0.setToggleState(CSTOI(m_pageControlValues[index]["chkMuteOut0"]) == 1, false);
 
 	// Line 1
 
-	cboDeviceIn1.setText(pageControlValues[index]["cboDeviceIn1"]);
-	txtInA1.setText(pageControlValues[index]["txtInA1"]);
-	txtInB1.setText(pageControlValues[index]["txtInB1"]);
-	txtInAB1.setText(pageControlValues[index]["txtInAB1"]);
-	txtInC1.setText(pageControlValues[index]["txtInC1"]);
-	txtInD1.setText(pageControlValues[index]["txtInD1"]);
-	txtInCD1.setText(pageControlValues[index]["txtInCD1"]);
-	txtInE1.setText(pageControlValues[index]["txtInE1"]);
-	txtInF1.setText(pageControlValues[index]["txtInF1"]);
-	txtInEF1.setText(pageControlValues[index]["txtInEF1"]);
-	//cboTargetIn1.setText(pageControlValues[index]["cboTargetIn1"]);
-	cboDeviceOut1.setText(pageControlValues[index]["cboDeviceOut1"]);
-	//txtOutA1.setText(pageControlValues[index]["txtOutA1"]);
-	//txtOutB1.setText(pageControlValues[index]["txtOutB1"]);
-	//txtOutAB1.setText(pageControlValues[index]["txtOutAB1"]);
-	//txtOutC1.setText(pageControlValues[index]["txtOutC1"]);
-	//txtOutD1.setText(pageControlValues[index]["txtOutD1"]);
-	//txtOutCD1.setText(pageControlValues[index]["txtOutCD1"]);
-	//txtOutE1.setText(pageControlValues[index]["txtOutE1"]);
-	//txtOutF1.setText(pageControlValues[index]["txtOutF1"]);
-	//txtOutEF1.setText(pageControlValues[index]["txtOutEF1"]);
+	cboDeviceIn1.setText(m_pageControlValues[index]["cboDeviceIn1"]);
+	txtInA1.setText(m_pageControlValues[index]["txtInA1"]);
+	txtInB1.setText(m_pageControlValues[index]["txtInB1"]);
+	txtInAB1.setText(m_pageControlValues[index]["txtInAB1"]);
+	txtInC1.setText(m_pageControlValues[index]["txtInC1"]);
+	txtInD1.setText(m_pageControlValues[index]["txtInD1"]);
+	txtInCD1.setText(m_pageControlValues[index]["txtInCD1"]);
+	txtInE1.setText(m_pageControlValues[index]["txtInE1"]);
+	txtInF1.setText(m_pageControlValues[index]["txtInF1"]);
+	txtInEF1.setText(m_pageControlValues[index]["txtInEF1"]);
+	//cboTargetIn1.setText(m_pageControlValues[index]["cboTargetIn1"]);
+	cboDeviceOut1.setText(m_pageControlValues[index]["cboDeviceOut1"]);
+	//txtOutA1.setText(m_pageControlValues[index]["txtOutA1"]);
+	//txtOutB1.setText(m_pageControlValues[index]["txtOutB1"]);
+	//txtOutAB1.setText(m_pageControlValues[index]["txtOutAB1"]);
+	//txtOutC1.setText(m_pageControlValues[index]["txtOutC1"]);
+	//txtOutD1.setText(m_pageControlValues[index]["txtOutD1"]);
+	//txtOutCD1.setText(m_pageControlValues[index]["txtOutCD1"]);
+	//txtOutE1.setText(m_pageControlValues[index]["txtOutE1"]);
+	//txtOutF1.setText(m_pageControlValues[index]["txtOutF1"]);
+	//txtOutEF1.setText(m_pageControlValues[index]["txtOutEF1"]);
 
-	chkInAB1.setToggleState(CSTOI(pageControlValues[index]["chkInAB1"]) == 1, false);
-	chkInCD1.setToggleState(CSTOI(pageControlValues[index]["chkInCD1"]) == 1, false);
-	chkInEF1.setToggleState(CSTOI(pageControlValues[index]["chkInEF1"]) == 1, false);
-	//chkOutAB1.setToggleState(CSTOI(pageControlValues[index]["chkOutAB1"]) == 1, false);
-	//chkOutCD1.setToggleState(CSTOI(pageControlValues[index]["chkOutCD1"]) == 1, false);
-	//chkOutEF1.setToggleState(CSTOI(pageControlValues[index]["chkOutEF1"]) == 1, false);
-	chkReverseIn1.setToggleState(CSTOI(pageControlValues[index]["chkReverseIn1"]) == 1, false);
-	//chkDropSysexIn1.setToggleState(CSTOI(pageControlValues[index]["chkDropSysexIn1"]) == 1, false);
-	chkMuteIn1.setToggleState(CSTOI(pageControlValues[index]["chkMuteIn1"]) == 1, false);
-	//chkMuteOut1.setToggleState(CSTOI(pageControlValues[index]["chkMuteOut1"]) == 1, false);
+	chkInAB1.setToggleState(CSTOI(m_pageControlValues[index]["chkInAB1"]) == 1, false);
+	chkInCD1.setToggleState(CSTOI(m_pageControlValues[index]["chkInCD1"]) == 1, false);
+	chkInEF1.setToggleState(CSTOI(m_pageControlValues[index]["chkInEF1"]) == 1, false);
+	//chkOutAB1.setToggleState(CSTOI(m_pageControlValues[index]["chkOutAB1"]) == 1, false);
+	//chkOutCD1.setToggleState(CSTOI(m_pageControlValues[index]["chkOutCD1"]) == 1, false);
+	//chkOutEF1.setToggleState(CSTOI(m_pageControlValues[index]["chkOutEF1"]) == 1, false);
+	chkReverseIn1.setToggleState(CSTOI(m_pageControlValues[index]["chkReverseIn1"]) == 1, false);
+	//chkDropSysexIn1.setToggleState(CSTOI(m_pageControlValues[index]["chkDropSysexIn1"]) == 1, false);
+	chkMuteIn1.setToggleState(CSTOI(m_pageControlValues[index]["chkMuteIn1"]) == 1, false);
+	//chkMuteOut1.setToggleState(CSTOI(m_pageControlValues[index]["chkMuteOut1"]) == 1, false);
 
-	cboDeviceIn2.setText(pageControlValues[index]["cboDeviceIn2"]);
-	txtInA2.setText(pageControlValues[index]["txtInA2"]);
-	txtInB2.setText(pageControlValues[index]["txtInB2"]);
-	txtInAB2.setText(pageControlValues[index]["txtInAB2"]);
-	txtInC2.setText(pageControlValues[index]["txtInC2"]);
-	txtInD2.setText(pageControlValues[index]["txtInD2"]);
-	txtInCD2.setText(pageControlValues[index]["txtInCD2"]);
-	txtInE2.setText(pageControlValues[index]["txtInE2"]);
-	txtInF2.setText(pageControlValues[index]["txtInF2"]);
-	txtInEF2.setText(pageControlValues[index]["txtInEF2"]);
-	//cboTargetIn2.setText(pageControlValues[index]["cboTargetIn2"]);
-	cboDeviceOut2.setText(pageControlValues[index]["cboDeviceOut2"]);
-	//txtOutA2.setText(pageControlValues[index]["txtOutA2"]);
-	//txtOutB2.setText(pageControlValues[index]["txtOutB2"]);
-	//txtOutAB2.setText(pageControlValues[index]["txtOutAB2"]);
-	//txtOutC2.setText(pageControlValues[index]["txtOutC2"]);
-	//txtOutD2.setText(pageControlValues[index]["txtOutD2"]);
-	//txtOutCD2.setText(pageControlValues[index]["txtOutCD2"]);
-	//txtOutE2.setText(pageControlValues[index]["txtOutE2"]);
-	//txtOutF2.setText(pageControlValues[index]["txtOutF2"]);
-	//txtOutEF2.setText(pageControlValues[index]["txtOutEF2"]);
-
-	// Care of std::stoi when string to non int conversion occurs ! See :
-	// https://stackoverflow.com/questions/29250531/microsoft-c-exception-stdinvalid-argument-at-memory-location
-	chkInAB2.setToggleState(CSTOI(pageControlValues[index]["chkInAB2"]) == 1, false);
-	chkInCD2.setToggleState(CSTOI(pageControlValues[index]["chkInCD2"]) == 1, false);
-	chkInEF2.setToggleState(CSTOI(pageControlValues[index]["chkInEF2"]) == 1, false);
-	//chkOutAB2.setToggleState(CSTOI(pageControlValues[index]["chkOutAB2"]) == 1, false);
-	//chkOutCD2.setToggleState(CSTOI(pageControlValues[index]["chkOutCD2"]) == 1, false);
-	//chkOutEF2.setToggleState(CSTOI(pageControlValues[index]["chkOutEF2"]) == 1, false);
-	chkReverseIn2.setToggleState(CSTOI(pageControlValues[index]["chkReverseIn2"]) == 1, false);
-	//chkDropSysexIn2.setToggleState(CSTOI(pageControlValues[index]["chkDropSysexIn2"]) == 1, false);
-	chkMuteIn2.setToggleState(CSTOI(pageControlValues[index]["chkMuteIn2"]) == 1, false);
-	//chkMuteOut2.setToggleState(CSTOI(pageControlValues[index]["chkMuteOut2"]) == 1, false);
-
-	cboDeviceIn3.setText(pageControlValues[index]["cboDeviceIn3"]);
-	txtInA3.setText(pageControlValues[index]["txtInA3"]);
-	txtInB3.setText(pageControlValues[index]["txtInB3"]);
-	txtInAB3.setText(pageControlValues[index]["txtInAB3"]);
-	txtInC3.setText(pageControlValues[index]["txtInC3"]);
-	txtInD3.setText(pageControlValues[index]["txtInD3"]);
-	txtInCD3.setText(pageControlValues[index]["txtInCD3"]);
-	txtInE3.setText(pageControlValues[index]["txtInE3"]);
-	txtInF3.setText(pageControlValues[index]["txtInF3"]);
-	txtInEF3.setText(pageControlValues[index]["txtInEF3"]);
-	//cboTargetIn3.setText(pageControlValues[index]["cboTargetIn3"]);
-	cboDeviceOut3.setText(pageControlValues[index]["cboDeviceOut3"]);
-	//txtOutA3.setText(pageControlValues[index]["txtOutA3"]);
-	//txtOutB3.setText(pageControlValues[index]["txtOutB3"]);
-	//txtOutAB3.setText(pageControlValues[index]["txtOutAB3"]);
-	//txtOutC3.setText(pageControlValues[index]["txtOutC3"]);
-	//txtOutD3.setText(pageControlValues[index]["txtOutD3"]);
-	//txtOutCD3.setText(pageControlValues[index]["txtOutCD3"]);
-	//txtOutE3.setText(pageControlValues[index]["txtOutE3"]);
-	//txtOutF3.setText(pageControlValues[index]["txtOutF3"]);
-	//txtOutEF3.setText(pageControlValues[index]["txtOutEF3"]);
+	cboDeviceIn2.setText(m_pageControlValues[index]["cboDeviceIn2"]);
+	txtInA2.setText(m_pageControlValues[index]["txtInA2"]);
+	txtInB2.setText(m_pageControlValues[index]["txtInB2"]);
+	txtInAB2.setText(m_pageControlValues[index]["txtInAB2"]);
+	txtInC2.setText(m_pageControlValues[index]["txtInC2"]);
+	txtInD2.setText(m_pageControlValues[index]["txtInD2"]);
+	txtInCD2.setText(m_pageControlValues[index]["txtInCD2"]);
+	txtInE2.setText(m_pageControlValues[index]["txtInE2"]);
+	txtInF2.setText(m_pageControlValues[index]["txtInF2"]);
+	txtInEF2.setText(m_pageControlValues[index]["txtInEF2"]);
+	//cboTargetIn2.setText(m_pageControlValues[index]["cboTargetIn2"]);
+	cboDeviceOut2.setText(m_pageControlValues[index]["cboDeviceOut2"]);
+	//txtOutA2.setText(m_pageControlValues[index]["txtOutA2"]);
+	//txtOutB2.setText(m_pageControlValues[index]["txtOutB2"]);
+	//txtOutAB2.setText(m_pageControlValues[index]["txtOutAB2"]);
+	//txtOutC2.setText(m_pageControlValues[index]["txtOutC2"]);
+	//txtOutD2.setText(m_pageControlValues[index]["txtOutD2"]);
+	//txtOutCD2.setText(m_pageControlValues[index]["txtOutCD2"]);
+	//txtOutE2.setText(m_pageControlValues[index]["txtOutE2"]);
+	//txtOutF2.setText(m_pageControlValues[index]["txtOutF2"]);
+	//txtOutEF2.setText(m_pageControlValues[index]["txtOutEF2"]);
 
 	// Care of std::stoi when string to non int conversion occurs ! See :
 	// https://stackoverflow.com/questions/29250531/microsoft-c-exception-stdinvalid-argument-at-memory-location
-	chkInAB3.setToggleState(CSTOI(pageControlValues[index]["chkInAB3"]) == 1, false);
-	chkInCD3.setToggleState(CSTOI(pageControlValues[index]["chkInCD3"]) == 1, false);
-	chkInEF3.setToggleState(CSTOI(pageControlValues[index]["chkInEF3"]) == 1, false);
-	//chkOutAB3.setToggleState(CSTOI(pageControlValues[index]["chkOutAB3"]) == 1, false);
-	//chkOutCD3.setToggleState(CSTOI(pageControlValues[index]["chkOutCD3"]) == 1, false);
-	//chkOutEF3.setToggleState(CSTOI(pageControlValues[index]["chkOutEF3"]) == 1, false);
-	chkReverseIn3.setToggleState(CSTOI(pageControlValues[index]["chkReverseIn3"]) == 1, false);
-	//chkDropSysexIn3.setToggleState(CSTOI(pageControlValues[index]["chkDropSysexIn3"]) == 1, false);
-	chkMuteIn3.setToggleState(CSTOI(pageControlValues[index]["chkMuteIn3"]) == 1, false);
-	//chkMuteOut3.setToggleState(CSTOI(pageControlValues[index]["chkMuteOut3"]) == 1, false);
+	chkInAB2.setToggleState(CSTOI(m_pageControlValues[index]["chkInAB2"]) == 1, false);
+	chkInCD2.setToggleState(CSTOI(m_pageControlValues[index]["chkInCD2"]) == 1, false);
+	chkInEF2.setToggleState(CSTOI(m_pageControlValues[index]["chkInEF2"]) == 1, false);
+	//chkOutAB2.setToggleState(CSTOI(m_pageControlValues[index]["chkOutAB2"]) == 1, false);
+	//chkOutCD2.setToggleState(CSTOI(m_pageControlValues[index]["chkOutCD2"]) == 1, false);
+	//chkOutEF2.setToggleState(CSTOI(m_pageControlValues[index]["chkOutEF2"]) == 1, false);
+	chkReverseIn2.setToggleState(CSTOI(m_pageControlValues[index]["chkReverseIn2"]) == 1, false);
+	//chkDropSysexIn2.setToggleState(CSTOI(m_pageControlValues[index]["chkDropSysexIn2"]) == 1, false);
+	chkMuteIn2.setToggleState(CSTOI(m_pageControlValues[index]["chkMuteIn2"]) == 1, false);
+	//chkMuteOut2.setToggleState(CSTOI(m_pageControlValues[index]["chkMuteOut2"]) == 1, false);
+
+	cboDeviceIn3.setText(m_pageControlValues[index]["cboDeviceIn3"]);
+	txtInA3.setText(m_pageControlValues[index]["txtInA3"]);
+	txtInB3.setText(m_pageControlValues[index]["txtInB3"]);
+	txtInAB3.setText(m_pageControlValues[index]["txtInAB3"]);
+	txtInC3.setText(m_pageControlValues[index]["txtInC3"]);
+	txtInD3.setText(m_pageControlValues[index]["txtInD3"]);
+	txtInCD3.setText(m_pageControlValues[index]["txtInCD3"]);
+	txtInE3.setText(m_pageControlValues[index]["txtInE3"]);
+	txtInF3.setText(m_pageControlValues[index]["txtInF3"]);
+	txtInEF3.setText(m_pageControlValues[index]["txtInEF3"]);
+	//cboTargetIn3.setText(m_pageControlValues[index]["cboTargetIn3"]);
+	cboDeviceOut3.setText(m_pageControlValues[index]["cboDeviceOut3"]);
+	//txtOutA3.setText(m_pageControlValues[index]["txtOutA3"]);
+	//txtOutB3.setText(m_pageControlValues[index]["txtOutB3"]);
+	//txtOutAB3.setText(m_pageControlValues[index]["txtOutAB3"]);
+	//txtOutC3.setText(m_pageControlValues[index]["txtOutC3"]);
+	//txtOutD3.setText(m_pageControlValues[index]["txtOutD3"]);
+	//txtOutCD3.setText(m_pageControlValues[index]["txtOutCD3"]);
+	//txtOutE3.setText(m_pageControlValues[index]["txtOutE3"]);
+	//txtOutF3.setText(m_pageControlValues[index]["txtOutF3"]);
+	//txtOutEF3.setText(m_pageControlValues[index]["txtOutEF3"]);
+
+	// Care of std::stoi when string to non int conversion occurs ! See :
+	// https://stackoverflow.com/questions/29250531/microsoft-c-exception-stdinvalid-argument-at-memory-location
+	chkInAB3.setToggleState(CSTOI(m_pageControlValues[index]["chkInAB3"]) == 1, false);
+	chkInCD3.setToggleState(CSTOI(m_pageControlValues[index]["chkInCD3"]) == 1, false);
+	chkInEF3.setToggleState(CSTOI(m_pageControlValues[index]["chkInEF3"]) == 1, false);
+	//chkOutAB3.setToggleState(CSTOI(m_pageControlValues[index]["chkOutAB3"]) == 1, false);
+	//chkOutCD3.setToggleState(CSTOI(m_pageControlValues[index]["chkOutCD3"]) == 1, false);
+	//chkOutEF3.setToggleState(CSTOI(m_pageControlValues[index]["chkOutEF3"]) == 1, false);
+	chkReverseIn3.setToggleState(CSTOI(m_pageControlValues[index]["chkReverseIn3"]) == 1, false);
+	//chkDropSysexIn3.setToggleState(CSTOI(m_pageControlValues[index]["chkDropSysexIn3"]) == 1, false);
+	chkMuteIn3.setToggleState(CSTOI(m_pageControlValues[index]["chkMuteIn3"]) == 1, false);
+	//chkMuteOut3.setToggleState(CSTOI(m_pageControlValues[index]["chkMuteOut3"]) == 1, false);
 }
 
 std::string MainComponent::dump(const juce::MidiMessage &mm)
@@ -1533,11 +1550,11 @@ void MainComponent::handleIncomingMidiMessage(juce::MidiInput* source, const juc
 	{
 		for (int j = 0; j < ROW_COUNT; j++)
 		{			
-			midn = pageControlValues[i][std::string("cboDeviceIn") + std::to_string(j)]; // Opposite of int x = std::stoi(s); !-)
-			bool muteIn = (CSTOI(pageControlValues[i][std::string("chkMuteIn") + std::to_string(j)]) != 0); // Mute means actually ignore ligne 
+			midn = m_pageControlValues[i][std::string("cboDeviceIn") + std::to_string(j)]; // Opposite of int x = std::stoi(s); !-)
+			bool muteIn = (CSTOI(m_pageControlValues[i][std::string("chkMuteIn") + std::to_string(j)]) != 0); // Mute means actually ignore ligne 
 			if (!muteIn and (midn.size() > 0) and (midn == source->getName()))
 			{
-				modn = pageControlValues[i][std::string("cboDeviceOut") + std::to_string(j)];
+				modn = m_pageControlValues[i][std::string("cboDeviceOut") + std::to_string(j)];
 				if ((modn == "") || (modn == NO_DEVICE))
 				{
 					return;
@@ -1581,7 +1598,7 @@ void MainComponent::process(int pageIn, int rowIn, int pageOut, int rowOut)
 	logThis("About to filter", Target::misc);
 	if (!filter(pageIn, rowIn))
 	{
-		if (pageControlValues[pageIn][std::string("chkReverseIn") + std::to_string(rowIn)] != "1")
+		if (m_pageControlValues[pageIn][std::string("chkReverseIn") + std::to_string(rowIn)] != "1")
 		{ 
 			logThis2("Midi message didn't pass the filter : page = %d ; row = %d", Target::misc, pageIn, rowIn);
 			return;
@@ -1592,7 +1609,7 @@ void MainComponent::process(int pageIn, int rowIn, int pageOut, int rowOut)
 	transform(pageIn, rowIn);
 	logThis("About to generate", Target::misc);
 	juce::MidiMessage msg = generate(pageOut, rowOut);
-	std::string modn = pageControlValues[pageOut][std::string("cboDeviceOut") + std::to_string(rowOut)];
+	std::string modn = m_pageControlValues[pageOut][std::string("cboDeviceOut") + std::to_string(rowOut)];
 	MidiOutput *mo = m_mods[m_midiOutputDeviceNames.indexOf(modn)];
 	logThis2("Outgoing message to device %s : %s", Target::midiOut, mo->getName().toStdString().c_str(), dump(msg).c_str());
 	mo->sendMessageNow(msg);
@@ -1628,9 +1645,9 @@ bool MainComponent::filter(int page, int row)
 {
 	std::string high, low, middle; // IE : (A and B) or AB
 		
-	if (CSTOI(pageControlValues[page][std::string("chkInAB") + std::to_string(row)]) != 0)
+	if (CSTOI(m_pageControlValues[page][std::string("chkInAB") + std::to_string(row)]) != 0)
 	{
-		middle = trim(pageControlValues[page][std::string("txtInAB") + std::to_string(row)]);
+		middle = trim(m_pageControlValues[page][std::string("txtInAB") + std::to_string(row)]);
 		if ((middle.size() > 1) and(!compare(middle, m_midiInByte0)))
 		{
 			return false;
@@ -1638,22 +1655,22 @@ bool MainComponent::filter(int page, int row)
 	}
 	else
 	{
-		high = trim(pageControlValues[page][std::string("txtInA") + std::to_string(row)]);
+		high = trim(m_pageControlValues[page][std::string("txtInA") + std::to_string(row)]);
 		if ((high.size() > 1) and(!compare(high, m_midiInHighNibble0)))
 		{
 			return false;
 		}
 
-		low = trim(pageControlValues[page][std::string("txtInB") + std::to_string(row)]);
+		low = trim(m_pageControlValues[page][std::string("txtInB") + std::to_string(row)]);
 		if ((low.size() > 1) and(!compare(low, m_midiInLowNibble0)))
 		{
 			return false;
 		}		
 	}
 
-	if (CSTOI(pageControlValues[page][std::string("chkInCD") + std::to_string(row)]) != 0)
+	if (CSTOI(m_pageControlValues[page][std::string("chkInCD") + std::to_string(row)]) != 0)
 	{
-		middle = trim(pageControlValues[page][std::string("txtInCD") + std::to_string(row)]);
+		middle = trim(m_pageControlValues[page][std::string("txtInCD") + std::to_string(row)]);
 		if ((middle.size() > 1) and(!compare(middle, m_midiInByte0)))
 		{
 			return false;
@@ -1661,22 +1678,22 @@ bool MainComponent::filter(int page, int row)
 	}
 	else
 	{
-		high = trim(pageControlValues[page][std::string("txtInC") + std::to_string(row)]);
+		high = trim(m_pageControlValues[page][std::string("txtInC") + std::to_string(row)]);
 		if ((high.size() > 1) and(!compare(high, m_midiInHighNibble0)))
 		{
 			return false;
 		}
 
-		low = trim(pageControlValues[page][std::string("txtInD") + std::to_string(row)]);
+		low = trim(m_pageControlValues[page][std::string("txtInD") + std::to_string(row)]);
 		if ((low.size() > 1) and(!compare(low, m_midiInLowNibble0)))
 		{
 			return false;
 		}
 	}
 
-	if (CSTOI(pageControlValues[page][std::string("chkInEF") + std::to_string(row)]) != 0)
+	if (CSTOI(m_pageControlValues[page][std::string("chkInEF") + std::to_string(row)]) != 0)
 	{
-		middle = trim(pageControlValues[page][std::string("txtInEF") + std::to_string(row)]);
+		middle = trim(m_pageControlValues[page][std::string("txtInEF") + std::to_string(row)]);
 		if ((middle.size() > 1) and(!compare(middle, m_midiInByte0)))
 		{
 			return false;
@@ -1684,13 +1701,13 @@ bool MainComponent::filter(int page, int row)
 	}
 	else
 	{
-		high = trim(pageControlValues[page][std::string("txtInE") + std::to_string(row)]);
+		high = trim(m_pageControlValues[page][std::string("txtInE") + std::to_string(row)]);
 		if ((high.size() > 1) and(!compare(high, m_midiInHighNibble0)))
 		{
 			return false;
 		}
 
-		low = trim(pageControlValues[page][std::string("txtInF") + std::to_string(row)]);
+		low = trim(m_pageControlValues[page][std::string("txtInF") + std::to_string(row)]);
 		if ((low.size() > 1) and(!compare(low, m_midiInLowNibble0)))
 		{
 			return false;
@@ -1748,7 +1765,7 @@ void MainComponent::transform(int page, int row)
 	symbol_table.add_variable("EF", ef);
 	expression.register_symbol_table(symbol_table);
 
-	formula = pageControlValues[page][std::string("txtOutA") + s];
+	formula = m_pageControlValues[page][std::string("txtOutA") + s];
 	if (formula.size() > 0)
 	{
 		if (parser.compile(formula, expression))
@@ -1761,7 +1778,7 @@ void MainComponent::transform(int page, int row)
 		m_midiOutHighNibble0 = m_midiInHighNibble0;
 	}
 
-	formula = pageControlValues[page][std::string("txtOutB") + s];
+	formula = m_pageControlValues[page][std::string("txtOutB") + s];
 	if (formula.size() > 0)
 	{
 		if (parser.compile(formula, expression))
@@ -1774,7 +1791,7 @@ void MainComponent::transform(int page, int row)
 		m_midiOutLowNibble0 = m_midiInLowNibble0;
 	}
 
-	formula = pageControlValues[page][std::string("txtOutAB") + s];
+	formula = m_pageControlValues[page][std::string("txtOutAB") + s];
 	if (formula.size() > 0)
 	{
 		if (parser.compile(formula, expression))
@@ -1787,7 +1804,7 @@ void MainComponent::transform(int page, int row)
 		m_midiOutByte0 = m_midiInByte0;
 	}
 
-	formula = pageControlValues[page][std::string("txtOutC") + s];
+	formula = m_pageControlValues[page][std::string("txtOutC") + s];
 	if (formula.size() > 0)
 	{
 		if (parser.compile(formula, expression))
@@ -1800,7 +1817,7 @@ void MainComponent::transform(int page, int row)
 		m_midiOutHighNibble1 = m_midiInHighNibble1;
 	}
 
-	formula = pageControlValues[page][std::string("txtOutD") + s];
+	formula = m_pageControlValues[page][std::string("txtOutD") + s];
 	if (formula.size() > 0)
 	{
 		if (parser.compile(formula, expression))
@@ -1813,7 +1830,7 @@ void MainComponent::transform(int page, int row)
 		m_midiOutLowNibble1 = m_midiInLowNibble1;
 	}
 
-	formula = pageControlValues[page][std::string("txtOutCD") + s];
+	formula = m_pageControlValues[page][std::string("txtOutCD") + s];
 	if (formula.size() > 0)
 	{
 		if (parser.compile(formula, expression))
@@ -1826,7 +1843,7 @@ void MainComponent::transform(int page, int row)
 		m_midiOutByte1 = m_midiInByte1;
 	}
 
-	formula = pageControlValues[page][std::string("txtOutE") + s];
+	formula = m_pageControlValues[page][std::string("txtOutE") + s];
 	if (formula.size() > 0)
 	{
 		if (parser.compile(formula, expression))
@@ -1839,7 +1856,7 @@ void MainComponent::transform(int page, int row)
 		m_midiOutHighNibble2 = m_midiInHighNibble2;
 	}
 
-	formula = pageControlValues[page][std::string("txtOutF") + s];
+	formula = m_pageControlValues[page][std::string("txtOutF") + s];
 	if (formula.size() > 0)
 	{
 		if (parser.compile(formula, expression))
@@ -1852,7 +1869,7 @@ void MainComponent::transform(int page, int row)
 		m_midiOutLowNibble2 = m_midiInLowNibble2;
 	}
 
-	formula = pageControlValues[page][std::string("txtOutEF") + s];
+	formula = m_pageControlValues[page][std::string("txtOutEF") + s];
 	if (formula.size() > 0)
 	{
 		if (parser.compile(formula, expression))
@@ -1870,7 +1887,7 @@ juce::MidiMessage MainComponent::generate(int page, int row)
 {
 	byte b0, b1, b2;
 
-	if (CSTOI(pageControlValues[page][std::string("chkOutAB") + std::to_string(row)]) != 0)
+	if (CSTOI(m_pageControlValues[page][std::string("chkOutAB") + std::to_string(row)]) != 0)
 	{
 		b0 = m_midiOutByte0;
 	}
@@ -1879,7 +1896,7 @@ juce::MidiMessage MainComponent::generate(int page, int row)
 		b0 = (m_midiOutHighNibble0 << 4) | (m_midiOutLowNibble0 & 0x0F);
 	}
 
-	if (CSTOI(pageControlValues[page][std::string("chkOutCD") + std::to_string(row)]) != 0)
+	if (CSTOI(m_pageControlValues[page][std::string("chkOutCD") + std::to_string(row)]) != 0)
 	{
 		b1 = m_midiOutByte1;
 	}
@@ -1888,7 +1905,7 @@ juce::MidiMessage MainComponent::generate(int page, int row)
 		b1 = (m_midiOutHighNibble1 << 4) | (m_midiOutLowNibble1 & 0x0F);
 	}
 
-	if (CSTOI(pageControlValues[page][std::string("chkOutEF") + std::to_string(row)]) != 0)
+	if (CSTOI(m_pageControlValues[page][std::string("chkOutEF") + std::to_string(row)]) != 0)
 	{
 		b2 = m_midiOutByte2;
 	}
@@ -1902,17 +1919,56 @@ juce::MidiMessage MainComponent::generate(int page, int row)
 
 void MainComponent::backupCurrentSession()
 {
-	//TODO: ...
+	if (!m_sessionChanged)
+	{
+		return;
+	}
+
+	String filePath = File::getCurrentWorkingDirectory().getFullPathName(); //TODO: Review this...
+	ConfigurationFile cf(filePath.toStdString() + PATH_SEPARATOR + m_sessionFileName);
+
+	for (auto const &kvp1 : m_pageControlValues)
+	{
+		for (auto const &kvp2 : kvp1.second)
+		{
+			cf.write(std::to_string(kvp1.first), kvp2.first, kvp2.second);
+		}
+	}
 }
 
 void MainComponent::tryRestoreLastSession()
 {
 	String filePath = File::getCurrentWorkingDirectory().getFullPathName(); //TODO: Review this...
 	ConfigurationFile cf(filePath.toStdString() + PATH_SEPARATOR + "GreenWitch2.ini");
-	setLogFilter((cf.keyValue("Log", "screen") == "1"), Target::screen);
-	setLogFilter((cf.keyValue("Log", "midiIn") == "1"), Target::midiIn);
-	setLogFilter((cf.keyValue("Log", "midiOut") == "1"), Target::midiOut);
-	setLogFilter((cf.keyValue("Log", "misc") == "1"), Target::misc);
+	setLogFilter((cf.read("Log", "screen") == "1"), Target::screen);
+	setLogFilter((cf.read("Log", "midiIn") == "1"), Target::midiIn);
+	setLogFilter((cf.read("Log", "midiOut") == "1"), Target::midiOut);
+	setLogFilter((cf.read("Log", "misc") == "1"), Target::misc);
+
+	m_sessionFileName = cf.read("Session", "fileName");
+	std::string fullFileName = filePath.toStdString() + PATH_SEPARATOR + m_sessionFileName;
+	if (FileExists(fullFileName))
+	{
+		ConfigurationFile cf(fullFileName);
+		std::vector<std::string> sections = cf.readSections(); // Pages
+		for (auto section : sections)
+		{
+			std::vector<std::string> keys = cf.readKeys(section); // Control names
+			for (auto key : keys)
+			{
+				m_pageControlValues[std::stoi(section)][key] = cf.read(section, key); // Control value
+			}
+		}
+		/* Too easy : m_pageControlValues is still empty now... We didn't call yet showPage !
+		for (auto &kvp1 : m_pageControlValues)
+		{
+			for (auto &kvp2 : kvp1.second)
+			{
+				kvp2.second = cf.read(std::to_string(kvp1.first), kvp2.first);
+			}
+		}
+		*/		
+	}
 
 	m_sessionChanged = false;
 }
@@ -1962,7 +2018,7 @@ void MainComponent::ReserveOutDevice(const std::string &deviceName)
 		for (int j = 0; j < ROW_COUNT; j++)
 		{
 			
-			if (pageControlValues[i]["cboDeviceOut" + std::to_string(j)])
+			if (m_pageControlValues[i]["cboDeviceOut" + std::to_string(j)])
 		}
 	}
 	*/

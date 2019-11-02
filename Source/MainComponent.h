@@ -116,9 +116,11 @@ private:
 
 	// Footer
 
-	Label lblFilter, lblFormula;
+	Label lblFilter, lblFormula, lblPage, lblPageCount;
+	TextEditor txtPageNumber;
 	TextButton btnFirst, btnPrev, btnNext, btnLast; //TODO: Change this to ImageButton (ImageButton btn...;) Then put the associated resource
 
+	//TODO: Finalize this...
 	juce::StringArray m_midiInputDeviceNames;
 	juce::StringArray m_midiInputDeviceNamesAvail;
 	juce::StringArray m_midiInputDeviceNamesInUse;
@@ -131,10 +133,11 @@ private:
 
 	// All the content value of the Buttons, ComboBoxes & TextEditors... A bit duplicate but more handy due to the pages
 	// Moreover, we don't have to store the associated pointer to control to find it back
-	std::map<int, std::map<std::string, std::string> > pageControlValues; // Page -> Control name -> Control value
+	std::map<int, std::map<std::string, std::string> > m_pageControlValues; // Page -> Control name -> Control value
 
 	int m_currentPage;
 	bool m_sessionChanged;
+	std::string m_sessionFileName;
 	
 	// well, we asssume here that we can process each message one at time without threading issue...
 	byte m_midiInByte0;

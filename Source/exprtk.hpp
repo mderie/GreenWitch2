@@ -3080,7 +3080,7 @@ namespace exprtk
       private:
 
          const std::size_t stride_;
-      };
+	  };
 
       class token_joiner : public helper_interface
       {
