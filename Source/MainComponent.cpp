@@ -23,7 +23,7 @@ MainComponent::MainComponent()
 
 	logThis("Session start", Target::misc);
 
-    setSize (920, 520);
+    setSize(920, 520);
 
 	// Header
 /*
@@ -1135,7 +1135,10 @@ MainComponent::MainComponent()
 	
 	// Ouf ! Enough of controls :)
 
-	openAllMidiDevices(); //TODO: Review this !
+	m_midiInputDeviceNames = juce::MidiInput::getDevices();
+	m_midiOutputDeviceNames = juce::MidiOutput::getDevices();
+
+	openAllMidiDevices(); // Actually just grab them
 	cboDeviceIn0.addItem(NO_DEVICE, 1); // Id's start always at 1
 	cboDeviceIn1.addItem(NO_DEVICE, 1);
 	cboDeviceIn2.addItem(NO_DEVICE, 1);
@@ -1150,8 +1153,8 @@ MainComponent::MainComponent()
 	// Doesn't work :(
 	//cboDeviceIn0.setSelectedId(1); 
 	// Not better... Too early ?
-	cboDeviceIn0.setText(NO_DEVICE);
-	cboDeviceIn1.setSelectedId(1);
+	//cboDeviceIn0.setText(NO_DEVICE);
+	//cboDeviceIn1.setSelectedId(1);
 
 	/*
 	cboTargetIn0.addItem(NO_DEVICE, 1);
@@ -1186,13 +1189,20 @@ MainComponent::MainComponent()
 	// Doesn't work :(
 	//cboDeviceOut0.setSelectedId(1);
 	// Not better... Too early ?
-	cboDeviceOut0.setSelectedItemIndex(1);
-	cboDeviceOut1.setSelectedId(1);
+	//cboDeviceOut0.setSelectedItemIndex(1);
+	//cboDeviceOut1.setSelectedId(1);
 
 	// Need to inherit from ComboBox ?
 	//cboDeviceOut0.focusGained = ? ;
 
+	//TODO: Restore this when done
 	tryRestoreLastSession();
+
+	// Does not trig the ComboBoxChanged event since it is delayed...
+	//for (int i = PAGE_COUNT - 1; i >= 0; i--)
+	//{
+	//	showPage(i);
+	//}
 
 	showPage(0);
 }
@@ -1264,7 +1274,7 @@ void MainComponent::comboBoxChanged(ComboBox *sender)
 {
 	std::string controlName = sender->getName().toStdString();
 	std::string controlValue = sender->getText().toStdString();
-	logThis2("controlName = %s & controlValue = %s", Target::screen, controlName.c_str(), controlValue.c_str());
+	logThis2("comboBoxChanged ==> controlName = '%s' & controlValue = '%s'", Target::screen, controlName.c_str(), controlValue.c_str());
 
 	//logThis("Step 0", Target::misc);
 	//return;
@@ -1293,18 +1303,122 @@ void MainComponent::comboBoxChanged(ComboBox *sender)
 			//ReserveOutDevice();
 		}
 	}
-		
+
 	//TODO: the other lines if needed...
+
+	if (controlName.rfind("cboDeviceIn", 0) == 0)
+	{
+		ExtComboBox *ecb = (ExtComboBox *) sender;
+		int index = ecb->getPreviousSelectedItemIndex();
+		if (index != -1)
+		{
+			std::string name = ecb->getItemText(index).toStdString();
+			if (name != NO_DEVICE)
+			{
+				logThis2("comboBoxChanged ==> deactivate previous in '%s'", Target::screen, name.c_str());
+				closeMidiDevice(name, true); // Close the the previous
+				changeEveryWhere(name, true, true); // Deactivate the previous
+			}
+		}
+		logThis2("comboBoxChanged ==> activate current in '%s'", Target::screen, controlValue.c_str());
+		openMidiDevice(controlValue, true); // Open the current
+		changeEveryWhere(controlValue, true, false); // Activate the current
+	}
+	
+	if (controlName.rfind("cboDeviceOut", 0) == 0)
+	{
+		ExtComboBox *ecb = (ExtComboBox *)sender;
+		int index = ecb->getPreviousSelectedItemIndex();
+		if (index != -1)
+		{
+			std::string name = ecb->getItemText(index).toStdString();
+			if (name != NO_DEVICE)
+			{
+				logThis2("comboBoxChanged ==> deactivate previous in '%s'", Target::screen, name.c_str());
+				closeMidiDevice(name, false); // Close the the previous
+				changeEveryWhere(name, false, true); // Deactivate the previous
+			}
+		}
+		logThis2("comboBoxChanged ==> activate current out '%s'", Target::screen, controlValue.c_str());
+		openMidiDevice(controlValue, false); // Open the current
+		changeEveryWhere(controlValue, false, false); // Activate the current		
+	}
 
 	m_pageControlValues[m_currentPage][controlName] = controlValue; // Always save the change
 	m_sessionChanged = true;
+}
+
+void MainComponent::openMidiDevice(const std::string &name, bool in)
+{
+	logThis2("openMidiDevice ==> Entering, device = '%s' & in = %d", Target::midiIn, name.c_str(), in);
+
+	if (name == "")
+	{
+		logThis("openMidiDevice ==> Leaving, no device", Target::midiIn);
+		return;
+	}
+
+	int index = getDeviceIndex(name, in);
+	if (index == -1)
+	{
+		logThis("openMidiDevice ==> Leaving, not found", Target::midiIn);
+		return;
+	}
+
+	// Open it if not already done
+	if (in && (m_ins.find(name) == m_ins.end()))
+	{
+		logThis2("openMidiDevice ==> Starting device in '%s'", Target::midiIn, name.c_str());
+		m_ins[name] = juce::MidiInput::openDevice(index, this);
+		m_ins[name]->start();
+	}
+	if (!in && (m_outs.find(name) == m_outs.end()))
+	{
+		logThis2("openMidiDevice ==> Starting device out 's%'", Target::midiOut, name.c_str());
+		m_outs[name] = juce::MidiOutput::openDevice(index);
+		// No start neither !-)
+		// m_outs[name]->start();
+	}
+}
+
+void MainComponent::closeMidiDevice(const std::string &name, bool in)
+{
+	logThis2("closeMidiDevice ==> Entering, device = '%s' & in = %d", Target::midiIn, name.c_str(), in);
+
+	if (name == "")
+	{
+		logThis("closeMidiDevice ==> Leaving, no device", Target::midiIn);
+		return;
+	}
+
+	int index = getDeviceIndex(name, in);
+	if (index == -1)
+	{
+		logThis("closeMidiDevice ==> Leaving, not found", Target::midiIn);
+		return;
+	}
+
+	if (in && (m_ins.find(name) != m_ins.end()))
+	{
+		logThis2("closeMidiDevice ==> Stopping in device '%s'", Target::midiIn, name.c_str());
+		m_ins[name]->stop();
+		delete m_ins[name];
+		m_ins[name] = nullptr;
+	}
+	if (!in && (m_outs.find(name) != m_outs.end()))
+	{
+		logThis2("closeMidiDevice ==> Stopping out device '%s'", Target::midiOut, name.c_str());
+		// No stop here !-)
+		delete m_outs[name];
+		m_outs[name] = nullptr;
+	}
 }
 
 void MainComponent::textEditorTextChanged(TextEditor &sender)
 {
 	std::string controlName = sender.getName().toStdString();
 	std::string controlValue = sender.getText().toStdString();
-	logThis2("controlName = %s & controlValue = %s", Target::screen, controlName.c_str(), controlValue.c_str());
+	logThis2("textEditorTextChanged ==> controlName = '%s' & controlValue = '%s'", Target::screen, controlName.c_str(), controlValue.c_str());
 
 	m_pageControlValues[m_currentPage][controlName] = controlValue; // Always save the change
 }
@@ -1340,6 +1454,7 @@ void MainComponent::resized()
 
 void MainComponent::showPage(int index)
 {
+	logThis2("About to switch to page = %d", Target::screen, index);
 	txtPageNumber.setText(std::to_string(index));
 	m_currentPage = index;
 
@@ -1415,6 +1530,8 @@ void MainComponent::showPage(int index)
 	chkMuteIn1.setToggleState(CSTOI(m_pageControlValues[index]["chkMuteIn1"]) == 1, false);
 	//chkMuteOut1.setToggleState(CSTOI(m_pageControlValues[index]["chkMuteOut1"]) == 1, false);
 
+	// Line 2
+
 	cboDeviceIn2.setText(m_pageControlValues[index]["cboDeviceIn2"]);
 	txtInA2.setText(m_pageControlValues[index]["txtInA2"]);
 	txtInB2.setText(m_pageControlValues[index]["txtInB2"]);
@@ -1449,6 +1566,8 @@ void MainComponent::showPage(int index)
 	//chkDropSysexIn2.setToggleState(CSTOI(m_pageControlValues[index]["chkDropSysexIn2"]) == 1, false);
 	chkMuteIn2.setToggleState(CSTOI(m_pageControlValues[index]["chkMuteIn2"]) == 1, false);
 	//chkMuteOut2.setToggleState(CSTOI(m_pageControlValues[index]["chkMuteOut2"]) == 1, false);
+
+	// Line 3
 
 	cboDeviceIn3.setText(m_pageControlValues[index]["cboDeviceIn3"]);
 	txtInA3.setText(m_pageControlValues[index]["txtInA3"]);
@@ -1540,7 +1659,7 @@ void MainComponent::handleIncomingMidiMessage(juce::MidiInput* source, const juc
 			m_midiInLowNibble2 = (*(p + 2)) & 0x0F;
 		}
 	}
-	logThis2("Incomming message from device %s : %s", Target::midiIn, source->getName().toStdString().c_str(), dump(message).c_str());
+	logThis2("Incomming message from device '%s' : '%s'", Target::midiIn, source->getName().toStdString().c_str(), dump(message).c_str());
 
 	std::string midn; // Midi Input Device Name
 	std::string modn;
@@ -1595,23 +1714,25 @@ void MainComponent::process(int pageIn, int rowIn, int pageOut, int rowOut)
 	//	return;
 	//}
 
-	logThis("About to filter", Target::misc);
+	logThis("process ==> About to filter", Target::misc);
 	if (!filter(pageIn, rowIn))
 	{
 		if (m_pageControlValues[pageIn][std::string("chkReverseIn") + std::to_string(rowIn)] != "1")
 		{ 
-			logThis2("Midi message didn't pass the filter : page = %d ; row = %d", Target::misc, pageIn, rowIn);
+			logThis2("process ==> Midi message didn't pass the filter : page = %d ; row = %d", Target::misc, pageIn, rowIn);
 			return;
 		}		
 	}
 
-	logThis("About to transform", Target::misc);
+	logThis("process ==> About to transform", Target::misc);
 	transform(pageIn, rowIn);
-	logThis("About to generate", Target::misc);
+	logThis("process ==> About to generate", Target::misc);
 	juce::MidiMessage msg = generate(pageOut, rowOut);
 	std::string modn = m_pageControlValues[pageOut][std::string("cboDeviceOut") + std::to_string(rowOut)];
-	MidiOutput *mo = m_mods[m_midiOutputDeviceNames.indexOf(modn)];
-	logThis2("Outgoing message to device %s : %s", Target::midiOut, mo->getName().toStdString().c_str(), dump(msg).c_str());
+	logThis2("process ==> Found device out = '%s'", Target::midiOut, modn.c_str());
+	//MidiOutput *mo = m_mods[m_midiOutputDeviceNames.indexOf(modn)];
+	MidiOutput *mo = m_outs[modn];
+	logThis2("process ==> Outgoing message to device '%s' : '%s'", Target::midiOut, mo->getName().toStdString().c_str(), dump(msg).c_str());
 	mo->sendMessageNow(msg);
 }
 
@@ -1636,7 +1757,7 @@ bool MainComponent::compare(const std::string &filterValue, byte currentValue)
 	}
 	else
 	{
-		logThis2("Unknown first character = %c", Target::misc, filterValue[0]);
+		logThis2("compare ==> Unknown first character = %c", Target::misc, filterValue[0]);
 		return false;
 	}
 }
@@ -1931,7 +2052,10 @@ void MainComponent::backupCurrentSession()
 	{
 		for (auto const &kvp2 : kvp1.second)
 		{
-			cf.write(std::to_string(kvp1.first), kvp2.first, kvp2.second);
+			if (kvp2.second != NO_DEVICE)
+			{ 
+				cf.write(std::to_string(kvp1.first), kvp2.first, kvp2.second);
+			}
 		}
 	}
 }
@@ -1956,7 +2080,29 @@ void MainComponent::tryRestoreLastSession()
 			std::vector<std::string> keys = cf.readKeys(section); // Control names
 			for (auto key : keys)
 			{
-				m_pageControlValues[std::stoi(section)][key] = cf.read(section, key); // Control value
+				std::string value = cf.read(section, key); // Potential control value... If available for this new session
+				if ((key.rfind("cboDeviceIn", 0) == 0) && (m_ins.find(value) != m_ins.end()))
+				{
+					m_pageControlValues[std::stoi(section)][key] = value;
+					if (std::stoi(section) > 0)
+					{
+						m_currentPage = std::stoi(section);
+						openMidiDevice(value, true); // Since the event will not be fired at start time
+						//changeSomeWhere(key, value, false);
+						//changeEveryWhere(value, true, false);
+					}
+				}
+				if ((key.rfind("cboDeviceOut", 0) == 0) && (m_outs.find(key) != m_outs.end()))
+				{
+					m_pageControlValues[std::stoi(section)][key] = value;
+					if (std::stoi(section) > 0)
+					{
+						m_currentPage = std::stoi(section);
+						openMidiDevice(value, false); // Id
+						//changeSomeWhere(key, value, false);
+						//changeEveryWhere(value, false, false);
+					}
+				}
 			}
 		}
 		/* Too easy : m_pageControlValues is still empty now... We didn't call yet showPage !
@@ -1973,21 +2119,147 @@ void MainComponent::tryRestoreLastSession()
 	m_sessionChanged = false;
 }
 
+ExtComboBox* MainComponent::findComboBox(const std::string& name)
+{
+	logThis2("findComboBox ==> Searching ExtCombobox '%s'", Target::screen, name.c_str());
+	for (int i = 0; i < this->getNumChildComponents(); i++)
+	{
+		if (this->getChildComponent(i)->getName().toStdString() == name)
+		{
+			logThis("findComboBox ==> Found :)", Target::screen);
+			return (ExtComboBox*) this->getChildComponent(i);
+		}
+	}
+
+	logThis("findComboBox ==> Not found :(", Target::screen);
+	return nullptr;
+}
+
+void MainComponent::changeEveryWhere(const std::string &name, bool in, bool value)
+{
+	logThis2("changeEveryWhere ==> About to change usage of device '%s' with value %i", Target::screen, name.c_str(), value);
+	//for (auto const &kvp1 : m_pageControlValues) // Per page (overkill...) Use m_currentPage !
+	//{
+		//for (auto const &kvp2 : kvp1.second) // Per control
+		for (auto const &kvp2 : m_pageControlValues[m_currentPage])
+		{
+			if (in && (kvp2.first.rfind("cboDeviceIn", 0) == 0))
+			{
+				changeSomeWhere(kvp2.first, name, value);
+				/*
+				ExtComboBox *cbo = findComboBox(kvp2.first);
+				if (cbo)
+				{ 
+					for (int i = 0; i < cbo->getNumItems(); i++)
+					{
+						if (cbo->getItemText(i).toStdString() == name)
+						{
+							logThis2("changeEveryWhere ==> Current value for i = %d is %d", Target::screen, i, cbo->isItemEnabled(cbo->getItemId(i)));
+							cbo->setItemEnabled(cbo->getItemId(i), value);
+							logThis2("changeEveryWhere ==> Changed to %d", Target::screen, cbo->isItemEnabled(cbo->getItemId(i)));
+							break;
+						}
+					}
+				}
+				*/
+			}
+
+			if (!in && (kvp2.first.rfind("cboDeviceOut", 0) == 0))
+			{
+				changeSomeWhere(kvp2.first, name, value);
+				/*
+				ExtComboBox *cbo = findComboBox(kvp2.first);
+				if (cbo)
+				{
+					for (int i = 0; i < cbo->getNumItems(); i++)
+					{
+						if (cbo->getItemText(i).toStdString() == name)
+						{
+							logThis2("changeEveryWhere ==> Current value for i = %d is %d", Target::screen, i, cbo->isItemEnabled(cbo->getItemId(i)));
+							cbo->setItemEnabled(cbo->getItemId(i), value);
+							logThis2("changeEveryWhere ==> Changed to %d", Target::screen, cbo->isItemEnabled(cbo->getItemId(i)));
+							break;
+						}
+					}
+				}
+				*/
+			}
+		}
+	//}
+}
+
+void MainComponent::changeSomeWhere(const std::string &controlName, const std::string &deviceName, bool value)
+{
+	ExtComboBox *cbo = findComboBox(controlName);
+	if (cbo)
+	{
+		for (int i = 0; i < cbo->getNumItems(); i++)
+		{
+			if (cbo->getItemText(i).toStdString() == deviceName)
+			{
+				logThis2("changeSomeWhere ==> For control %s & device = %s the current value for i = %d is %d", Target::screen, controlName.c_str(), deviceName.c_str(), i, cbo->isItemEnabled(cbo->getItemId(i)));
+				cbo->setItemEnabled(cbo->getItemId(i), value);
+				logThis2("changeSomeWhere ==> Changed to %d", Target::screen, cbo->isItemEnabled(cbo->getItemId(i)));
+				break;
+			}
+		}
+	}
+}
+
+int MainComponent::getDeviceIndex(const std::string &name, bool in)
+{
+	int result = -1;
+	if (in)
+	{
+		for (int i = 0; i < m_midiInputDeviceNames.size(); i++)
+		{			
+			if (m_midiInputDeviceNames[i].toStdString() == name)
+			{
+				result = i;
+				break;
+			}
+		}
+	}
+	else
+	{
+		for (int i = 0; i < m_midiOutputDeviceNames.size(); i++)
+		{
+			if (m_midiOutputDeviceNames[i].toStdString() == name)
+			{
+				result = i;
+				break;
+			}
+		}
+	}
+
+	logThis2("getDeviceIndex ==> Found index = %i for name = '%s' and in = %i", Target::screen, result, name.c_str(), in);
+	return result;
+}
+
 //TODO: Change this and open only the devices in use in the combo boxes...
 void MainComponent::openAllMidiDevices()
 {
 	m_midiInputDeviceNames = juce::MidiInput::getDevices();
+	m_midiOutputDeviceNames = juce::MidiOutput::getDevices();
+
 	for (int i = 0; i < m_midiInputDeviceNames.size(); i++)
 	{
-		m_mids.push_back(juce::MidiInput::openDevice(i, this));
-		m_mids[i]->start();
-	}
+		// Deprecated way ? Not yet...
+		// m_mids.push_back(juce::MidiInput::openDevice(i, this));
+		// New way ? In next version
+		// m_mids.push_back(juce::MidiInput::openDevice(m_midiInputDeviceNames[i], this));
 
-	m_midiOutputDeviceNames = juce::MidiOutput::getDevices();
+		//m_mids[i]->start();
+		logThis2("openAllMidiDevices ==> m_midiInputDeviceNames[%d] = '%s'", Target::misc, i, m_midiInputDeviceNames[i].toStdString().c_str());
+		m_ins[m_midiInputDeviceNames[i].toStdString()] = nullptr; // Create empty entries
+	}	
+
 	for (int i = 0; i < m_midiOutputDeviceNames.size(); i++)
 	{
-		m_mods.push_back(juce::MidiOutput::openDevice(i));
+		//m_mods.push_back(juce::MidiOutput::openDevice(i));
 		//m_mods[i]->start();
+		logThis2("openAllMidiDevices ==> m_midiOutputDeviceNames[%d] = '%s'", Target::misc, i, m_midiOutputDeviceNames[i].toStdString().c_str());
+		m_outs[m_midiOutputDeviceNames[i].toStdString()] = nullptr; // Id
 	}
 
 	// Not available for Windaube ! See LoopMidi as free third party replacement http://www.tobias-erichsen.de/software.html
@@ -1996,17 +2268,36 @@ void MainComponent::openAllMidiDevices()
 
 void MainComponent::closeAllMidiDevices()
 {
+	for(auto const &kvp : m_ins)
+	{
+		if (kvp.second != nullptr)
+		{ 
+			kvp.second->stop();
+			delete kvp.second;
+		}
+	}
+
+	for (auto const &kvp : m_outs)
+	{
+		if (kvp.second != nullptr)
+		{
+			delete kvp.second;
+		}		
+	}
+
+	/*
 	for (int i = 0; i < m_mids.size(); i++)
 	{
 		m_mids[i]->stop();
 		delete m_mids[i];
 	}
 
-	for (int i = 0; i < m_midiOutputDeviceNames.size(); i++)
+	for (int i = 0; i < m_mods.size(); i++)
 	{
 		//m_mods[i]->stop();
 		delete m_mods[i];
 	}
+	*/
 }
 
 //void MainComponent::ReserveOutDevice(const std::string &deviceName, const std::string &senderName)
@@ -2023,12 +2314,12 @@ void MainComponent::ReserveOutDevice(const std::string &deviceName)
 	}
 	*/
 
-	m_midiOutputDeviceNamesAvail.removeString(deviceName);
-	m_midiOutputDeviceNamesInUse.add(deviceName);
+//	m_midiOutputDeviceNamesAvail.removeString(deviceName);
+//	m_midiOutputDeviceNamesInUse.add(deviceName);
 }
 
 void MainComponent::RestoreOutDevice(const std::string &deviceName)
 {
-	m_midiOutputDeviceNamesAvail.add(deviceName);
-	m_midiOutputDeviceNamesInUse.removeString(deviceName);
+//	m_midiOutputDeviceNamesAvail.add(deviceName);
+//	m_midiOutputDeviceNamesInUse.removeString(deviceName);
 }

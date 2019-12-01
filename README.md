@@ -20,3 +20,4 @@ TODO (first ones are though ones)
 - Enhance the log content : put the milli seconds
 - Support hex in formula/filter ? Supported by the lib ?
 - Show current page / max page [OK]
+- Put the version info into the exe file

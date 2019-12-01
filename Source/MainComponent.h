@@ -19,6 +19,26 @@ typedef unsigned char byte; // Same as juce::uint8
 #define NO_DEVICE "<no device>"
 #define CSTOI(x) (x.size() == 0 ? 0 : std::stoi(x)) // Check stoi !-)
 
+class ExtComboBox : public ComboBox
+{
+private:
+	int m_previousSelectedItemIndex;
+public:
+	ExtComboBox()
+	{
+		m_previousSelectedItemIndex = -1;
+	}
+	void showPopup() override
+	{
+		m_previousSelectedItemIndex = getSelectedItemIndex();
+		ComboBox::showPopup();
+	}
+	int getPreviousSelectedItemIndex() 
+	{
+		return m_previousSelectedItemIndex;
+	}
+};
+
 //==============================================================================
 /*
     This component lives inside our window, and this is where you should put all
@@ -62,9 +82,9 @@ private:
 
 	TextEditor txtInA0, txtInB0, txtInAB0, txtInC0, txtInD0, txtInCD0, txtInE0, txtInF0, txtInEF0;
 	TextEditor txtOutA0, txtOutB0, txtOutAB0, txtOutC0, txtOutD0, txtOutCD0, txtOutE0, txtOutF0, txtOutEF0;
-	ComboBox cboDeviceIn0;
+	ExtComboBox cboDeviceIn0;
 	//ComboBox cboTargetIn0; // Optional merge out 
-	ComboBox cboDeviceOut0;
+	ExtComboBox cboDeviceOut0;
 	ToggleButton chkInAB0, chkInCD0, chkInEF0;
 	ToggleButton chkOutAB0, chkOutCD0, chkOutEF0;
 	ToggleButton chkReverseIn0; // Negate the filter
@@ -76,9 +96,9 @@ private:
 
 	TextEditor txtInA1, txtInB1, txtInAB1, txtInC1, txtInD1, txtInCD1, txtInE1, txtInF1, txtInEF1;
 	TextEditor txtOutA1, txtOutB1, txtOutAB1, txtOutC1, txtOutD1, txtOutCD1, txtOutE1, txtOutF1, txtOutEF1;
-	ComboBox cboDeviceIn1;
+	ExtComboBox cboDeviceIn1;
 	//ComboBox cboTargetIn1;
-	ComboBox cboDeviceOut1;
+	ExtComboBox cboDeviceOut1;
 	ToggleButton chkInAB1, chkInCD1, chkInEF1;
 	ToggleButton chkOutAB1, chkOutCD1, chkOutEF1;
 	ToggleButton chkReverseIn1;
@@ -90,9 +110,9 @@ private:
 
 	TextEditor txtInA2, txtInB2, txtInAB2, txtInC2, txtInD2, txtInCD2, txtInE2, txtInF2, txtInEF2;
 	TextEditor txtOutA2, txtOutB2, txtOutAB2, txtOutC2, txtOutD2, txtOutCD2, txtOutE2, txtOutF2, txtOutEF2;
-	ComboBox cboDeviceIn2;
+	ExtComboBox cboDeviceIn2;
 	//ComboBox cboTargetIn2;
-	ComboBox cboDeviceOut2;
+	ExtComboBox cboDeviceOut2;
 	ToggleButton chkInAB2, chkInCD2, chkInEF2;
 	ToggleButton chkOutAB2, chkOutCD2, chkOutEF2;
 	ToggleButton chkReverseIn2;
@@ -104,9 +124,9 @@ private:
 
 	TextEditor txtInA3, txtInB3, txtInAB3, txtInC3, txtInD3, txtInCD3, txtInE3, txtInF3, txtInEF3;
 	TextEditor txtOutA3, txtOutB3, txtOutAB3, txtOutC3, txtOutD3, txtOutCD3, txtOutE3, txtOutF3, txtOutEF3;
-	ComboBox cboDeviceIn3;
+	ExtComboBox cboDeviceIn3;
 	//ComboBox cboTargetIn3;
-	ComboBox cboDeviceOut3;
+	ExtComboBox cboDeviceOut3;
 	ToggleButton chkInAB3, chkInCD3, chkInEF3;
 	ToggleButton chkOutAB3, chkOutCD3, chkOutEF3;
 	ToggleButton chkReverseIn3;
@@ -122,14 +142,18 @@ private:
 
 	//TODO: Finalize this...
 	juce::StringArray m_midiInputDeviceNames;
-	juce::StringArray m_midiInputDeviceNamesAvail;
-	juce::StringArray m_midiInputDeviceNamesInUse;
+	//juce::StringArray m_midiInputDeviceNamesAvail;
+	//juce::StringArray m_midiInputDeviceNamesInUse;
 	juce::StringArray m_midiOutputDeviceNames;
-	juce::StringArray m_midiOutputDeviceNamesAvail;
-	juce::StringArray m_midiOutputDeviceNamesInUse;
+	//juce::StringArray m_midiOutputDeviceNamesAvail;
+	//juce::StringArray m_midiOutputDeviceNamesInUse;
 
+	//Deprecated
 	std::vector<MidiInput*> m_mids; // Must be in the same order as above
 	std::vector<MidiOutput*> m_mods;
+
+	std::map<std::string, MidiInput*> m_ins;
+	std::map<std::string, MidiOutput*> m_outs;
 
 	// All the content value of the Buttons, ComboBoxes & TextEditors... A bit duplicate but more handy due to the pages
 	// Moreover, we don't have to store the associated pointer to control to find it back
@@ -163,11 +187,21 @@ private:
 	void tryRestoreLastSession();
 	void backupCurrentSession();
 	void openAllMidiDevices();
+	void openMidiDevice(const std::string &name, bool in);
 	void closeAllMidiDevices();
+	void closeMidiDevice(const std::string &name, bool in);
 	void showPage(int index);
+	int getDeviceIndex(const std::string &name, bool in);
+
 	// KO void ahu(int *p, q);
+
+	// Deprecated
 	void ReserveOutDevice(const std::string &deviceName); // One out line is associated to this device
 	void RestoreOutDevice(const std::string &deviceName); // The device can now be used somewhere else
+
+	void changeEveryWhere(const std::string &name, bool in, bool value); // For a given device
+	void changeSomeWhere(const std::string &controlName, const std::string &deviceName, bool value); // For one device
+	ExtComboBox* findComboBox(const std::string &name);
 
 	bool filter(int page, int row);
 	void process(int pageIn, int rowIn, int pageOut, int rowOut);
